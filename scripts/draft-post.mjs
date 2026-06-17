@@ -4,14 +4,13 @@
  *
  * Steps:
  *   1. Fetch RSS feeds listed in scripts/feeds.json
- *   2. Ask Claude to pick the best item and write a bilingual DE/EN post
+ *   2. Ask Together AI (Llama-3.3-70B-Free) to pick the best item and write a bilingual DE/EN post
  *   3. Generate a hero image via Together AI (FLUX.1-schnell-Free)
  *   4. Generate an SVG key-takeaways card in Node (no API)
  *   5. Write src/content/blog/<slug>.md + public/blog/{images,visuals}/
  *   6. Output slug + titel to $GITHUB_OUTPUT for the PR step
  *
- * Required env:  ANTHROPIC_API_KEY
- * Optional env:  TOGETHER_API_KEY  (hero image; skipped if absent)
+ * Required env:  TOGETHER_API_KEY
  */
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
@@ -71,24 +70,23 @@ function dehtml(h) {
     .replace(/\s+/g, ' ').trim();
 }
 
-// ── Anthropic Claude ─────────────────────────────────────────────────────────
+// ── Together AI chat (text generation) ──────────────────────────────────────
 
-async function claude(prompt) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+async function togetherChat(prompt) {
+  const res = await fetch('https://api.together.xyz/v1/chat/completions', {
     method: 'POST',
     headers: {
-      'x-api-key': process.env.ANTHROPIC_API_KEY,
-      'anthropic-version': '2023-06-01',
-      'content-type': 'application/json',
+      'Authorization': `Bearer ${process.env.TOGETHER_API_KEY}`,
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-6',
+      model: 'meta-llama/Llama-3.3-70B-Instruct-Turbo-Free',
       max_tokens: 4096,
       messages: [{ role: 'user', content: prompt }],
     }),
   });
-  if (!res.ok) throw new Error(`Claude ${res.status}: ${await res.text()}`);
-  return (await res.json()).content[0].text;
+  if (!res.ok) throw new Error(`Together AI ${res.status}: ${await res.text()}`);
+  return (await res.json()).choices[0].message.content;
 }
 
 // ── Together AI image generation (FLUX.1-schnell-Free) ───────────────────────
@@ -195,9 +193,9 @@ async function main() {
   });
   const candidates = (recent.length ? recent : allItems).slice(0, 20);
 
-  console.log(`\n✍  Sending ${candidates.length} items to Claude (claude-sonnet-4-6)…`);
+  console.log(`\n✍  Sending ${candidates.length} items to Together AI (Llama-3.3-70B-Free)…`);
 
-  const raw = await claude(`\
+  const raw = await togetherChat(`\
 You write for Mohammad Chakrouf — Freelance Senior HubSpot Consultant in Berlin.
 Audience: B2B Ops teams, RevOps managers, SaaS decision-makers in the DACH region.
 Language: German is primary (and must be thorough); English is secondary.
