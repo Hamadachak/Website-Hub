@@ -12,81 +12,41 @@ const graphLd = {
       "@id": "https://mohammad-chakrouf.de/#person",
       "name": "Mohammad Chakrouf",
       "jobTitle": "Senior HubSpot Consultant",
-      "url": "https://mohammad-chakrouf.de",
+      "url": "https://mohammad-chakrouf.de/",
       "image": "https://mohammad-chakrouf.de/og.png",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Berlin",
         "addressCountry": "DE"
       },
+      "knowsAbout": [
+        "HubSpot",
+        "CRM-Architektur",
+        "RevOps",
+        "Datenmigration",
+        "Marketing Automation",
+        "HubSpot UI Extensions"
+      ],
+      "knowsLanguage": ["de", "en"],
       "sameAs": [
         "https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/",
         "https://www.malt.de/profile/mohammadchakrouf"
-      ],
-      "knowsAbout": [
-        "HubSpot",
-        "CRM",
-        "Revenue Operations",
-        "Datenmigration",
-        "Marketing Automation",
-        "RevOps"
       ]
     },
     {
       "@type": "ProfessionalService",
-      "@id": "https://mohammad-chakrouf.de/#business",
+      "@id": "https://mohammad-chakrouf.de/#service",
       "name": "Mohammad Chakrouf – HubSpot & RevOps Consulting",
-      "url": "https://mohammad-chakrouf.de",
+      "url": "https://mohammad-chakrouf.de/",
       "image": "https://mohammad-chakrouf.de/og.png",
-      "description": "Senior HubSpot Freelancer in Berlin – CRM-Setup, Datenmigration, RevOps und Marketing-Automation für B2B-Unternehmen im DACH-Raum.",
-      "priceRange": "€€€",
-      "currenciesAccepted": "EUR",
-      "paymentAccepted": "Invoice",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Berlin",
-        "addressCountry": "DE"
-      },
-      "areaServed": [
-        { "@type": "Country", "name": "Germany" },
-        { "@type": "Country", "name": "Austria" },
-        { "@type": "Country", "name": "Switzerland" }
-      ],
-      "founder": { "@id": "https://mohammad-chakrouf.de/#person" },
-      "employee": { "@id": "https://mohammad-chakrouf.de/#person" },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "HubSpot Consulting Leistungen",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "HubSpot-Migration",
-              "url": "https://mohammad-chakrouf.de/leistungen/hubspot-migration/"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "RevOps für Startups",
-              "url": "https://mohammad-chakrouf.de/leistungen/revops-fuer-startups/"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "HubSpot für B2B-SaaS",
-              "url": "https://mohammad-chakrouf.de/leistungen/hubspot-fuer-b2b-saas/"
-            }
-          }
-        ]
-      },
-      "sameAs": [
-        "https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/",
-        "https://www.malt.de/profile/mohammadchakrouf"
+      "provider": { "@id": "https://mohammad-chakrouf.de/#person" },
+      "areaServed": ["DE", "AT", "CH"],
+      "availableLanguage": ["de", "en"],
+      "serviceType": [
+        "HubSpot Consulting",
+        "CRM Architecture",
+        "Data Migration",
+        "RevOps"
       ]
     }
   ]
