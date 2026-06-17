@@ -1,14 +1,34 @@
 ---
 import Base from "../layouts/Base.astro";
+const professionalServiceLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Mohammad Chakrouf — HubSpot Consultant Berlin",
+  "description": "Freelance Senior HubSpot Berater in Berlin. CRM-Architektur, Datenmigration und RevOps für B2B-Unternehmen im DACH-Raum.",
+  "url": "https://mohammad-chakrouf.de",
+  "address": { "@type": "PostalAddress", "addressLocality": "Berlin", "addressCountry": "DE" },
+  "areaServed": [
+    { "@type": "Country", "name": "Germany" },
+    { "@type": "Country", "name": "Austria" },
+    { "@type": "Country", "name": "Switzerland" }
+  ],
+  "knowsAbout": ["HubSpot","CRM","Revenue Operations","Datenmigration","Marketing Automation"]
+};
 ---
-<Base title="Mohammad Chakrouf — Senior HubSpot Consultant" description="Freelance Senior HubSpot Consultant in Berlin. CRM-Architektur, Datenmigration und RevOps für B2B-Unternehmen und Agenturen im DACH-Raum.">
+<Base
+  title="HubSpot Consultant Berlin – CRM, RevOps & Datenmigration | Mohammad Chakrouf"
+  titleEn="HubSpot Consultant Berlin – CRM, RevOps & Data Migration | Mohammad Chakrouf"
+  description="Freelance Senior HubSpot Berater in Berlin. CRM-Architektur, Datenmigration und RevOps für B2B-Unternehmen und Agenturen im DACH-Raum."
+  descriptionEn="Freelance Senior HubSpot consultant in Berlin. CRM architecture, data migration and RevOps for B2B companies across the DACH region."
+>
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(professionalServiceLd)} />
 <header class="hero" id="top">
   <div class="wrap">
     <div class="hero-grid">
       <div>
         <p class="eyebrow"><span class="b">Freelance</span> · Berlin · HubSpot &amp; RevOps</p>
         <h1 data-de="Aus chaotischem HubSpot wird ein System, dem das Team vertraut." data-en="I turn HubSpot into the system you were promised.">Aus chaotischem HubSpot wird ein System, dem das Team vertraut.</h1>
-        <p class="sub" data-de="Senior HubSpot Consultant in Berlin. Ich entwerfe CRM-Architekturen, migriere Daten ohne Chaos und automatisiere Prozesse über Marketing, Sales und Service hinweg — und baue eigene Tools, wenn der Standard nicht reicht." data-en="Senior HubSpot consultant in Berlin. I design CRM architecture, migrate data without the chaos, and automate across Marketing, Sales and Service — and build custom tooling when the standard product runs out.">Senior HubSpot Consultant in Berlin. Ich entwerfe CRM-Architekturen, migriere Daten ohne Chaos und automatisiere Prozesse über Marketing, Sales und Service hinweg — und baue eigene Tools, wenn der Standard nicht reicht.</p>
+        <p class="sub" data-de="HubSpot Berater und Freelancer in Berlin. Ich entwerfe CRM-Architekturen, migriere Daten ohne Chaos und automatisiere Prozesse über Marketing, Sales und Service hinweg — und baue eigene Tools, wenn der Standard nicht reicht." data-en="Freelance HubSpot consultant in Berlin. I design CRM architecture, migrate data without the chaos, and automate across Marketing, Sales and Service — and build custom tooling when the standard product runs out.">HubSpot Berater und Freelancer in Berlin. Ich entwerfe CRM-Architekturen, migriere Daten ohne Chaos und automatisiere Prozesse über Marketing, Sales und Service hinweg — und baue eigene Tools, wenn der Standard nicht reicht.</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary" data-de="Kontakt aufnehmen" data-en="Get in touch">Kontakt aufnehmen</a>
           <a href="#work" class="btn btn-ghost" data-de="Projekte ansehen" data-en="See the work">Projekte ansehen</a>
@@ -92,27 +112,27 @@ import Base from "../layouts/Base.astro";
     <div class="pipe reveal">
       <div class="stage">
         <div class="num">01</div>
-        <h4 data-de="Discovery" data-en="Discovery">Discovery</h4>
+        <h3 data-de="Discovery" data-en="Discovery">Discovery</h3>
         <p data-de="Verstehen, was kaputt ist. Audit von Daten, Prozessen und warum das Reporting lügt." data-en="Understand what's broken. Audit of data, processes, and why the reporting lies.">Verstehen, was kaputt ist. Audit von Daten, Prozessen und warum das Reporting lügt.</p>
       </div>
       <div class="stage">
         <div class="num">02</div>
-        <h4 data-de="Architektur" data-en="Architecture">Architektur</h4>
+        <h3 data-de="Architektur" data-en="Architecture">Architektur</h3>
         <p data-de="Objekt- und Datenmodell entwerfen, das auch in zwei Jahren noch trägt." data-en="Design an object and data model that still holds in two years.">Objekt- und Datenmodell entwerfen, das auch in zwei Jahren noch trägt.</p>
       </div>
       <div class="stage">
         <div class="num">03</div>
-        <h4 data-de="Migration" data-en="Migration">Migration</h4>
+        <h3 data-de="Migration" data-en="Migration">Migration</h3>
         <p data-de="Daten sauber überführen — ohne Dubletten, ohne verwaiste Datensätze." data-en="Move data cleanly — no duplicates, no orphaned records.">Daten sauber überführen — ohne Dubletten, ohne verwaiste Datensätze.</p>
       </div>
       <div class="stage">
         <div class="num">04</div>
-        <h4 data-de="Automation" data-en="Automation">Automation</h4>
+        <h3 data-de="Automation" data-en="Automation">Automation</h3>
         <p data-de="Prozesse in verlässliche Workflows gießen, die das Team nicht umgeht." data-en="Turn processes into reliable workflows the team won't route around.">Prozesse in verlässliche Workflows gießen, die das Team nicht umgeht.</p>
       </div>
       <div class="stage">
         <div class="num">05</div>
-        <h4 data-de="Enablement" data-en="Enablement">Enablement</h4>
+        <h3 data-de="Enablement" data-en="Enablement">Enablement</h3>
         <p data-de="Das Team befähigen statt abhängig machen. Übergabe, Doku, Schulung." data-en="Enable the team instead of creating dependency. Handover, docs, training.">Das Team befähigen statt abhängig machen. Übergabe, Doku, Schulung.</p>
       </div>
     </div>
@@ -128,22 +148,22 @@ import Base from "../layouts/Base.astro";
     <p class="build-intro reveal" data-de="Custom HubSpot UI Extensions mit React, dem HubSpot CLI und Node.js. Wenn der Standard nicht reicht, baue ich die fehlende Karte selbst — direkt im Datensatz, wo das Team arbeitet." data-en="Custom HubSpot UI extensions with React, the HubSpot CLI and Node.js. When the standard product runs out, I build the missing card myself — right inside the record, where the team works.">Custom HubSpot UI Extensions mit React, dem HubSpot CLI und Node.js. Wenn der Standard nicht reicht, baue ich die fehlende Karte selbst — direkt im Datensatz, wo das Team arbeitet.</p>
     <div class="ext-grid">
       <div class="ext reveal">
-        <div class="ehead"><div class="glyph">★</div><h4>Company Health Score Card</h4></div>
+        <div class="ehead"><div class="glyph">★</div><h3>Company Health Score Card</h3></div>
         <p data-de="Bewertet die Gesundheit eines Accounts und zeigt den Score direkt im Datensatz an." data-en="Scores account health and surfaces it right inside the record.">Bewertet die Gesundheit eines Accounts und zeigt den Score direkt im Datensatz an.</p>
         <p class="stack">React · HubSpot CLI · Node.js</p>
       </div>
       <div class="ext reveal">
-        <div class="ehead"><div class="glyph">⌖</div><h4>Property Address Card</h4></div>
+        <div class="ehead"><div class="glyph">⌖</div><h3>Property Address Card</h3></div>
         <p data-de="Adressen mit Google-Maps-Integration direkt in der CRM-Karte — sichtbar, nicht nur gespeichert." data-en="Addresses with Google Maps integration inside the CRM card — visible, not just stored.">Adressen mit Google-Maps-Integration direkt in der CRM-Karte — sichtbar, nicht nur gespeichert.</p>
         <p class="stack">React · Google Maps API · Node.js</p>
       </div>
       <div class="ext reveal">
-        <div class="ehead"><div class="glyph">●</div><h4>Voice Notes</h4></div>
+        <div class="ehead"><div class="glyph">●</div><h3>Voice Notes</h3></div>
         <p data-de="Sprachnotizen direkt am Datensatz aufnehmen und ablegen — schneller als Tippen nach dem Call." data-en="Record and attach voice notes directly on a record — faster than typing after the call.">Sprachnotizen direkt am Datensatz aufnehmen und ablegen — schneller als Tippen nach dem Call.</p>
         <p class="stack">React · HubSpot CLI · Node.js</p>
       </div>
       <div class="ext reveal">
-        <div class="ehead"><div class="glyph">▦</div><h4>GIF Generator</h4></div>
+        <div class="ehead"><div class="glyph">▦</div><h3>GIF Generator</h3></div>
         <p data-de="Eine kleine Spielerei — weil gute interne Tools auch Spaß machen dürfen." data-en="A small toy — because good internal tools are allowed to be fun too.">Eine kleine Spielerei — weil gute interne Tools auch Spaß machen dürfen.</p>
         <p class="stack">React · HubSpot CLI</p>
       </div>
@@ -158,7 +178,7 @@ import Base from "../layouts/Base.astro";
         <p class="eyebrow" data-de="Über mich" data-en="About">Über mich</p>
         <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,3.2vw,2.4rem);line-height:1.1;letter-spacing:-.02em;margin:14px 0 24px" data-de="Operator und Builder — kein reiner Stratege." data-en="Operator and builder — not a pure strategist.">Operator und Builder — kein reiner Stratege.</h2>
         <p data-de="Sechs Jahre HubSpot, über alle Hubs hinweg — Marketing, Sales, Service und Operations. Stationen u. a. bei Trusted Shops und einem Berliner Property-Management-Unternehmen, wo ich vom Reporting bis zum eigenen Ticketsystem alles selbst gebaut habe." data-en="Six years of HubSpot across every hub — Marketing, Sales, Service and Operations. Stops include Trusted Shops and a Berlin property-management company, where I built everything from reporting to a custom ticketing system.">Sechs Jahre HubSpot, über alle Hubs hinweg — Marketing, Sales, Service und Operations. Stationen u. a. bei Trusted Shops und einem Berliner Property-Management-Unternehmen, wo ich vom Reporting bis zum eigenen Ticketsystem alles selbst gebaut habe.</p>
-        <p data-de="Ich nehme gern ein chaotisches Setup und verwandle es in ein System, dem das Team wirklich vertraut. Heute arbeite ich freelance mit B2B-Unternehmen und Agenturen im DACH-Raum." data-en="I like taking a chaotic setup and turning it into a system the team actually trusts. Today I work freelance with B2B companies and agencies across the DACH region.">Ich nehme gern ein chaotisches Setup und verwandle es in ein System, dem das Team wirklich vertraut. Heute arbeite ich freelance mit B2B-Unternehmen und Agenturen im DACH-Raum.</p>
+        <p data-de="Ich nehme gern ein chaotisches Setup und verwandle es in ein System, dem das Team wirklich vertraut. Als HubSpot Freelancer arbeite ich mit B2B-Unternehmen und Agenturen im DACH-Raum." data-en="I like taking a chaotic setup and turning it into a system the team actually trusts. As a freelance HubSpot consultant I work with B2B companies and agencies across the DACH region.">Ich nehme gern ein chaotisches Setup und verwandle es in ein System, dem das Team wirklich vertraut. Als HubSpot Freelancer arbeite ich mit B2B-Unternehmen und Agenturen im DACH-Raum.</p>
         <p data-de="Schwerpunkt-Zertifizierungen in Arbeit: Revenue Operations, Data Migration, Reporting." data-en="Focus certifications in progress: Revenue Operations, Data Migration, Reporting."><strong data-de="In Arbeit:" data-en="In progress:">In Arbeit:</strong> <span data-de="Revenue Operations · Data Migration · Reporting" data-en="Revenue Operations · Data Migration · Reporting">Revenue Operations · Data Migration · Reporting</span></p>
       </div>
       <div class="facts reveal">
@@ -171,6 +191,29 @@ import Base from "../layouts/Base.astro";
           <div class="row"><span class="k" data-de="Region" data-en="Region">Region</span><span class="v">DACH · Remote</span></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line);padding:56px 0">
+  <div class="wrap">
+    <p class="eyebrow" data-de="Leistungen" data-en="Services">Leistungen</p>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:28px">
+      <a class="case" href="/leistungen/hubspot-migration" style="text-decoration:none;display:block">
+        <span class="ctag" data-de="Migration" data-en="Migration">Migration</span>
+        <h3 data-de="HubSpot-Migration" data-en="HubSpot Migration">HubSpot-Migration</h3>
+        <p data-de="Von Salesforce, Pipedrive oder Excel zu HubSpot — strukturiert, bereinigt, ohne Betriebsunterbrechung." data-en="From Salesforce, Pipedrive or Excel to HubSpot — structured, clean, without disruption.">Von Salesforce, Pipedrive oder Excel zu HubSpot — strukturiert, bereinigt, ohne Betriebsunterbrechung.</p>
+      </a>
+      <a class="case" href="/leistungen/revops-fuer-startups" style="text-decoration:none;display:block">
+        <span class="ctag">RevOps</span>
+        <h3 data-de="RevOps für Startups" data-en="RevOps for Startups">RevOps für Startups</h3>
+        <p data-de="Marketing, Sales und Service auf einer Datenbasis — für verlässliches Reporting und skalierbares Wachstum." data-en="Marketing, Sales and Service on one data foundation — for reliable reporting and scalable growth.">Marketing, Sales und Service auf einer Datenbasis — für verlässliches Reporting und skalierbares Wachstum.</p>
+      </a>
+      <a class="case" href="/leistungen/hubspot-fuer-b2b-saas" style="text-decoration:none;display:block">
+        <span class="ctag">B2B SaaS</span>
+        <h3 data-de="HubSpot für B2B-SaaS" data-en="HubSpot for B2B SaaS">HubSpot für B2B-SaaS</h3>
+        <p data-de="PQL-Scoring, Trial-Flows, Churn-Signale — HubSpot als Wachstumsmotor für Software-Unternehmen." data-en="PQL scoring, trial flows, churn signals — HubSpot as a growth engine for software companies.">PQL-Scoring, Trial-Flows, Churn-Signale — HubSpot als Wachstumsmotor für Software-Unternehmen.</p>
+      </a>
     </div>
   </div>
 </section>

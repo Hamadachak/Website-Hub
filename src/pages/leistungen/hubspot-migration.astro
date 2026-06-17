@@ -1,10 +1,26 @@
 ---
 import Base from "../../layouts/Base.astro";
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "HubSpot-Migration",
+  "description": "Datenmigration zu HubSpot: strukturiert, bereinigt und ohne Unterbrechung des Betriebs. Von Salesforce, Pipedrive oder Excel.",
+  "provider": { "@type": "Person", "name": "Mohammad Chakrouf", "url": "https://mohammad-chakrouf.de" },
+  "areaServed": [
+    { "@type": "Country", "name": "Germany" },
+    { "@type": "Country", "name": "Austria" },
+    { "@type": "Country", "name": "Switzerland" }
+  ],
+  "serviceType": "CRM Migration Consulting"
+};
 ---
 <Base
-  title="HubSpot-Migration — Mohammad Chakrouf"
-  description="Datenmigration zu HubSpot: strukturiert, bereinigt und ohne Unterbrechung des Betriebs. Senior HubSpot Consultant in Berlin für DACH-Unternehmen."
+  title="HubSpot-Migration — Mohammad Chakrouf, HubSpot Berater Berlin"
+  titleEn="HubSpot Migration — Mohammad Chakrouf, HubSpot Consultant Berlin"
+  description="Datenmigration zu HubSpot: strukturiert, bereinigt und ohne Unterbrechung des Betriebs. Senior HubSpot Berater in Berlin für DACH-Unternehmen."
+  descriptionEn="HubSpot data migration: structured, clean, and without disrupting operations. Senior HubSpot consultant in Berlin for DACH companies."
 >
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
 
 <header class="hero" id="top">
   <div class="wrap">
@@ -70,21 +86,42 @@ import Base from "../../layouts/Base.astro";
     </div>
     <div class="ext-grid reveal">
       <div class="ext">
-        <div class="ehead"><div class="glyph">↗</div><h4>Wechsel von Salesforce oder Pipedrive</h4></div>
+        <div class="ehead"><div class="glyph">↗</div><h3>Wechsel von Salesforce oder Pipedrive</h3></div>
         <p>Historische Deals, Kontakte und Aktivitäten müssen strukturiert überführt werden — ohne Datenverlust und ohne Wochen manueller Nacharbeit.</p>
       </div>
       <div class="ext">
-        <div class="ehead"><div class="glyph">⊞</div><h4>Merger & Konsolidierung</h4></div>
+        <div class="ehead"><div class="glyph">⊞</div><h3>Merger & Konsolidierung</h3></div>
         <p>Mehrere CRM-Instanzen landen in einem Account. Das Datenmodell muss von Anfang an stimmen, damit das Reporting nicht sofort wieder lügt.</p>
       </div>
       <div class="ext">
-        <div class="ehead"><div class="glyph">▦</div><h4>Excel / Sheets als „CRM"</h4></div>
+        <div class="ehead"><div class="glyph">▦</div><h3>Excel / Sheets als „CRM"</h3></div>
         <p>Wenn das Unternehmen aus Spreadsheets herauswächst, ist der erste Import der wichtigste. Ich sorge dafür, dass er der letzte manuelle Export ist.</p>
       </div>
       <div class="ext">
-        <div class="ehead"><div class="glyph">◎</div><h4>HubSpot-Restrukturierung</h4></div>
+        <div class="ehead"><div class="glyph">◎</div><h3>HubSpot-Restrukturierung</h3></div>
         <p>Manchmal ist das Ziel nicht ein neues System, sondern ein aufgeräumtes: Properties neu ordnen, Objekte konsolidieren, Altlasten löschen.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">Weitere Leistungen</p>
+      <h2>Was ich sonst noch anbiete.</h2>
+    </div>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <a class="case" href="/leistungen/revops-fuer-startups" style="text-decoration:none;display:block">
+        <span class="ctag">RevOps</span>
+        <h3>RevOps für Startups</h3>
+        <p>Marketing, Sales und Service auf einer Datenbasis — für verlässliches Reporting und skalierbares Wachstum.</p>
+      </a>
+      <a class="case" href="/leistungen/hubspot-fuer-b2b-saas" style="text-decoration:none;display:block">
+        <span class="ctag">B2B SaaS</span>
+        <h3>HubSpot für B2B-SaaS</h3>
+        <p>PQL-Scoring, Trial-Flows, Churn-Signale — HubSpot als Wachstumsmotor für Software-Unternehmen.</p>
+      </a>
     </div>
   </div>
 </section>

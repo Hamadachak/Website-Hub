@@ -12,7 +12,17 @@
       "Bash(security find-internet-password *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(brew install *)"
+      "Bash(brew install *)",
+      "Bash(git rm *)",
+      "Bash(gh workflow *)",
+      "mcp__claude_ai_Netlify__netlify-project-services-reader",
+      "Bash(gh run *)",
+      "Bash(git push *)",
+      "Bash(gh pr *)",
+      "Bash(gh api *)",
+      "Bash(python3 -c \"import sys,json,base64; d=json.load\\(sys.stdin\\); print\\(base64.b64decode\\(d['content']\\).decode\\(\\)[:300]\\)\")",
+      "mcp__claude_ai_Netlify__netlify-deploy-services-reader",
+      "Bash(git pull *)"
     ]
   }
 }

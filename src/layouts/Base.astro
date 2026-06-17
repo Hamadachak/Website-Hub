@@ -8,8 +8,10 @@ const { title, description, titleEn, descriptionEn, image, type } = Astro.props;
 <html lang="de">
 <head>
   <BaseHead title={title} description={description} image={image} type={type} />
+  <slot name="head" />
 </head>
 <body>
+<a class="skip-link" href="#main-content">Zum Inhalt springen / Skip to content</a>
 <nav>
   <div class="nav-in">
     <a class="brand" href="/"><span class="mark">MC</span><span>chakrouf</span></a>
@@ -22,19 +24,21 @@ const { title, description, titleEn, descriptionEn, image, type } = Astro.props;
     </div>
     <div class="nav-right">
       <div class="langtoggle">
-        <button id="lang-de" class="active" onclick="setLang('de')">DE</button>
-        <button id="lang-en" onclick="setLang('en')">EN</button>
+        <button id="lang-de" class="active" aria-label="Deutsch" aria-pressed="true" onclick="setLang('de')">DE</button>
+        <button id="lang-en" aria-label="English" aria-pressed="false" onclick="setLang('en')">EN</button>
       </div>
       <a href="/#contact" class="btn btn-primary nav-cta" data-de="Kontakt" data-en="Contact">Kontakt</a>
     </div>
   </div>
 </nav>
-  {/* Hidden nodes carry bilingual page title + description for JS to read */}
+<main id="main-content">
+  {/* Hidden nodes carry bilingual page title + description for JS */}
   <span id="page-title-de" style="display:none">{title}</span>
   <span id="page-title-en" style="display:none">{titleEn || title}</span>
   <span id="page-desc-de" style="display:none">{description}</span>
   <span id="page-desc-en" style="display:none">{descriptionEn || description}</span>
   <slot />
+</main>
 <footer>
   <div class="wrap foot-in">
     <span>Mohammad Chakrouf · Senior HubSpot Consultant · Berlin</span>
@@ -49,25 +53,33 @@ const { title, description, titleEn, descriptionEn, image, type } = Astro.props;
     <span>© <span id="year"></span> · <span data-de="Selbst gebaut" data-en="Built by hand">Selbst gebaut</span></span>
   </div>
 </footer>
-  <script is:inline>// ----- language toggle (in-memory, default German) -----
-  var lang = 'de';
-  function setLang(l){
-    lang = l;
+<script is:inline>(function () {
+  var KEY = 'lang';
+
+  function apply(l) {
     document.documentElement.lang = l;
-    var nodes = document.querySelectorAll('[data-de]');
-    for(var i=0;i<nodes.length;i++){
+    // text nodes with bilingual attributes
+    var nodes = document.querySelectorAll('[data-de],[data-en]');
+    for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
-      var val = (l === 'de') ? el.getAttribute('data-de') : el.getAttribute('data-en');
-      if(val !== null) el.textContent = val;
+      var val = (l === 'en') ? el.getAttribute('data-en') : el.getAttribute('data-de');
+      if (val !== null) el.textContent = val;
     }
-    // Switch bilingual body blocks (blog posts)
+    // bilingual body blocks (blog posts)
     var blocks = document.querySelectorAll('[data-lang-block]');
-    for(var j=0;j<blocks.length;j++){
+    for (var j = 0; j < blocks.length; j++) {
       blocks[j].style.display = (blocks[j].getAttribute('data-lang-block') === l) ? '' : 'none';
     }
-    document.getElementById('lang-de').classList.toggle('active', l==='de');
-    document.getElementById('lang-en').classList.toggle('active', l==='en');
-    // Switch document.title and meta description
+    // toggle buttons
+    var de = document.getElementById('lang-de');
+    var en = document.getElementById('lang-en');
+    if (de && en) {
+      de.classList.toggle('active', l === 'de');
+      en.classList.toggle('active', l === 'en');
+      de.setAttribute('aria-pressed', String(l === 'de'));
+      en.setAttribute('aria-pressed', String(l === 'en'));
+    }
+    // document.title + meta description
     var titleNode = document.getElementById('page-title-' + l);
     if (titleNode) document.title = titleNode.textContent;
     var descNode = document.getElementById('page-desc-' + l);
@@ -75,21 +87,34 @@ const { title, description, titleEn, descriptionEn, image, type } = Astro.props;
     if (descNode && metaDesc) metaDesc.setAttribute('content', descNode.textContent);
   }
 
-  // ----- scroll reveals -----
-  (function(){
-    var els = document.querySelectorAll('.reveal');
-    if(!('IntersectionObserver' in window)){
-      els.forEach(function(e){e.classList.add('in')});
-      return;
-    }
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
-      });
-    }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
-    els.forEach(function(e){io.observe(e)});
-  })();
+  window.setLang = function (l) {
+    try { localStorage.setItem(KEY, l); } catch (e) {}
+    apply(l);
+  };
 
-  document.getElementById('year').textContent = new Date().getFullYear();</script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // restore persisted language (default: 'de')
+    var saved = 'de';
+    try { saved = localStorage.getItem(KEY) || 'de'; } catch (e) {}
+    apply(saved);
+
+    // scroll reveals
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      for (var k = 0; k < els.length; k++) els[k].classList.add('in');
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+        });
+      }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+      for (var m = 0; m < els.length; m++) io.observe(els[m]);
+    }
+
+    // year
+    var yr = document.getElementById('year');
+    if (yr) yr.textContent = new Date().getFullYear();
+  });
+})();</script>
 </body>
 </html>

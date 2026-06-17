@@ -1,10 +1,26 @@
 ---
 import Base from "../../layouts/Base.astro";
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "HubSpot für B2B-SaaS",
+  "description": "HubSpot als Wachstumsmotor für B2B-SaaS: Trial-to-paid Flows, Product-Qualified Leads und skalierbare CRM-Architektur für Software-Unternehmen.",
+  "provider": { "@type": "Person", "name": "Mohammad Chakrouf", "url": "https://mohammad-chakrouf.de" },
+  "areaServed": [
+    { "@type": "Country", "name": "Germany" },
+    { "@type": "Country", "name": "Austria" },
+    { "@type": "Country", "name": "Switzerland" }
+  ],
+  "serviceType": "HubSpot Consulting"
+};
 ---
 <Base
-  title="HubSpot für B2B-SaaS — Mohammad Chakrouf"
+  title="HubSpot für B2B-SaaS — Mohammad Chakrouf, HubSpot Berater Berlin"
+  titleEn="HubSpot for B2B SaaS — Mohammad Chakrouf, HubSpot Consultant Berlin"
   description="HubSpot als Wachstumsmotor für B2B-SaaS: Trial-to-paid Flows, Product-Qualified Leads und skalierbare CRM-Architektur für Software-Unternehmen."
+  descriptionEn="HubSpot as a growth engine for B2B SaaS: trial-to-paid flows, product-qualified leads and scalable CRM architecture for software companies."
 >
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
 
 <header class="hero" id="top">
   <div class="wrap">
@@ -70,21 +86,42 @@ import Base from "../../layouts/Base.astro";
     </div>
     <div class="ext-grid reveal">
       <div class="ext">
-        <div class="ehead"><div class="glyph">◎</div><h4>SaaS-Lifecycle ≠ Standard-Lifecycle</h4></div>
+        <div class="ehead"><div class="glyph">◎</div><h3>SaaS-Lifecycle ≠ Standard-Lifecycle</h3></div>
         <p>MQL → SQL → Opportunity funktioniert für SaaS nur teilweise. Trial, PQL, Expansion und Churn-Risk sind eigene Stages, die HubSpot kennen muss.</p>
       </div>
       <div class="ext">
-        <div class="ehead"><div class="glyph">↗</div><h4>Produktdaten müssen ins CRM</h4></div>
+        <div class="ehead"><div class="glyph">↗</div><h3>Produktdaten müssen ins CRM</h3></div>
         <p>Ohne Nutzungsdaten treffen Sales und CS Entscheidungen im Blindflug. Ich baue die Brücke zwischen Ihrer App und HubSpot.</p>
       </div>
       <div class="ext">
-        <div class="ehead"><div class="glyph">★</div><h4>Skalierbarkeit von Anfang an</h4></div>
+        <div class="ehead"><div class="glyph">★</div><h3>Skalierbarkeit von Anfang an</h3></div>
         <p>Was bei 50 Kunden manuell funktioniert, bricht bei 500 zusammen. Ich designe Setups so, dass sie mit Ihrem Wachstum mithalten.</p>
       </div>
       <div class="ext">
-        <div class="ehead"><div class="glyph">▦</div><h4>Revenue-Reporting für Investoren</h4></div>
+        <div class="ehead"><div class="glyph">▦</div><h3>Revenue-Reporting für Investoren</h3></div>
         <p>ARR, MRR, Churn-Rate, NRR — sauber in HubSpot, nicht manuell aus vier Sheets zusammengebaut.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">Weitere Leistungen</p>
+      <h2>Was ich sonst noch anbiete.</h2>
+    </div>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <a class="case" href="/leistungen/hubspot-migration" style="text-decoration:none;display:block">
+        <span class="ctag">Migration</span>
+        <h3>HubSpot-Migration</h3>
+        <p>Von Salesforce, Pipedrive oder Excel zu HubSpot — strukturiert, bereinigt, ohne Betriebsunterbrechung.</p>
+      </a>
+      <a class="case" href="/leistungen/revops-fuer-startups" style="text-decoration:none;display:block">
+        <span class="ctag">RevOps</span>
+        <h3>RevOps für Startups</h3>
+        <p>Marketing, Sales und Service auf einer Datenbasis — für verlässliches Reporting und skalierbares Wachstum.</p>
+      </a>
     </div>
   </div>
 </section>

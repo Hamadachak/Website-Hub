@@ -1,10 +1,26 @@
 ---
 import Base from "../../layouts/Base.astro";
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "RevOps für Startups",
+  "description": "Revenue Operations für wachsende Startups: Marketing, Sales und Service auf einer Datenbasis für verlässliches Reporting und skalierbares Wachstum.",
+  "provider": { "@type": "Person", "name": "Mohammad Chakrouf", "url": "https://mohammad-chakrouf.de" },
+  "areaServed": [
+    { "@type": "Country", "name": "Germany" },
+    { "@type": "Country", "name": "Austria" },
+    { "@type": "Country", "name": "Switzerland" }
+  ],
+  "serviceType": "Revenue Operations Consulting"
+};
 ---
 <Base
-  title="RevOps für Startups — Mohammad Chakrouf"
+  title="RevOps für Startups — Mohammad Chakrouf, HubSpot Berater Berlin"
+  titleEn="RevOps for Startups — Mohammad Chakrouf, HubSpot Consultant Berlin"
   description="Revenue Operations für wachsende Startups: Marketing, Sales und Service auf einer Datenbasis — für verlässliches Reporting und skalierbares Wachstum im DACH-Raum."
+  descriptionEn="Revenue Operations for growing startups: Marketing, Sales and Service on one data foundation — for reliable reporting and scalable growth in the DACH region."
 >
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
 
 <header class="hero" id="top">
   <div class="wrap">
@@ -71,24 +87,45 @@ import Base from "../../layouts/Base.astro";
     <div class="pipe reveal">
       <div class="stage">
         <div class="num">01</div>
-        <h4>GTM-Audit</h4>
+        <h3>GTM-Audit</h3>
         <p>Wie arbeiten Marketing, Sales und Service heute zusammen? Wo entstehen Reibungen, Datenverluste, blinde Flecken im Funnel?</p>
       </div>
       <div class="stage">
         <div class="num">02</div>
-        <h4>Modell-Design</h4>
+        <h3>Modell-Design</h3>
         <p>Objekte, Properties, Lifecycle-Stages und Pipelines so entwerfen, dass sie die realen Prozesse widerspiegeln — und skalieren.</p>
       </div>
       <div class="stage">
         <div class="num">03</div>
-        <h4>Implementation</h4>
+        <h3>Implementation</h3>
         <p>Setup in HubSpot: Workflows, Scoring, Routing, Dashboards. Schritt für Schritt, mit dem Team, nicht am Team vorbei.</p>
       </div>
       <div class="stage">
         <div class="num">04</div>
-        <h4>Übergabe</h4>
+        <h3>Übergabe</h3>
         <p>Dokumentation, Schulung, klare Owner. Das Ziel ist Unabhängigkeit — kein dauerhafter Consultant-Lock-in.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">Weitere Leistungen</p>
+      <h2>Was ich sonst noch anbiete.</h2>
+    </div>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <a class="case" href="/leistungen/hubspot-migration" style="text-decoration:none;display:block">
+        <span class="ctag">Migration</span>
+        <h3>HubSpot-Migration</h3>
+        <p>Von Salesforce, Pipedrive oder Excel zu HubSpot — strukturiert, bereinigt, ohne Betriebsunterbrechung.</p>
+      </a>
+      <a class="case" href="/leistungen/hubspot-fuer-b2b-saas" style="text-decoration:none;display:block">
+        <span class="ctag">B2B SaaS</span>
+        <h3>HubSpot für B2B-SaaS</h3>
+        <p>PQL-Scoring, Trial-Flows, Churn-Signale — HubSpot als Wachstumsmotor für Software-Unternehmen.</p>
+      </a>
     </div>
   </div>
 </section>

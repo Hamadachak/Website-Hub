@@ -82,7 +82,28 @@ const bodyEnHtml = post.data.bodyEn ? marked.parse(post.data.bodyEn) : null;
         </p>
       )}
 
-      <p style="margin-top:44px"><a href="/blog/" class="btn btn-ghost">← Alle Beiträge</a></p>
+      <p style="margin-top:44px"><a href="/blog/" class="btn btn-ghost" data-de="← Alle Beiträge" data-en="← All posts">← Alle Beiträge</a></p>
+
+      <div style="margin-top:56px;padding-top:32px;border-top:1px solid var(--line)">
+        <p class="eyebrow" data-de="Passende Leistungen" data-en="Related services">Passende Leistungen</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:20px">
+          <a class="case" href="/leistungen/hubspot-migration" style="text-decoration:none;display:block;padding:20px 22px">
+            <span class="ctag" data-de="Migration" data-en="Migration">Migration</span>
+            <h3 style="font-size:1rem;margin:10px 0 8px" data-de="HubSpot-Migration" data-en="HubSpot Migration">HubSpot-Migration</h3>
+            <p style="font-size:.88rem" data-de="Sauber migriert, kein Chaos." data-en="Clean migration, no chaos.">Sauber migriert, kein Chaos.</p>
+          </a>
+          <a class="case" href="/leistungen/revops-fuer-startups" style="text-decoration:none;display:block;padding:20px 22px">
+            <span class="ctag">RevOps</span>
+            <h3 style="font-size:1rem;margin:10px 0 8px" data-de="RevOps für Startups" data-en="RevOps for Startups">RevOps für Startups</h3>
+            <p style="font-size:.88rem" data-de="Eine Datenbasis für alle Teams." data-en="One data foundation for all teams.">Eine Datenbasis für alle Teams.</p>
+          </a>
+          <a class="case" href="/leistungen/hubspot-fuer-b2b-saas" style="text-decoration:none;display:block;padding:20px 22px">
+            <span class="ctag">B2B SaaS</span>
+            <h3 style="font-size:1rem;margin:10px 0 8px" data-de="HubSpot für B2B-SaaS" data-en="HubSpot for B2B SaaS">HubSpot für B2B-SaaS</h3>
+            <p style="font-size:.88rem" data-de="PQL, Trial-Flows, Churn-Signale." data-en="PQL, trial flows, churn signals.">PQL, Trial-Flows, Churn-Signale.</p>
+          </a>
+        </div>
+      </div>
     </div>
   </article>
 </Base>
