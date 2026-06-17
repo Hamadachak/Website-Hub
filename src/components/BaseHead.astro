@@ -3,19 +3,93 @@ interface Props { title: string; description: string; image?: string; type?: str
 const { title, description, image = "/og.png", type = "website" } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const imageURL = new URL(image, Astro.site).href;
-const personLd = {
+
+const graphLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Mohammad Chakrouf",
-  "jobTitle": "Senior HubSpot Consultant",
-  "url": "https://mohammad-chakrouf.de",
-  "image": "https://mohammad-chakrouf.de/og.png",
-  "address": { "@type": "PostalAddress", "addressLocality": "Berlin", "addressCountry": "DE" },
-  "sameAs": [
-    "https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/",
-    "https://www.malt.de/profile/mohammadchakrouf"
-  ],
-  "knowsAbout": ["HubSpot","CRM","Revenue Operations","Datenmigration","Marketing Automation","RevOps"]
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://mohammad-chakrouf.de/#person",
+      "name": "Mohammad Chakrouf",
+      "jobTitle": "Senior HubSpot Consultant",
+      "url": "https://mohammad-chakrouf.de",
+      "image": "https://mohammad-chakrouf.de/og.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Berlin",
+        "addressCountry": "DE"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/",
+        "https://www.malt.de/profile/mohammadchakrouf"
+      ],
+      "knowsAbout": [
+        "HubSpot",
+        "CRM",
+        "Revenue Operations",
+        "Datenmigration",
+        "Marketing Automation",
+        "RevOps"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://mohammad-chakrouf.de/#business",
+      "name": "Mohammad Chakrouf – HubSpot & RevOps Consulting",
+      "url": "https://mohammad-chakrouf.de",
+      "image": "https://mohammad-chakrouf.de/og.png",
+      "description": "Senior HubSpot Freelancer in Berlin – CRM-Setup, Datenmigration, RevOps und Marketing-Automation für B2B-Unternehmen im DACH-Raum.",
+      "priceRange": "€€€",
+      "currenciesAccepted": "EUR",
+      "paymentAccepted": "Invoice",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Berlin",
+        "addressCountry": "DE"
+      },
+      "areaServed": [
+        { "@type": "Country", "name": "Germany" },
+        { "@type": "Country", "name": "Austria" },
+        { "@type": "Country", "name": "Switzerland" }
+      ],
+      "founder": { "@id": "https://mohammad-chakrouf.de/#person" },
+      "employee": { "@id": "https://mohammad-chakrouf.de/#person" },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "HubSpot Consulting Leistungen",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "HubSpot-Migration",
+              "url": "https://mohammad-chakrouf.de/leistungen/hubspot-migration/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "RevOps für Startups",
+              "url": "https://mohammad-chakrouf.de/leistungen/revops-fuer-startups/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "HubSpot für B2B-SaaS",
+              "url": "https://mohammad-chakrouf.de/leistungen/hubspot-fuer-b2b-saas/"
+            }
+          }
+        ]
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/",
+        "https://www.malt.de/profile/mohammadchakrouf"
+      ]
+    }
+  ]
 };
 ---
 <meta charset="utf-8" />
@@ -34,7 +108,5 @@ const personLd = {
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageURL} />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/archivo-latin.woff2" crossorigin="anonymous" />
+<script type="application/ld+json" set:html={JSON.stringify(graphLd)} />
