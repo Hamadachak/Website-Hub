@@ -80,7 +80,7 @@ async function togetherChat(prompt) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'mistralai/Mixtral-8x7B-Instruct-v0.1',
+      model: 'meta-llama/Llama-3.3-70B-Instruct-Turbo',
       max_tokens: 4096,
       messages: [{ role: 'user', content: prompt }],
     }),
