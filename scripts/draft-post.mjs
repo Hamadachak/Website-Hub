@@ -193,12 +193,15 @@ async function main() {
   });
   const candidates = (recent.length ? recent : allItems).slice(0, 20);
 
-  console.log(`\n✍  Sending ${candidates.length} items to Together AI (Llama-3.1-8B-Turbo)…`);
+  console.log(`\n✍  Sending ${candidates.length} items to Together AI (Llama-3.3-70B-Turbo)…`);
 
-  const raw = await togetherChat(`\
+  // Split the prompt into two calls:
+  //   1. Metadata as JSON (short strings only — avoids control-char JSON parse errors)
+  //   2. Body text as plain delimited sections (no JSON wrapping)
+
+  const metaRaw = await togetherChat(`\
 You write for Mohammad Chakrouf — Freelance Senior HubSpot Consultant in Berlin.
 Audience: B2B Ops teams, RevOps managers, SaaS decision-makers in the DACH region.
-Language: German is primary (and must be thorough); English is secondary.
 
 Recent items from HubSpot, AI, CRM, and RevOps sources:
 
@@ -208,66 +211,95 @@ ${candidates.map((it, i) =>
 
 Choose the SINGLE most relevant and timely item for this audience.
 Prefer: HubSpot product updates, AI in CRM, RevOps strategy, B2B SaaS operations.
-Write ~600 words per language. Add a clear consultant perspective and practical takeaways.
-If any fact is uncertain, hedge — do NOT invent specifics.
 
-Return ONLY a single valid JSON object (no markdown fences, no commentary):
+Return ONLY this JSON object (no markdown fences, no extra text, short strings only — NO body content here):
 {
-  "slug": "german-slug-no-special-chars-no-umlauts-max-60-chars",
-  "titleDe": "German title (≤80 chars)",
-  "titleEn": "English title (≤80 chars)",
-  "descriptionDe": "German meta description (≤160 chars)",
-  "descriptionEn": "English meta description (≤160 chars)",
-  "heroImagePrompt": "Specific visual concept for an abstract hero image — what shapes, textures, metaphors fit this topic? No people, no text, no logos.",
-  "takeawaysDe": ["3–5 key points in German, each ≤70 chars"],
-  "takeawaysEn": ["3–5 key points in English, each ≤70 chars"],
-  "bodyDe": "Complete German markdown body",
-  "bodyEn": "Complete English markdown body",
-  "sourceTitle": "Exact title of the chosen article",
-  "sourceUrl": "Exact URL of the chosen article"
+  "selected": <number of chosen item>,
+  "slug": "german-slug-no-umlauts-max-60-chars",
+  "titleDe": "German title max 80 chars",
+  "titleEn": "English title max 80 chars",
+  "descriptionDe": "German meta description max 160 chars",
+  "descriptionEn": "English meta description max 160 chars",
+  "heroImagePrompt": "Visual concept for abstract hero: shapes, light, metaphor. No people, text, logos.",
+  "takeawaysDe": ["3-5 key points in German each max 70 chars"],
+  "takeawaysEn": ["3-5 key points in English each max 70 chars"],
+  "sourceTitle": "Exact title of chosen article",
+  "sourceUrl": "Exact URL of chosen article"
 }`);
 
-  // Strip accidental code fences
-  const text = raw.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim();
-  const post = JSON.parse(text);
+  const metaText = metaRaw.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim();
+  const meta = JSON.parse(metaText);
 
-  const slug = post.slug
+  // Identify the chosen source item for context
+  const chosen = candidates[meta.selected - 1] || candidates[0];
+
+  const bodyRaw = await togetherChat(`\
+You write for Mohammad Chakrouf — Freelance Senior HubSpot Consultant in Berlin.
+Audience: B2B Ops teams, RevOps managers, SaaS decision-makers in the DACH region.
+
+Write a bilingual blog post based on this source:
+Title: ${chosen.title}
+URL: ${chosen.link}
+Summary: ${chosen.description}
+
+Post metadata already decided:
+- German title: ${meta.titleDe}
+- English title: ${meta.titleEn}
+
+Write ~600 words per language. Direct, practical, consultant perspective. Hedge if unsure — do not invent.
+
+Respond with EXACTLY this structure (keep the delimiter lines verbatim):
+===DE_BODY===
+[Complete German markdown body here]
+===EN_BODY===
+[Complete English markdown body here]
+===END===`);
+
+  // Parse body sections
+  const deMatch = bodyRaw.match(/===DE_BODY===\n([\s\S]*?)\n===EN_BODY===/);
+  const enMatch = bodyRaw.match(/===EN_BODY===\n([\s\S]*?)\n===END===/);
+  const bodyDe  = deMatch?.[1]?.trim() ?? '';
+  const bodyEn  = enMatch?.[1]?.trim() ?? '';
+
+  if (!bodyDe) throw new Error('Could not parse German body from model response');
+
+  const slug = meta.slug
     .toLowerCase()
     .replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss')
     .replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
 
-  console.log(`\n📝 Post: "${post.titleDe}"`);
+  console.log(`\n📝 Post: "${meta.titleDe}"`);
   console.log(`   Slug: ${slug}`);
-  console.log(`   Source: ${post.sourceUrl}`);
+  console.log(`   Source: ${meta.sourceUrl}`);
 
   console.log('\n🎨 Generating visuals…');
   const [heroImage, takeawaysSvg] = await Promise.all([
-    generateHeroImage(post.heroImagePrompt, slug),
-    Promise.resolve(writeTakeawaysSVG(post.takeawaysDe, slug)),
+    generateHeroImage(meta.heroImagePrompt, slug),
+    Promise.resolve(writeTakeawaysSVG(meta.takeawaysDe, slug)),
   ]);
 
-  // Build frontmatter — bodyEn as YAML literal block scalar (no quoting issues)
-  const q          = s => String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-  const blockScalar = post.bodyEn.split('\n').map(l => '  ' + l).join('\n');
+  // Build frontmatter — bodyEn as YAML literal block scalar
+  const q           = s => String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  const blockScalar = bodyEn.split('\n').map(l => '  ' + l).join('\n');
 
-  const lines = [
+  const fmLines = [
     '---',
-    `title: "${q(post.titleDe)}"`,
-    `titleEn: "${q(post.titleEn)}"`,
-    `description: "${q(post.descriptionDe)}"`,
-    `descriptionEn: "${q(post.descriptionEn)}"`,
+    `title: "${q(meta.titleDe)}"`,
+    `titleEn: "${q(meta.titleEn)}"`,
+    `description: "${q(meta.descriptionDe)}"`,
+    `descriptionEn: "${q(meta.descriptionEn)}"`,
     `pubDate: ${TODAY}`,
     `draft: true`,
     heroImage ? `heroImage: "${heroImage}"` : null,
     `visuals:\n  - "${takeawaysSvg}"`,
-    `sourceTitle: "${q(post.sourceTitle || '')}"`,
-    `sourceUrl: "${q(post.sourceUrl || '')}"`,
+    `sourceTitle: "${q(meta.sourceTitle || '')}"`,
+    `sourceUrl: "${q(meta.sourceUrl || '')}"`,
     `bodyEn: |\n${blockScalar}`,
     '---',
   ].filter(Boolean);
 
   const filePath = join(ROOT, `src/content/blog/${slug}.md`);
-  writeFileSync(filePath, lines.join('\n') + '\n\n' + post.bodyDe + '\n', 'utf-8');
+  writeFileSync(filePath, fmLines.join('\n') + '\n\n' + bodyDe + '\n', 'utf-8');
   console.log(`\n✅ Written: src/content/blog/${slug}.md`);
 
   // Write GitHub Actions outputs
@@ -276,7 +308,7 @@ Return ONLY a single valid JSON object (no markdown fences, no commentary):
       `file=src/content/blog/${slug}.md`,
       `slug=${slug}`,
       `titel<<POSTDELIM`,
-      post.titleDe,
+      meta.titleDe,
       `POSTDELIM`,
       '',
     ].join('\n');
