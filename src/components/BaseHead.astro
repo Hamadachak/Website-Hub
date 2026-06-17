@@ -1,0 +1,39 @@
+---
+interface Props { title: string; description: string; image?: string; type?: string; }
+const { title, description, image = "/og.png", type = "website" } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const imageURL = new URL(image, Astro.site).href;
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mohammad Chakrouf",
+  "jobTitle": "Senior HubSpot Consultant",
+  "url": "https://mohammad-chakrouf.de",
+  "address": { "@type": "PostalAddress", "addressLocality": "Berlin", "addressCountry": "DE" },
+  "sameAs": [
+    "https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/",
+    "https://www.malt.de/profile/mohammadchakrouf"
+  ],
+  "knowsAbout": ["HubSpot","CRM","Revenue Operations","Data Migration","Marketing Automation"]
+};
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="canonical" href={canonical} />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageURL} />
+<meta property="og:locale" content="de_DE" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageURL} />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script type="application/ld+json" set:html={JSON.stringify(personLd)} />

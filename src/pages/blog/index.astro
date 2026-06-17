@@ -1,0 +1,27 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const fmt = (d) => d.toLocaleDateString("de-DE", { year: "numeric", month: "long", day: "numeric" });
+---
+<Base title="Blog — Mohammad Chakrouf" description="Insights zu HubSpot, CRM, RevOps und KI für B2B- und B2C-Unternehmen.">
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Blog</p>
+        <h2>Insights zu HubSpot, CRM &amp; RevOps</h2>
+      </div>
+      <div class="work-grid">
+        {posts.map((post) => (
+          <a class="case" href={`/blog/${post.id}/`} style="display:block;text-decoration:none">
+            <span class="ctag">{fmt(post.data.pubDate)}</span>
+            <h3>{post.data.title}</h3>
+            <p>{post.data.description}</p>
+          </a>
+        ))}
+        {posts.length === 0 && <p style="color:var(--muted)">Bald geht es hier los.</p>}
+      </div>
+    </div>
+  </section>
+</Base>

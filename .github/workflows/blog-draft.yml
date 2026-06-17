@@ -1,0 +1,44 @@
+name: Weekly Blog Draft
+
+on:
+  schedule:
+    # Every Monday at 07:00 UTC
+    - cron: "0 7 * * 1"
+  # Allow manual trigger for testing
+  workflow_dispatch:
+
+jobs:
+  draft-post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate blog post with Claude
+        id: gen
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 .github/scripts/generate_blog.py
+
+      - name: Open Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: blog-draft/${{ steps.gen.outputs.slug }}
+          commit-message: "blog: add draft '${{ steps.gen.outputs.slug }}'"
+          title: "Blog-Entwurf: ${{ steps.gen.outputs.titel }}"
+          body: |
+            Automatisch generierter Blog-Entwurf (Claude claude-opus-4-8, ${{ steps.gen.outputs.slug }}).
+
+            **Nächste Schritte:**
+            1. Text lesen und ggf. überarbeiten
+            2. `draft: true` → `draft: false` setzen, um den Post zu veröffentlichen
+            3. PR mergen — Netlify deployed automatisch
+
+            *Dieser PR wurde durch den wöchentlichen Blog-Draft-Workflow erstellt.*
+          labels: blog-draft
+          add-paths: src/content/blog/
