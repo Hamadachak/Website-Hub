@@ -72,7 +72,7 @@ function dehtml(h) {
 
 // ── Together AI chat (text generation) ──────────────────────────────────────
 
-async function togetherChat(prompt) {
+async function togetherChat(prompt, attempt = 0) {
   const res = await fetch('https://api.together.xyz/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -85,6 +85,12 @@ async function togetherChat(prompt) {
       messages: [{ role: 'user', content: prompt }],
     }),
   });
+  if (res.status === 503 && attempt < 3) {
+    const wait = (attempt + 1) * 8_000;
+    console.warn(`  ⚠ Together AI 503 — retrying in ${wait / 1000}s (attempt ${attempt + 1}/3)…`);
+    await new Promise(r => setTimeout(r, wait));
+    return togetherChat(prompt, attempt + 1);
+  }
   if (!res.ok) throw new Error(`Together AI ${res.status}: ${await res.text()}`);
   return (await res.json()).choices[0].message.content;
 }
