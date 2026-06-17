@@ -4,7 +4,7 @@ on:
   schedule:
     # Every Monday at 07:00 UTC
     - cron: "0 7 * * 1"
-  # Allow manual trigger for testing
+  # Allow manual trigger (e.g. to test or get an extra post)
   workflow_dispatch:
 
 jobs:
@@ -18,27 +18,42 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate blog post with Claude
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate post (RSS → Claude → visuals)
         id: gen
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python3 .github/scripts/generate_blog.py
+          TOGETHER_API_KEY:  ${{ secrets.TOGETHER_API_KEY }}
+        run: node scripts/draft-post.mjs
 
       - name: Open Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: blog-draft/${{ steps.gen.outputs.slug }}
-          commit-message: "blog: add draft '${{ steps.gen.outputs.slug }}'"
+          commit-message: "blog: draft '${{ steps.gen.outputs.slug }}'"
           title: "Blog-Entwurf: ${{ steps.gen.outputs.titel }}"
           body: |
-            Automatisch generierter Blog-Entwurf (Claude claude-opus-4-8, ${{ steps.gen.outputs.slug }}).
+            Automatisch generierter Blog-Entwurf (Claude claude-sonnet-4-6 + Together AI FLUX).
 
-            **Nächste Schritte:**
-            1. Text lesen und ggf. überarbeiten
-            2. `draft: true` → `draft: false` setzen, um den Post zu veröffentlichen
-            3. PR mergen — Netlify deployed automatisch
+            **Checkliste vor dem Merge:**
+            - [ ] Deutschen Text gelesen und ggf. korrigiert
+            - [ ] Englischen Text geprüft
+            - [ ] Hero-Bild passt zum Thema (liegt in `public/blog/images/`)
+            - [ ] Key-Takeaways-Karte stimmt (`public/blog/visuals/`)
+            - [ ] `draft: true` → `draft: false` in der `.md`-Datei setzen
+            - [ ] Quellen-URL ist korrekt und erreichbar
 
-            *Dieser PR wurde durch den wöchentlichen Blog-Draft-Workflow erstellt.*
+            *Erstellt durch den wöchentlichen Blog-Draft-Workflow. Nicht auto-mergen.*
           labels: blog-draft
-          add-paths: src/content/blog/
+          add-paths: |
+            src/content/blog/
+            public/blog/

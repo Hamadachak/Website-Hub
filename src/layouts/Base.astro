@@ -55,6 +55,11 @@ const { title, description, image, type } = Astro.props;
       var val = (l === 'de') ? el.getAttribute('data-de') : el.getAttribute('data-en');
       if(val !== null) el.textContent = val;
     }
+    // Switch bilingual body blocks (blog posts)
+    var blocks = document.querySelectorAll('[data-lang-block]');
+    for(var j=0;j<blocks.length;j++){
+      blocks[j].style.display = (blocks[j].getAttribute('data-lang-block') === l) ? '' : 'none';
+    }
     document.getElementById('lang-de').classList.toggle('active', l==='de');
     document.getElementById('lang-en').classList.toggle('active', l==='en');
   }

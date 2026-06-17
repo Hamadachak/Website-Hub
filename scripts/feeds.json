@@ -1,0 +1,29 @@
+{
+  "_note": "Edit this file to control which RSS feeds the weekly blog bot monitors. It fetches up to 5 items per feed and filters to the last 14 days. If a feed URL fails it is silently skipped — check the Actions log.",
+  "feeds": [
+    {
+      "name": "HubSpot Marketing Blog",
+      "url": "https://blog.hubspot.com/marketing/rss.xml"
+    },
+    {
+      "name": "HubSpot Sales Blog",
+      "url": "https://blog.hubspot.com/sales/rss.xml"
+    },
+    {
+      "name": "HubSpot Product Updates",
+      "url": "https://www.hubspot.com/product-updates/rss.xml"
+    },
+    {
+      "name": "Anthropic News",
+      "url": "https://www.anthropic.com/rss.xml"
+    },
+    {
+      "name": "OpenAI News",
+      "url": "https://openai.com/news/rss.xml"
+    },
+    {
+      "name": "Salesforce Blog",
+      "url": "https://www.salesforce.com/blog/feed/"
+    }
+  ]
+}
