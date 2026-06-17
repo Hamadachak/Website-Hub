@@ -80,7 +80,7 @@ async function togetherChat(prompt) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'meta-llama/Llama-3.3-70B-Instruct-Turbo-Free',
+      model: 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo',
       max_tokens: 4096,
       messages: [{ role: 'user', content: prompt }],
     }),
@@ -193,7 +193,7 @@ async function main() {
   });
   const candidates = (recent.length ? recent : allItems).slice(0, 20);
 
-  console.log(`\n✍  Sending ${candidates.length} items to Together AI (Llama-3.3-70B-Free)…`);
+  console.log(`\n✍  Sending ${candidates.length} items to Together AI (Llama-3.1-8B-Turbo)…`);
 
   const raw = await togetherChat(`\
 You write for Mohammad Chakrouf — Freelance Senior HubSpot Consultant in Berlin.

@@ -41,7 +41,7 @@ jobs:
           commit-message: "blog: draft '${{ steps.gen.outputs.slug }}'"
           title: "Blog-Entwurf: ${{ steps.gen.outputs.titel }}"
           body: |
-            Automatisch generierter Blog-Entwurf (Together AI: Llama-3.3-70B-Free + FLUX.1-schnell-Free).
+            Automatisch generierter Blog-Entwurf (Together AI: Llama-3.1-8B-Turbo + FLUX.1-schnell-Free).
 
             **Checkliste vor dem Merge:**
             - [ ] Deutschen Text gelesen und ggf. korrigiert
