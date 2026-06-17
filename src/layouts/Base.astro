@@ -1,8 +1,8 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import "../styles/global.css";
-interface Props { title: string; description: string; image?: string; type?: string; }
-const { title, description, image, type } = Astro.props;
+interface Props { title: string; description: string; titleEn?: string; descriptionEn?: string; image?: string; type?: string; }
+const { title, description, titleEn, descriptionEn, image, type } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="de">
@@ -29,6 +29,11 @@ const { title, description, image, type } = Astro.props;
     </div>
   </div>
 </nav>
+  {/* Hidden nodes carry bilingual page title + description for JS to read */}
+  <span id="page-title-de" style="display:none">{title}</span>
+  <span id="page-title-en" style="display:none">{titleEn || title}</span>
+  <span id="page-desc-de" style="display:none">{description}</span>
+  <span id="page-desc-en" style="display:none">{descriptionEn || description}</span>
   <slot />
 <footer>
   <div class="wrap foot-in">
@@ -62,6 +67,12 @@ const { title, description, image, type } = Astro.props;
     }
     document.getElementById('lang-de').classList.toggle('active', l==='de');
     document.getElementById('lang-en').classList.toggle('active', l==='en');
+    // Switch document.title and meta description
+    var titleNode = document.getElementById('page-title-' + l);
+    if (titleNode) document.title = titleNode.textContent;
+    var descNode = document.getElementById('page-desc-' + l);
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (descNode && metaDesc) metaDesc.setAttribute('content', descNode.textContent);
   }
 
   // ----- scroll reveals -----

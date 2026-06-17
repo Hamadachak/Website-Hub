@@ -15,7 +15,9 @@ const bodyEnHtml = post.data.bodyEn ? marked.parse(post.data.bodyEn) : null;
 ---
 <Base
   title={`${post.data.title} — Mohammad Chakrouf`}
+  titleEn={post.data.titleEn ? `${post.data.titleEn} — Mohammad Chakrouf` : undefined}
   description={post.data.description}
+  descriptionEn={post.data.descriptionEn}
   image={post.data.heroImage}
   type="article"
 >

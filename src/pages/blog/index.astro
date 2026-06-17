@@ -5,7 +5,12 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 const fmt = (d: Date) => d.toLocaleDateString("de-DE", { year: "numeric", month: "long", day: "numeric" });
 ---
-<Base title="Blog — Mohammad Chakrouf" description="Insights zu HubSpot, CRM, RevOps und KI für B2B- und B2C-Unternehmen.">
+<Base
+  title="Blog — Mohammad Chakrouf"
+  titleEn="Blog — Mohammad Chakrouf"
+  description="Insights zu HubSpot, CRM, RevOps und KI für B2B- und B2C-Unternehmen."
+  descriptionEn="Insights on HubSpot, CRM, RevOps and AI for B2B companies."
+>
   <section class="block">
     <div class="wrap">
       <div class="head">
