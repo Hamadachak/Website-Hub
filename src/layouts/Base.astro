@@ -21,6 +21,7 @@ const path = Astro.url.pathname;
       <a href="/#approach" data-de="Ansatz" data-en="Approach">Ansatz</a>
       <a href="/#build" data-de="Build" data-en="Build">Build</a>
       <a href="/#about" data-de="Über mich" data-en="About">Über mich</a>
+      <a href="/#leistungen" data-de="Leistungen" data-en="Services" aria-current={path.startsWith('/leistungen') ? 'page' : undefined}>Leistungen</a>
       <a href="/blog/" data-de="Blog" data-en="Blog" aria-current={path.startsWith('/blog') ? 'page' : undefined}>Blog</a>
     </div>
     <div class="nav-right">
