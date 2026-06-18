@@ -21,7 +21,7 @@
     <circle cx="14" cy="20" r="5" fill="#FF9A3C"/>
     <text x="30" y="25" fill="#E8EAED"
       font-family="'Hanken Grotesk',system-ui,sans-serif"
-      font-size="14" font-weight="500">ChatGPT-Indexierung</text>
+      font-size="14" font-weight="500">ChatGPT-Integration</text>
   </g>
   </g>
 </svg>
