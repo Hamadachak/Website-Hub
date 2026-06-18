@@ -1,0 +1,161 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getDict, localizedPath, type Locale } from "../../i18n";
+
+type ServiceKey = "migration" | "revops" | "b2bsaas";
+interface Props { service: ServiceKey; locale: Locale }
+const { service, locale } = Astro.props;
+
+const t = getDict(locale);
+const sp = t.servicePages[service];
+const c = t.common;
+
+const slugOf: Record<ServiceKey, string> = {
+  migration: "hubspot-migration",
+  revops: "revops-fuer-startups",
+  b2bsaas: "hubspot-fuer-b2b-saas",
+};
+const slug = slugOf[service];
+const homeBase = localizedPath("/", locale);
+
+// Second CTA anchor differs per service.
+const cta2Anchor: Record<ServiceKey, string> = { migration: "#work", revops: "#about", b2bsaas: "#work" };
+
+// Section-2 decorative glyphs (ext layout only).
+const s2Glyphs: Record<ServiceKey, string[]> = {
+  migration: ["↗", "⊞", "▦", "◎"],
+  b2bsaas: ["◎", "↗", "★", "▦"],
+  revops: [],
+};
+const pipeNums = ["01", "02", "03", "04"];
+
+// Related = the other two services, reusing the homepage service cards.
+const order: ServiceKey[] = ["migration", "revops", "b2bsaas"];
+const related = order
+  .map((k, i) => ({ key: k, slug: slugOf[k], card: t.home.services.cards[i] }))
+  .filter((r) => r.key !== service);
+
+const serviceTypeMap: Record<ServiceKey, string> = {
+  migration: "CRM Migration Consulting",
+  revops: "Revenue Operations Consulting",
+  b2bsaas: "HubSpot Consulting",
+};
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": sp.ldName,
+  "description": sp.ldDescription,
+  "provider": { "@id": "https://mohammad-chakrouf.de/#person" },
+  "areaServed": [
+    { "@type": "Country", "name": "Germany" },
+    { "@type": "Country", "name": "Austria" },
+    { "@type": "Country", "name": "Switzerland" },
+    { "@type": "Country", "name": "United Arab Emirates" }
+  ],
+  "serviceType": serviceTypeMap[service]
+};
+---
+<Base
+  title={sp.metaTitle}
+  description={sp.metaDescription}
+  locale={locale}
+  logicalPath={`/leistungen/${slug}/`}
+>
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow"><span class="b">{c.serviceEyebrow}</span> · <span>{sp.eyebrowProduct}</span></p>
+    <h1 style="font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,5.5vw,4rem);line-height:1.05;letter-spacing:-.025em;max-width:16ch;margin:20px 0 22px">{sp.h1}</h1>
+    <p class="sub" style="max-width:50ch">{sp.sub}</p>
+    <div class="hero-actions" style="margin-top:28px">
+      <a href={`${homeBase}#contact`} class="btn btn-primary">{sp.cta1}</a>
+      <a href={`${homeBase}${cta2Anchor[service]}`} class="btn btn-ghost">{sp.cta2}</a>
+    </div>
+  </div>
+</header>
+
+<div class="caps">
+  <div class="wrap caps-in">
+    {sp.caps.map((cap) => <span class="tag">{cap}</span>)}
+  </div>
+</div>
+
+<section class="block" id="leistung">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">{sp.s1Eyebrow}</p>
+      <h2>{sp.s1H2}</h2>
+    </div>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      {sp.s1Items.map((item) => (
+        <div class="case reveal">
+          <span class="ctag">{item.tag}</span>
+          <h3>{item.h3}</h3>
+          <p>{item.p}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">{sp.s2Eyebrow}</p>
+      <h2>{sp.s2H2}</h2>
+    </div>
+    {sp.s2Layout === "pipe" ? (
+      <div class="pipe reveal">
+        {sp.s2Items.map((item, i) => (
+          <div class="stage">
+            <div class="num">{pipeNums[i]}</div>
+            <h3>{item.h3}</h3>
+            <p>{item.p}</p>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="ext-grid reveal">
+        {sp.s2Items.map((item, i) => (
+          <div class="ext">
+            <div class="ehead"><div class="glyph" aria-hidden="true">{s2Glyphs[service][i]}</div><h3>{item.h3}</h3></div>
+            <p>{item.p}</p>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">{c.relatedEyebrow}</p>
+      <h2>{c.relatedH2}</h2>
+    </div>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      {related.map((r) => (
+        <a class="case" href={localizedPath(`/leistungen/${r.slug}/`, locale)} style="text-decoration:none;display:block">
+          <span class="ctag">{r.card.tag}</span>
+          <h3>{r.card.h3}</h3>
+          <p>{r.card.p}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="block contact" style="position:relative;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow">{c.contactEyebrow}</p>
+    <h2>{sp.contactH2}</h2>
+    <p class="sub">{sp.contactSub}</p>
+    <div class="contact-actions">
+      <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach" class="btn btn-primary" target="_blank" rel="noopener" aria-label={c.bookAria}>{c.book}</a>
+      <a href="mailto:chakroufmohammad@gmail.com" class="btn btn-ghost">{c.email}</a>
+      <a href="https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/" class="btn btn-ghost" target="_blank" rel="noopener" aria-label={c.linkedinAria}>LinkedIn</a>
+    </div>
+  </div>
+</section>
+</Base>

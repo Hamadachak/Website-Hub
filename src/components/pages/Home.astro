@@ -1,0 +1,188 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getDict, localizedPath, type Locale } from "../../i18n";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = getDict(locale);
+const h = t.home;
+const svc = (slug: string) => localizedPath(`/leistungen/${slug}/`, locale);
+
+const professionalServiceLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Mohammad Chakrouf — HubSpot Consultant Berlin",
+  "description": h.ldDescription,
+  "url": "https://mohammad-chakrouf.de",
+  "address": { "@type": "PostalAddress", "addressLocality": "Berlin", "addressCountry": "DE" },
+  "areaServed": [
+    { "@type": "Country", "name": "Germany" },
+    { "@type": "Country", "name": "Austria" },
+    { "@type": "Country", "name": "Switzerland" },
+    { "@type": "Country", "name": "United Arab Emirates" }
+  ],
+  "knowsAbout": ["HubSpot", "CRM", "Revenue Operations", "Datenmigration", "Marketing Automation"]
+};
+
+const extTitles = ["Company Health Score Card", "Property Address Card", "Voice Notes", "GIF Generator"];
+const extGlyphs = ["★", "⌖", "●", "▦"];
+const extStacks = ["React · HubSpot CLI · Node.js", "React · Google Maps API · Node.js", "React · HubSpot CLI · Node.js", "React · HubSpot CLI"];
+const stageNums = ["01", "02", "03", "04", "05"];
+const serviceSlugs = ["hubspot-migration", "revops-fuer-startups", "hubspot-fuer-b2b-saas"];
+---
+<Base title={h.metaTitle} description={h.metaDescription} locale={locale} logicalPath="/" type="website">
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(professionalServiceLd)} />
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow"><span class="b">{h.hero.eyebrowLead}</span>{h.hero.eyebrowRest}</p>
+        <h1>{h.hero.h1}</h1>
+        <p class="sub">{h.hero.sub}</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">{h.hero.ctaContact}</a>
+          <a href="#work" class="btn btn-ghost">{h.hero.ctaWork}</a>
+        </div>
+        <p class="status"><span class="dot" aria-hidden="true"></span><span>{h.hero.status}</span></p>
+      </div>
+
+      <div class="record reveal">
+        <div class="record-tab">// <span>{h.record.tab}</span></div>
+        <div class="record-head">
+          <div class="avatar">MC</div>
+          <div>
+            <div class="name">Mohammad Chakrouf</div>
+            <div class="role">Senior HubSpot Consultant</div>
+          </div>
+        </div>
+        <div class="record-rows">
+          <div class="row"><span class="k">{h.record.roleK}</span><span class="v">CRM Architect · RevOps</span></div>
+          <div class="row"><span class="k">{h.record.locationK}</span><span class="v">{h.record.locationV}</span></div>
+          <div class="row"><span class="k">{h.record.experienceK}</span><span class="v">{h.record.experienceV}</span></div>
+          <div class="row"><span class="k">{h.record.focusK}</span><span class="v">{h.record.focusV}</span></div>
+          <div class="row"><span class="k">Stack</span><span class="v">HubSpot CLI · React · Node.js</span></div>
+          <div class="row"><span class="k">{h.record.languagesK}</span><span class="v">{h.record.languagesV}</span></div>
+          <div class="row"><span class="k">Status</span><span class="v"><span class="mini-dot" aria-hidden="true"></span><span>{h.record.statusV}</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="caps">
+  <div class="wrap caps-in">
+    {h.caps.map((cap) => <span class="tag">{cap}</span>)}
+  </div>
+</div>
+
+<section class="block" id="work">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">{h.work.eyebrow}</p>
+      <h2>{h.work.h2}</h2>
+    </div>
+    <div class="work-grid">
+      {h.work.cases.map((c) => (
+        <article class="case reveal">
+          <span class="ctag">{c.tag}</span>
+          <h3>{c.h3}</h3>
+          <p>{c.body}</p>
+          <p class="outcome"><b>{c.outcomeLabel}</b> · <span>{c.outcomeText}</span></p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="block" id="approach" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">{h.approach.eyebrow}</p>
+      <h2>{h.approach.h2}</h2>
+    </div>
+    <div class="pipe reveal">
+      {h.approach.stages.map((s, i) => (
+        <div class="stage">
+          <div class="num">{stageNums[i]}</div>
+          <h3>{s.h3}</h3>
+          <p>{s.p}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="block" id="build" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">{h.build.eyebrow}</p>
+      <h2>{h.build.h2}</h2>
+    </div>
+    <p class="build-intro reveal">{h.build.intro}</p>
+    <div class="ext-grid">
+      {h.build.ext.map((p, i) => (
+        <div class="ext reveal">
+          <div class="ehead"><div class="glyph" aria-hidden="true">{extGlyphs[i]}</div><h3>{extTitles[i]}</h3></div>
+          <p>{p}</p>
+          <p class="stack">{extStacks[i]}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="block" id="about" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about reveal">
+        <p class="eyebrow">{h.about.eyebrow}</p>
+        <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,3.2vw,2.4rem);line-height:1.1;letter-spacing:-.02em;margin:14px 0 24px">{h.about.h2}</h2>
+        <p>{h.about.p1}</p>
+        <p>{h.about.p2}</p>
+        <p><strong>{h.about.p3Label}</strong> <span>{h.about.p3Rest}</span></p>
+      </div>
+      <div class="facts reveal">
+        <div class="record-tab">// <span>{h.about.factsTab}</span></div>
+        <div class="record-rows" style="padding-top:10px">
+          <div class="row"><span class="k">{h.about.experienceK}</span><span class="v">{h.about.experienceV}</span></div>
+          <div class="row"><span class="k">Hubs</span><span class="v">Marketing · Sales · Service · Ops</span></div>
+          <div class="row"><span class="k">Engineering</span><span class="v">React · Node.js · HubSpot CLI</span></div>
+          <div class="row"><span class="k">{h.about.modelK}</span><span class="v">{h.about.modelV}</span></div>
+          <div class="row"><span class="k">{h.about.regionK}</span><span class="v">DACH · Remote</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line);padding:56px 0">
+  <div class="wrap">
+    <p class="eyebrow">{h.services.eyebrow}</p>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:28px">
+      {h.services.cards.map((card, i) => (
+        <a class="case" href={svc(serviceSlugs[i])} style="text-decoration:none;display:block">
+          <span class="ctag">{card.tag}</span>
+          <h3>{card.h3}</h3>
+          <p>{card.p}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="block contact" id="contact" style="position:relative">
+  <div class="wrap">
+    <p class="eyebrow">{h.contact.eyebrow}</p>
+    <h2>{h.contact.h2}</h2>
+    <p class="sub">{h.contact.sub}</p>
+    <div class="contact-actions">
+      <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach" class="btn btn-primary" target="_blank" rel="noopener" aria-label={h.contact.bookAria}>{h.contact.book}</a>
+      <a href="mailto:chakroufmohammad@gmail.com" class="btn btn-ghost">{h.contact.email}</a>
+      <a href="https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/" class="btn btn-ghost" target="_blank" rel="noopener" aria-label={h.contact.linkedinAria}>LinkedIn</a>
+      <a href="https://www.malt.de/profile/mohammadchakrouf" class="btn btn-ghost" target="_blank" rel="noopener" aria-label={h.contact.maltAria}>Malt</a>
+    </div>
+    <p class="status"><span class="dot" aria-hidden="true"></span><span>{h.contact.status}</span></p>
+  </div>
+</section>
+</Base>

@@ -1,127 +1,146 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import "../styles/global.css";
-interface Props { title: string; description: string; titleEn?: string; descriptionEn?: string; image?: string; type?: string; }
-const { title, description, titleEn, descriptionEn, image, type } = Astro.props;
+import { getDict, localizedPath, getAlternates, dir as dirOf, locales, localeLabels, type Locale } from "../i18n";
+
+interface Props {
+  title: string;
+  description: string;
+  locale?: Locale;          // current page locale (default: de)
+  logicalPath?: string;     // set on fully-localized pages (home + services) → enables hreflang
+  titleEn?: string;         // blog only: client-side DE/EN title swap
+  descriptionEn?: string;   // blog only
+  image?: string;
+  type?: string;
+}
+
+const {
+  title, description, locale = "de", logicalPath,
+  titleEn, descriptionEn, image, type,
+} = Astro.props;
+
+const t = getDict(locale);
+const d = dirOf(locale);
 const path = Astro.url.pathname;
+const alternates = logicalPath != null ? getAlternates(logicalPath) : null;
+const homeBase = localizedPath("/", locale);
+
+// Switcher target for a given locale:
+//  - localized pages → the same page in that locale
+//  - other pages (blog/legal) → that locale's home (current page for its own locale)
+const switchTarget = (loc: Locale): string =>
+  logicalPath != null
+    ? localizedPath(logicalPath, loc)
+    : loc === locale
+      ? path
+      : localizedPath("/", loc);
+
+const skip =
+  locale === "ar" ? "تخطَّ إلى المحتوى"
+  : locale === "en" ? "Skip to content"
+  : "Zum Inhalt springen / Skip to content";
+
+const bookUrl = "https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach";
 ---
 <!DOCTYPE html>
-<html lang="de">
+<html lang={locale} dir={d}>
 <head>
-  <BaseHead title={title} description={description} image={image} type={type} />
+  <BaseHead title={title} description={description} image={image} type={type} locale={locale} alternates={alternates} />
   <slot name="head" />
 </head>
 <body>
-<a class="skip-link" href="#main-content">Zum Inhalt springen / Skip to content</a>
-<nav aria-label="Hauptnavigation">
+<a class="skip-link" href="#main-content">{skip}</a>
+<nav aria-label="Navigation">
   <div class="nav-in">
-    <a class="brand" href="/" aria-label="Mohammad Chakrouf – Startseite"><span class="mark" aria-hidden="true">MC</span><span>chakrouf</span></a>
+    <a class="brand" href={homeBase} aria-label="Mohammad Chakrouf – Home"><span class="mark" aria-hidden="true">MC</span><span>chakrouf</span></a>
     <div class="nav-links">
-      <a href="/#work" data-de="Projekte" data-en="Work">Projekte</a>
-      <a href="/#approach" data-de="Ansatz" data-en="Approach">Ansatz</a>
-      <a href="/#build" data-de="Build" data-en="Build">Build</a>
-      <a href="/#about" data-de="Über mich" data-en="About">Über mich</a>
-      <a href="/blog/" data-de="Blog" data-en="Blog" aria-current={path.startsWith('/blog') ? 'page' : undefined}>Blog</a>
+      <a href={`${homeBase}#work`}>{t.nav.work}</a>
+      <a href={`${homeBase}#approach`}>{t.nav.approach}</a>
+      <a href={`${homeBase}#build`}>{t.nav.build}</a>
+      <a href={`${homeBase}#about`}>{t.nav.about}</a>
+      <a href="/blog/" aria-current={path.startsWith("/blog") ? "page" : undefined}>{t.nav.blog}</a>
     </div>
     <div class="nav-right">
-      <div class="langtoggle" role="group" aria-label="Sprache / Language">
-        <button id="lang-de" class="active"
-          aria-label="Auf Deutsch anzeigen"
-          aria-pressed="true"
-          onclick="setLang('de')">DE</button>
-        <button id="lang-en"
-          aria-label="Show in English"
-          aria-pressed="false"
-          onclick="setLang('en')">EN</button>
+      <div class="langtoggle" role="group" aria-label={t.switcher.label}>
+        {locales.map((loc) => (
+          <a
+            href={switchTarget(loc)}
+            hreflang={loc}
+            lang={loc}
+            class={loc === locale ? "active" : undefined}
+            aria-current={loc === locale ? "true" : undefined}
+            onclick={`try{localStorage.setItem('lang','${loc}')}catch(e){}`}
+          >{localeLabels[loc]}</a>
+        ))}
       </div>
-      <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach"
+      <a href={bookUrl}
         class="btn btn-primary nav-cta"
         target="_blank"
         rel="noopener"
-        data-de="Termin buchen"
-        data-en="Book a call"
-        data-de-aria="Termin buchen (öffnet in neuem Tab)"
-        data-en-aria="Book a call (opens in new tab)"
-        aria-label="Termin buchen (öffnet in neuem Tab)">Termin buchen</a>
+        aria-label={t.nav.bookCtaAria}>{t.nav.bookCta}</a>
     </div>
   </div>
 </nav>
 <main id="main-content" tabindex="-1">
-  {/* Hidden nodes carry bilingual page title + description for JS */}
-  <span id="page-title-de" style="display:none">{title}</span>
-  <span id="page-title-en" style="display:none">{titleEn || title}</span>
-  <span id="page-desc-de" style="display:none">{description}</span>
-  <span id="page-desc-en" style="display:none">{descriptionEn || description}</span>
+  {/* Hidden nodes carry the alternate-language title/desc for the blog's client-side swap */}
+  {titleEn && <span id="page-title-de" style="display:none">{title}</span>}
+  {titleEn && <span id="page-title-en" style="display:none">{titleEn}</span>}
+  {descriptionEn && <span id="page-desc-de" style="display:none">{description}</span>}
+  {descriptionEn && <span id="page-desc-en" style="display:none">{descriptionEn}</span>}
   <slot />
 </main>
 <footer>
   <div class="wrap foot-in">
-    <span>Mohammad Chakrouf · Senior HubSpot Consultant · Berlin</span>
+    <span>{t.footer.tagline}</span>
     <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
-      <a href="/leistungen/hubspot-migration" data-de="HubSpot-Migration" data-en="HubSpot Migration">HubSpot-Migration</a>
-      <a href="/leistungen/revops-fuer-startups" data-de="RevOps für Startups" data-en="RevOps for Startups">RevOps für Startups</a>
-      <a href="/leistungen/hubspot-fuer-b2b-saas" data-de="HubSpot für B2B-SaaS" data-en="HubSpot for B2B SaaS">HubSpot für B2B-SaaS</a>
+      <a href={localizedPath("/leistungen/hubspot-migration/", locale)}>{t.footer.migration}</a>
+      <a href={localizedPath("/leistungen/revops-fuer-startups/", locale)}>{t.footer.revops}</a>
+      <a href={localizedPath("/leistungen/hubspot-fuer-b2b-saas/", locale)}>{t.footer.b2bsaas}</a>
       <span style="color:var(--line)" aria-hidden="true">|</span>
-      <a href="/impressum">Impressum</a>
-      <a href="/datenschutz">Datenschutz</a>
-      <a href="/barrierefreiheit">Barrierefreiheit</a>
+      <a href="/impressum">{t.footer.imprint}</a>
+      <a href="/datenschutz">{t.footer.privacy}</a>
+      <a href="/barrierefreiheit">{t.footer.accessibility}</a>
     </div>
-    <span>© <span id="year"></span> · <span data-de="Selbst gebaut" data-en="Built by hand">Selbst gebaut</span></span>
+    <span>© <span id="year"></span> · <span>{t.footer.builtByHand}</span></span>
   </div>
 </footer>
 <script is:inline>(function () {
   var KEY = 'lang';
 
-  function apply(l) {
-    document.documentElement.lang = l;
-    // text nodes with bilingual attributes
+  // Client-side DE/EN swap — only used by pages that still ship inline bilingual
+  // content (the blog). Fully-localized pages render their language server-side.
+  function applyInline(l) {
     var nodes = document.querySelectorAll('[data-de],[data-en]');
     for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
       var val = (l === 'en') ? el.getAttribute('data-en') : el.getAttribute('data-de');
       if (val !== null) el.textContent = val;
     }
-    // bilingual aria-label on external links
     var ariaNodes = document.querySelectorAll('[data-de-aria],[data-en-aria]');
     for (var n = 0; n < ariaNodes.length; n++) {
       var an = ariaNodes[n];
       var av = (l === 'en') ? an.getAttribute('data-en-aria') : an.getAttribute('data-de-aria');
       if (av !== null) an.setAttribute('aria-label', av);
     }
-    // bilingual body blocks (blog posts)
     var blocks = document.querySelectorAll('[data-lang-block]');
     for (var j = 0; j < blocks.length; j++) {
       blocks[j].style.display = (blocks[j].getAttribute('data-lang-block') === l) ? '' : 'none';
     }
-    // toggle buttons
-    var de = document.getElementById('lang-de');
-    var en = document.getElementById('lang-en');
-    if (de && en) {
-      de.classList.toggle('active', l === 'de');
-      en.classList.toggle('active', l === 'en');
-      de.setAttribute('aria-pressed', String(l === 'de'));
-      en.setAttribute('aria-pressed', String(l === 'en'));
-    }
-    // document.title + meta description
-    var titleNode = document.getElementById('page-title-' + l);
-    if (titleNode) document.title = titleNode.textContent;
-    var descNode = document.getElementById('page-desc-' + l);
-    var metaDesc = document.querySelector('meta[name="description"]');
-    if (descNode && metaDesc) metaDesc.setAttribute('content', descNode.textContent);
+    var tn = document.getElementById('page-title-' + l);
+    if (tn) document.title = tn.textContent;
+    var dn = document.getElementById('page-desc-' + l);
+    var md = document.querySelector('meta[name="description"]');
+    if (dn && md) md.setAttribute('content', dn.textContent);
   }
 
-  window.setLang = function (l) {
-    try { localStorage.setItem(KEY, l); } catch (e) {}
-    apply(l);
-  };
-
   document.addEventListener('DOMContentLoaded', function () {
-    // restore persisted language (default: 'de')
-    var saved = 'de';
-    try { saved = localStorage.getItem(KEY) || 'de'; } catch (e) {}
-    apply(saved);
+    if (document.querySelector('[data-lang-block],[data-de]')) {
+      var saved = 'de';
+      try { saved = localStorage.getItem(KEY) || 'de'; } catch (e) {}
+      if (saved === 'ar') saved = 'en'; // blog has no Arabic body; fall back to EN
+      applyInline(saved);
+    }
 
-    // scroll reveals
     var els = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window)) {
       for (var k = 0; k < els.length; k++) els[k].classList.add('in');
@@ -134,7 +153,6 @@ const path = Astro.url.pathname;
       for (var m = 0; m < els.length; m++) io.observe(els[m]);
     }
 
-    // year
     var yr = document.getElementById('year');
     if (yr) yr.textContent = new Date().getFullYear();
   });
