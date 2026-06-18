@@ -1,8 +1,19 @@
 ---
-interface Props { title: string; description: string; image?: string; type?: string; }
-const { title, description, image = "/og.png", type = "website" } = Astro.props;
+import { ogLocale, locales, type Locale } from "../i18n";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: string;
+  locale?: Locale;
+  alternates?: Array<{ hreflang: string; path: string }> | null;
+}
+
+const { title, description, image = "/og.png", type = "website", locale = "de", alternates = null } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const imageURL = new URL(image, Astro.site).href;
+const abs = (p: string) => new URL(p, Astro.site).href;
 
 const graphLd = {
   "@context": "https://schema.org",
@@ -27,7 +38,7 @@ const graphLd = {
         "Marketing Automation",
         "HubSpot UI Extensions"
       ],
-      "knowsLanguage": ["de", "en"],
+      "knowsLanguage": ["de", "en", "ar"],
       "sameAs": [
         "https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/",
         "https://www.malt.de/profile/mohammadchakrouf"
@@ -40,8 +51,8 @@ const graphLd = {
       "url": "https://mohammad-chakrouf.de/",
       "image": "https://mohammad-chakrouf.de/og.png",
       "provider": { "@id": "https://mohammad-chakrouf.de/#person" },
-      "areaServed": ["DE", "AT", "CH"],
-      "availableLanguage": ["de", "en"],
+      "areaServed": ["DE", "AT", "CH", "AE", "SA", "QA"],
+      "availableLanguage": ["de", "en", "ar"],
       "serviceType": [
         "HubSpot Consulting",
         "CRM Architecture",
@@ -56,6 +67,9 @@ const graphLd = {
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="canonical" href={canonical} />
+{alternates && alternates.map((a) => (
+  <link rel="alternate" hreflang={a.hreflang} href={abs(a.path)} />
+))}
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta property="og:type" content={type} />
@@ -63,10 +77,16 @@ const graphLd = {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
-<meta property="og:locale" content="de_DE" />
+<meta property="og:locale" content={ogLocale[locale]} />
+{locales.filter((l) => l !== locale).map((l) => (
+  <meta property="og:locale:alternate" content={ogLocale[l]} />
+))}
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageURL} />
 <link rel="preload" as="font" type="font/woff2" href="/fonts/archivo-latin.woff2" crossorigin="anonymous" />
+{locale === "ar" && (
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-sans-arabic-400.woff2" crossorigin="anonymous" />
+)}
 <script type="application/ld+json" set:html={JSON.stringify(graphLd)} />
