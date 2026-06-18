@@ -112,7 +112,7 @@
     background:var(--amber);color:var(--ink);
     display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:.85rem;
   }
-  .nav-links{display:flex;gap:30px;font-family:var(--mono);font-size:.82rem;letter-spacing:.03em;color:var(--muted)}
+  .nav-links{display:flex;gap:20px;font-family:var(--mono);font-size:.82rem;letter-spacing:.03em;color:var(--muted)}
   .nav-links a{transition:color .2s}
   .nav-links a:hover{color:var(--text)}
   .nav-right{display:flex;align-items:center;gap:18px}
@@ -132,7 +132,7 @@
   .btn-primary:hover{background:#ffae5e;transform:translateY(-1px)}
   .btn-ghost{border-color:var(--line);color:var(--text)}
   .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
-  .nav-cta{display:none}
+  .nav-cta{display:inline-flex}
 
   /* ---------- HERO ---------- */
   .hero{position:relative;padding:84px 0 64px;overflow:hidden}
@@ -292,7 +292,6 @@
   /* ---------- RESPONSIVE ---------- */
   @media(max-width:860px){
     .nav-links{display:none}
-    .nav-cta{display:inline-flex}
     .langtoggle button{padding:10px 12px}
     .hero-grid{grid-template-columns:1fr;gap:40px}
     .hero{padding:56px 0 48px}
