@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="212" viewBox="0 0 700 212">
+  <rect width="700" height="212" rx="13" fill="#14171D" stroke="#262C36" stroke-width="1"/>
+  <text x="24" y="30" fill="#FF9A3C"
+    font-family="'JetBrains Mono',ui-monospace,monospace"
+    font-size="10" letter-spacing="0.18em">// KEY TAKEAWAYS</text>
+  <line x1="24" y1="40" x2="676" y2="40" stroke="#262C36" stroke-width="1"/>
+  <g transform="translate(24,46)">
+  <g transform="translate(0,0)">
+    <circle cx="14" cy="20" r="5" fill="#FF9A3C"/>
+    <text x="30" y="25" fill="#E8EAED"
+      font-family="'Hanken Grotesk',system-ui,sans-serif"
+      font-size="14" font-weight="500">Sicherheit überall</text>
+  </g>
+  <g transform="translate(0,50)">
+    <circle cx="14" cy="20" r="5" fill="#FF9A3C"/>
+    <text x="30" y="25" fill="#E8EAED"
+      font-family="'Hanken Grotesk',system-ui,sans-serif"
+      font-size="14" font-weight="500">Governance integriert</text>
+  </g>
+  <g transform="translate(0,100)">
+    <circle cx="14" cy="20" r="5" fill="#FF9A3C"/>
+    <text x="30" y="25" fill="#E8EAED"
+      font-family="'Hanken Grotesk',system-ui,sans-serif"
+      font-size="14" font-weight="500">Headless 360 schützt</text>
+  </g>
+  </g>
+</svg>
