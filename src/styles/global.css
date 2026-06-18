@@ -116,12 +116,15 @@
   .nav-links a{transition:color .2s}
   .nav-links a:hover{color:var(--text)}
   .nav-right{display:flex;align-items:center;gap:18px}
-  .langtoggle{display:flex;font-family:var(--mono);font-size:.78rem;border:1px solid var(--line);border-radius:7px;overflow:hidden}
-  .langtoggle button{
-    background:none;border:none;color:var(--muted);
+  .langtoggle{display:inline-flex;font-family:var(--mono);font-size:.78rem;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+  .langtoggle a,.langtoggle button{
+    background:none;border:none;color:var(--muted);text-decoration:none;
+    display:inline-flex;align-items:center;justify-content:center;line-height:1;
     padding:6px 10px;cursor:pointer;font-family:var(--mono);font-size:.78rem;transition:.18s;
   }
-  .langtoggle button.active{background:var(--text);color:var(--ink)}
+  .langtoggle a + a{border-inline-start:1px solid var(--line)}
+  .langtoggle a:hover{color:var(--text)}
+  .langtoggle a.active,.langtoggle button.active{background:var(--text);color:var(--ink)}
   .btn{
     display:inline-flex;align-items:center;gap:8px;
     font-family:var(--mono);font-size:.8rem;letter-spacing:.03em;
