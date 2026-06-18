@@ -13,13 +13,58 @@
  * Required env:  TOGETHER_API_KEY
  */
 
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { join, dirname }                           from 'node:path';
-import { fileURLToPath }                           from 'node:url';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
+import { join, dirname }                                       from 'node:path';
+import { fileURLToPath, pathToFileURL }                        from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT      = join(__dirname, '..');
+const BLOG_DIR  = join(ROOT, 'src/content/blog');
 const TODAY     = new Date().toISOString().slice(0, 10);
+
+// ── Slug helpers + collision guard ───────────────────────────────────────────
+// The blog uses Astro's glob loader, so a post's slug IS its filename (minus
+// .md). We never want a generated draft to silently overwrite a published post,
+// so we slugify deterministically and abort loudly on any collision.
+
+export function slugify(input) {
+  return String(input)
+    .toLowerCase()
+    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+    .replace(/[^a-z0-9]+/g, '-')   // any non-alphanumeric run → single dash
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+// Existing slugs = basenames of every .md already in the blog dir (lowercased).
+export function existingSlugs(blogDir) {
+  try {
+    return readdirSync(blogDir)
+      .filter(f => f.endsWith('.md'))
+      .map(f => f.replace(/\.md$/, '').toLowerCase());
+  } catch {
+    return [];
+  }
+}
+
+// Throws a clear, non-zero-producing error if the slug is already taken.
+export function assertSlugAvailable(slug, blogDir) {
+  if (existingSlugs(blogDir).includes(slug.toLowerCase())) {
+    throw new Error(
+      `Slug collision: "${slug}" already exists at src/content/blog/${slug}.md. ` +
+      `Refusing to overwrite a published post — a human should pick a different ` +
+      `topic or rename the draft. Nothing was written.`,
+    );
+  }
+}
+
+// Guard-then-write: never writes if the slug collides. Returns the file path.
+export function writePostFile(blogDir, slug, contents) {
+  assertSlugAvailable(slug, blogDir);
+  const filePath = join(blogDir, `${slug}.md`);
+  writeFileSync(filePath, contents, 'utf-8');
+  return filePath;
+}
 
 // ── RSS helpers ──────────────────────────────────────────────────────────────
 
@@ -269,14 +314,16 @@ Respond with EXACTLY this structure (keep the delimiter lines verbatim):
 
   if (!bodyDe) throw new Error('Could not parse German body from model response');
 
-  const slug = meta.slug
-    .toLowerCase()
-    .replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss')
-    .replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  const slug = slugify(meta.slug || meta.titleDe);
+  if (!slug) throw new Error('Could not derive a slug from the model response');
 
   console.log(`\n📝 Post: "${meta.titleDe}"`);
   console.log(`   Slug: ${slug}`);
   console.log(`   Source: ${meta.sourceUrl}`);
+
+  // Collision guard — abort BEFORE generating/writing any visuals so a colliding
+  // run leaves nothing on disk and produces a non-zero exit (fails CI, no PR).
+  assertSlugAvailable(slug, BLOG_DIR);
 
   console.log('\n🎨 Generating visuals…');
   const [heroImage, takeawaysSvg] = await Promise.all([
@@ -304,8 +351,9 @@ Respond with EXACTLY this structure (keep the delimiter lines verbatim):
     '---',
   ].filter(Boolean);
 
-  const filePath = join(ROOT, `src/content/blog/${slug}.md`);
-  writeFileSync(filePath, fmLines.join('\n') + '\n\n' + bodyDe + '\n', 'utf-8');
+  // writePostFile re-checks the guard, so we never overwrite even if a post with
+  // this slug appeared between the early check and now.
+  writePostFile(BLOG_DIR, slug, fmLines.join('\n') + '\n\n' + bodyDe + '\n');
   console.log(`\n✅ Written: src/content/blog/${slug}.md`);
 
   // Write GitHub Actions outputs
@@ -322,4 +370,7 @@ Respond with EXACTLY this structure (keep the delimiter lines verbatim):
   }
 }
 
-main().catch(e => { console.error('\n❌ Fatal:', e.message); process.exit(1); });
+// Only run the pipeline when executed directly (not when imported by tests).
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch(e => { console.error('\n❌ Fatal:', e.message); process.exit(1); });
+}

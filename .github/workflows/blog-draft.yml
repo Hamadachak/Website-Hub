@@ -18,15 +18,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node 20
+      - name: Set up Node 22
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
 
       - name: Install dependencies
         run: npm ci
 
+      # Verifies the slug-collision guard (among other unit tests) before we
+      # spend any API calls. A failure here fails the whole job.
+      - name: Run generator tests
+        run: npm test
+
+      # If the generator exits non-zero (e.g. a slug collision), this step fails
+      # and — because later steps have no `if:`/`continue-on-error` — the
+      # "Open Pull Request" step is skipped. No colliding draft can be published.
       - name: Generate post (RSS → Together AI → visuals)
         id: gen
         env:
@@ -41,7 +49,7 @@ jobs:
           commit-message: "blog: draft '${{ steps.gen.outputs.slug }}'"
           title: "Blog-Entwurf: ${{ steps.gen.outputs.titel }}"
           body: |
-            Automatisch generierter Blog-Entwurf (Together AI: Llama-3.3-70B-Instruct-Turbo + FLUX.1-schnell-Free).
+            Automatisch generierter Blog-Entwurf (Together AI: Llama-3.3-70B-Instruct-Turbo + FLUX.1-schnell).
 
             **Checkliste vor dem Merge:**
             - [ ] Deutschen Text gelesen und ggf. korrigiert
