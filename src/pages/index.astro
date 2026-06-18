@@ -33,7 +33,7 @@ const professionalServiceLd = {
           <a href="#contact" class="btn btn-primary" data-de="Kontakt aufnehmen" data-en="Get in touch">Kontakt aufnehmen</a>
           <a href="#work" class="btn btn-ghost" data-de="Projekte ansehen" data-en="See the work">Projekte ansehen</a>
         </div>
-        <p class="status"><span class="dot"></span><span data-de="Verfügbar für Projekte · 3 Tage / Woche" data-en="Available for projects · 3 days / week">Verfügbar für Projekte · 3 Tage / Woche</span></p>
+        <p class="status"><span class="dot" aria-hidden="true"></span><span data-de="Verfügbar für Projekte · 3 Tage / Woche" data-en="Available for projects · 3 days / week">Verfügbar für Projekte · 3 Tage / Woche</span></p>
       </div>
 
       <div class="record reveal">
@@ -52,7 +52,7 @@ const professionalServiceLd = {
           <div class="row"><span class="k" data-de="Fokus" data-en="Focus">Fokus</span><span class="v" data-de="Architektur · Migration · Automation" data-en="Architecture · Migration · Automation">Architektur · Migration · Automation</span></div>
           <div class="row"><span class="k">Stack</span><span class="v">HubSpot CLI · React · Node.js</span></div>
           <div class="row"><span class="k" data-de="Sprachen" data-en="Languages">Sprachen</span><span class="v">Deutsch · English</span></div>
-          <div class="row"><span class="k">Status</span><span class="v"><span class="mini-dot"></span><span data-de="Verfügbar" data-en="Available">Verfügbar</span></span></div>
+          <div class="row"><span class="k">Status</span><span class="v"><span class="mini-dot" aria-hidden="true"></span><span data-de="Verfügbar" data-en="Available">Verfügbar</span></span></div>
         </div>
       </div>
     </div>
@@ -148,22 +148,22 @@ const professionalServiceLd = {
     <p class="build-intro reveal" data-de="Custom HubSpot UI Extensions mit React, dem HubSpot CLI und Node.js. Wenn der Standard nicht reicht, baue ich die fehlende Karte selbst — direkt im Datensatz, wo das Team arbeitet." data-en="Custom HubSpot UI extensions with React, the HubSpot CLI and Node.js. When the standard product runs out, I build the missing card myself — right inside the record, where the team works.">Custom HubSpot UI Extensions mit React, dem HubSpot CLI und Node.js. Wenn der Standard nicht reicht, baue ich die fehlende Karte selbst — direkt im Datensatz, wo das Team arbeitet.</p>
     <div class="ext-grid">
       <div class="ext reveal">
-        <div class="ehead"><div class="glyph">★</div><h3>Company Health Score Card</h3></div>
+        <div class="ehead"><div class="glyph" aria-hidden="true">★</div><h3>Company Health Score Card</h3></div>
         <p data-de="Bewertet die Gesundheit eines Accounts und zeigt den Score direkt im Datensatz an." data-en="Scores account health and surfaces it right inside the record.">Bewertet die Gesundheit eines Accounts und zeigt den Score direkt im Datensatz an.</p>
         <p class="stack">React · HubSpot CLI · Node.js</p>
       </div>
       <div class="ext reveal">
-        <div class="ehead"><div class="glyph">⌖</div><h3>Property Address Card</h3></div>
+        <div class="ehead"><div class="glyph" aria-hidden="true">⌖</div><h3>Property Address Card</h3></div>
         <p data-de="Adressen mit Google-Maps-Integration direkt in der CRM-Karte — sichtbar, nicht nur gespeichert." data-en="Addresses with Google Maps integration inside the CRM card — visible, not just stored.">Adressen mit Google-Maps-Integration direkt in der CRM-Karte — sichtbar, nicht nur gespeichert.</p>
         <p class="stack">React · Google Maps API · Node.js</p>
       </div>
       <div class="ext reveal">
-        <div class="ehead"><div class="glyph">●</div><h3>Voice Notes</h3></div>
+        <div class="ehead"><div class="glyph" aria-hidden="true">●</div><h3>Voice Notes</h3></div>
         <p data-de="Sprachnotizen direkt am Datensatz aufnehmen und ablegen — schneller als Tippen nach dem Call." data-en="Record and attach voice notes directly on a record — faster than typing after the call.">Sprachnotizen direkt am Datensatz aufnehmen und ablegen — schneller als Tippen nach dem Call.</p>
         <p class="stack">React · HubSpot CLI · Node.js</p>
       </div>
       <div class="ext reveal">
-        <div class="ehead"><div class="glyph">▦</div><h3>GIF Generator</h3></div>
+        <div class="ehead"><div class="glyph" aria-hidden="true">▦</div><h3>GIF Generator</h3></div>
         <p data-de="Eine kleine Spielerei — weil gute interne Tools auch Spaß machen dürfen." data-en="A small toy — because good internal tools are allowed to be fun too.">Eine kleine Spielerei — weil gute interne Tools auch Spaß machen dürfen.</p>
         <p class="stack">React · HubSpot CLI</p>
       </div>
@@ -224,12 +224,32 @@ const professionalServiceLd = {
     <h2 data-de="Lust auf ein HubSpot, das sich benimmt?" data-en="Want a HubSpot that behaves?">Lust auf ein HubSpot, das sich benimmt?</h2>
     <p class="sub" data-de="Ob Projektarbeit, RevOps-Mandat oder Subcontracting für eine Agentur — schreib mir kurz, worum es geht." data-en="Whether it's project work, a RevOps engagement, or subcontracting for an agency — drop me a line about what you need.">Ob Projektarbeit, RevOps-Mandat oder Subcontracting für eine Agentur — schreib mir kurz, worum es geht.</p>
     <div class="contact-actions">
-      <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach" class="btn btn-primary" target="_blank" rel="noopener" data-de="Termin buchen" data-en="Book a call">Termin buchen</a>
+      <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach"
+        class="btn btn-primary"
+        target="_blank"
+        rel="noopener"
+        data-de="Termin buchen"
+        data-en="Book a call"
+        data-de-aria="Termin buchen (öffnet in neuem Tab)"
+        data-en-aria="Book a call (opens in new tab)"
+        aria-label="Termin buchen (öffnet in neuem Tab)">Termin buchen</a>
       <a href="mailto:chakroufmohammad@gmail.com" class="btn btn-ghost" data-de="E-Mail schreiben" data-en="Email me">E-Mail schreiben</a>
-      <a href="https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://www.malt.de/profile/mohammadchakrouf" class="btn btn-ghost" target="_blank" rel="noopener">Malt</a>
+      <a href="https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/"
+        class="btn btn-ghost"
+        target="_blank"
+        rel="noopener"
+        data-de-aria="LinkedIn (öffnet in neuem Tab)"
+        data-en-aria="LinkedIn (opens in new tab)"
+        aria-label="LinkedIn (öffnet in neuem Tab)">LinkedIn</a>
+      <a href="https://www.malt.de/profile/mohammadchakrouf"
+        class="btn btn-ghost"
+        target="_blank"
+        rel="noopener"
+        data-de-aria="Malt (öffnet in neuem Tab)"
+        data-en-aria="Malt (opens in new tab)"
+        aria-label="Malt (öffnet in neuem Tab)">Malt</a>
     </div>
-    <p class="status"><span class="dot"></span><span data-de="Verfügbar für Projekte · 3 Tage / Woche" data-en="Available for projects · 3 days / week">Verfügbar für Projekte · 3 Tage / Woche</span></p>
+    <p class="status"><span class="dot" aria-hidden="true"></span><span data-de="Verfügbar für Projekte · 3 Tage / Woche" data-en="Available for projects · 3 days / week">Verfügbar für Projekte · 3 Tage / Woche</span></p>
   </div>
 </section>
 </Base>

@@ -77,6 +77,7 @@ const bodyEnHtml = post.data.bodyEn ? marked.parse(post.data.bodyEn) : null;
             href={post.data.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`${post.data.sourceTitle || post.data.sourceUrl} (öffnet in neuem Tab)`}
             style="color:var(--amber);text-decoration:underline;text-underline-offset:3px"
           >{post.data.sourceTitle || post.data.sourceUrl}</a>
         </p>

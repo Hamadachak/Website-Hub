@@ -15,6 +15,7 @@ export const GET: APIRoute = async ({ site }) => {
     ...posts.map(p => `${base}/blog/${p.id}/`),
     `${base}/impressum/`,
     `${base}/datenschutz/`,
+    `${base}/barrierefreiheit/`,
   ];
 
   const xml = [

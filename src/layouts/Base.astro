@@ -3,6 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import "../styles/global.css";
 interface Props { title: string; description: string; titleEn?: string; descriptionEn?: string; image?: string; type?: string; }
 const { title, description, titleEn, descriptionEn, image, type } = Astro.props;
+const path = Astro.url.pathname;
 ---
 <!DOCTYPE html>
 <html lang="de">
@@ -12,26 +13,40 @@ const { title, description, titleEn, descriptionEn, image, type } = Astro.props;
 </head>
 <body>
 <a class="skip-link" href="#main-content">Zum Inhalt springen / Skip to content</a>
-<nav>
+<nav aria-label="Hauptnavigation">
   <div class="nav-in">
-    <a class="brand" href="/"><span class="mark">MC</span><span>chakrouf</span></a>
+    <a class="brand" href="/" aria-label="Mohammad Chakrouf – Startseite"><span class="mark" aria-hidden="true">MC</span><span>chakrouf</span></a>
     <div class="nav-links">
       <a href="/#work" data-de="Projekte" data-en="Work">Projekte</a>
       <a href="/#approach" data-de="Ansatz" data-en="Approach">Ansatz</a>
       <a href="/#build" data-de="Build" data-en="Build">Build</a>
       <a href="/#about" data-de="Über mich" data-en="About">Über mich</a>
-      <a href="/blog/" data-de="Blog" data-en="Blog">Blog</a>
+      <a href="/blog/" data-de="Blog" data-en="Blog" aria-current={path.startsWith('/blog') ? 'page' : undefined}>Blog</a>
     </div>
     <div class="nav-right">
-      <div class="langtoggle">
-        <button id="lang-de" class="active" aria-label="Deutsch" aria-pressed="true" onclick="setLang('de')">DE</button>
-        <button id="lang-en" aria-label="English" aria-pressed="false" onclick="setLang('en')">EN</button>
+      <div class="langtoggle" role="group" aria-label="Sprache / Language">
+        <button id="lang-de" class="active"
+          aria-label="Auf Deutsch anzeigen"
+          aria-pressed="true"
+          onclick="setLang('de')">DE</button>
+        <button id="lang-en"
+          aria-label="Show in English"
+          aria-pressed="false"
+          onclick="setLang('en')">EN</button>
       </div>
-      <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach" class="btn btn-primary nav-cta" target="_blank" rel="noopener" data-de="Termin buchen" data-en="Book a call">Termin buchen</a>
+      <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach"
+        class="btn btn-primary nav-cta"
+        target="_blank"
+        rel="noopener"
+        data-de="Termin buchen"
+        data-en="Book a call"
+        data-de-aria="Termin buchen (öffnet in neuem Tab)"
+        data-en-aria="Book a call (opens in new tab)"
+        aria-label="Termin buchen (öffnet in neuem Tab)">Termin buchen</a>
     </div>
   </div>
 </nav>
-<main id="main-content">
+<main id="main-content" tabindex="-1">
   {/* Hidden nodes carry bilingual page title + description for JS */}
   <span id="page-title-de" style="display:none">{title}</span>
   <span id="page-title-en" style="display:none">{titleEn || title}</span>
@@ -46,9 +61,10 @@ const { title, description, titleEn, descriptionEn, image, type } = Astro.props;
       <a href="/leistungen/hubspot-migration">HubSpot-Migration</a>
       <a href="/leistungen/revops-fuer-startups">RevOps für Startups</a>
       <a href="/leistungen/hubspot-fuer-b2b-saas">HubSpot für B2B-SaaS</a>
-      <span style="color:var(--line)">|</span>
+      <span style="color:var(--line)" aria-hidden="true">|</span>
       <a href="/impressum">Impressum</a>
       <a href="/datenschutz">Datenschutz</a>
+      <a href="/barrierefreiheit">Barrierefreiheit</a>
     </div>
     <span>© <span id="year"></span> · <span data-de="Selbst gebaut" data-en="Built by hand">Selbst gebaut</span></span>
   </div>
@@ -64,6 +80,13 @@ const { title, description, titleEn, descriptionEn, image, type } = Astro.props;
       var el = nodes[i];
       var val = (l === 'en') ? el.getAttribute('data-en') : el.getAttribute('data-de');
       if (val !== null) el.textContent = val;
+    }
+    // bilingual aria-label on external links
+    var ariaNodes = document.querySelectorAll('[data-de-aria],[data-en-aria]');
+    for (var n = 0; n < ariaNodes.length; n++) {
+      var an = ariaNodes[n];
+      var av = (l === 'en') ? an.getAttribute('data-en-aria') : an.getAttribute('data-de-aria');
+      if (av !== null) an.setAttribute('aria-label', av);
     }
     // bilingual body blocks (blog posts)
     var blocks = document.querySelectorAll('[data-lang-block]');
