@@ -4,7 +4,7 @@ titleEn: "Get Indexed by ChatGPT"
 description: "Erhöhen Sie Ihre Sichtbarkeit mit ChatGPT"
 descriptionEn: "Boost visibility with ChatGPT indexing"
 pubDate: 2026-06-18
-draft: true
+draft: false
 visuals:
   - "/blog/visuals/chatgpt-indexierung-takeaways.svg"
 sourceTitle: "How to get indexed by ChatGPT"
