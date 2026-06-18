@@ -4,7 +4,7 @@
  *
  * Steps:
  *   1. Fetch RSS feeds listed in scripts/feeds.json
- *   2. Ask Together AI (Llama-3.3-70B-Free) to pick the best item and write a bilingual DE/EN post
+ *   2. Ask Together AI (Llama-3.3-70B-Instruct-Turbo) to pick the best item and write a bilingual DE/EN post
  *   3. Generate a hero image via Together AI (FLUX.1-schnell-Free)
  *   4. Generate an SVG key-takeaways card in Node (no API)
  *   5. Write src/content/blog/<slug>.md + public/blog/{images,visuals}/
@@ -116,7 +116,7 @@ async function generateHeroImage(conceptPrompt, slug) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'black-forest-labs/FLUX.1-schnell-Free',
+      model: 'black-forest-labs/FLUX.1-schnell',
       prompt: fullPrompt,
       width: 1200,
       height: 630,
