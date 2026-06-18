@@ -118,8 +118,8 @@ async function generateHeroImage(conceptPrompt, slug) {
     body: JSON.stringify({
       model: 'black-forest-labs/FLUX.1-schnell',
       prompt: fullPrompt,
-      width: 1200,
-      height: 630,
+      width: 1200,   // multiple of 16 (75×16)
+      height: 624,   // multiple of 16 (39×16) — FLUX requires both dims % 16 == 0
       steps: 4,
       n: 1,
     }),
