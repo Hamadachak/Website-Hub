@@ -9,13 +9,13 @@
     <circle cx="14" cy="20" r="5" fill="#FF9A3C"/>
     <text x="30" y="25" fill="#E8EAED"
       font-family="'Hanken Grotesk',system-ui,sans-serif"
-      font-size="14" font-weight="500">Optimieren Sie Inhalte</text>
+      font-size="14" font-weight="500">Erhöhe Sichtbarkeit</text>
   </g>
   <g transform="translate(0,50)">
     <circle cx="14" cy="20" r="5" fill="#FF9A3C"/>
     <text x="30" y="25" fill="#E8EAED"
       font-family="'Hanken Grotesk',system-ui,sans-serif"
-      font-size="14" font-weight="500">Verwenden Sie Schlüsselwörter</text>
+      font-size="14" font-weight="500">Optimiere Inhalte</text>
   </g>
   <g transform="translate(0,100)">
     <circle cx="14" cy="20" r="5" fill="#FF9A3C"/>
