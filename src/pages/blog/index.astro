@@ -7,28 +7,20 @@ const fmt = (d: Date) => d.toLocaleDateString("de-DE", { year: "numeric", month:
 ---
 <Base
   title="Blog — Mohammad Chakrouf"
-  titleEn="Blog — Mohammad Chakrouf"
-  description="Insights zu HubSpot, CRM, RevOps und KI für B2B- und B2C-Unternehmen."
-  descriptionEn="Insights on HubSpot, CRM, RevOps and AI for B2B companies."
+  description="Insights zu HubSpot, CRM, RevOps und KI für B2B-Unternehmen."
 >
   <section class="block">
     <div class="wrap">
       <div class="head">
         <p class="eyebrow">Blog</p>
-        <h1 style="font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,3.6vw,2.7rem);line-height:1.08;letter-spacing:-.02em;margin:14px 0 0" data-de="Insights zu HubSpot, CRM &amp; RevOps" data-en="Insights on HubSpot, CRM &amp; RevOps">Insights zu HubSpot, CRM &amp; RevOps</h1>
+        <h1 style="font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,3.6vw,2.7rem);line-height:1.08;letter-spacing:-.02em;margin:14px 0 0">Insights zu HubSpot, CRM &amp; RevOps</h1>
       </div>
       <div class="work-grid">
         {posts.map((post) => (
           <a class="case" href={`/blog/${post.id}/`} style="display:block;text-decoration:none">
             <span class="ctag">{fmt(post.data.pubDate)}</span>
-            <h3
-              data-de={post.data.title}
-              data-en={post.data.titleEn ?? post.data.title}
-            >{post.data.title}</h3>
-            <p
-              data-de={post.data.description}
-              data-en={post.data.descriptionEn ?? post.data.description}
-            >{post.data.description}</p>
+            <h3>{post.data.title}</h3>
+            <p>{post.data.description}</p>
           </a>
         ))}
         {posts.length === 0 && <p style="color:var(--muted)">Bald geht es hier los.</p>}

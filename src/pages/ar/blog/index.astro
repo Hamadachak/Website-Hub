@@ -1,0 +1,30 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const fmt = (d: Date) => d.toLocaleDateString("ar-AE", { year: "numeric", month: "long", day: "numeric" });
+---
+<Base
+  title="المدونة — محمد شكروف"
+  description="رؤى حول HubSpot وCRM وRevOps والذكاء الاصطناعي لشركات B2B."
+>
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">المدونة</p>
+        <h1 style="font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,3.6vw,2.7rem);line-height:1.08;letter-spacing:-.02em;margin:14px 0 0">رؤى حول HubSpot وCRM وRevOps</h1>
+      </div>
+      <div class="work-grid">
+        {posts.map((post) => (
+          <a class="case" href={`/ar/blog/${post.id}/`} style="display:block;text-decoration:none">
+            <span class="ctag">{fmt(post.data.pubDate)}</span>
+            <h3>{post.data.titleAr ?? post.data.titleEn ?? post.data.title}</h3>
+            <p>{post.data.descriptionAr ?? post.data.descriptionEn ?? post.data.description}</p>
+          </a>
+        ))}
+        {posts.length === 0 && <p style="color:var(--muted)">قريباً.</p>}
+      </div>
+    </div>
+  </section>
+</Base>

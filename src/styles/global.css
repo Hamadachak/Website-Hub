@@ -117,11 +117,13 @@
   .nav-links a:hover{color:var(--text)}
   .nav-right{display:flex;align-items:center;gap:18px}
   .langtoggle{display:flex;font-family:var(--mono);font-size:.78rem;border:1px solid var(--line);border-radius:7px;overflow:hidden}
-  .langtoggle button{
+  .lang-btn{
     background:none;border:none;color:var(--muted);
     padding:6px 10px;cursor:pointer;font-family:var(--mono);font-size:.78rem;transition:.18s;
+    text-decoration:none;display:inline-flex;align-items:center;
   }
-  .langtoggle button.active{background:var(--text);color:var(--ink)}
+  .lang-btn:hover{color:var(--text)}
+  .lang-btn.active{background:var(--text);color:var(--ink)}
   .btn{
     display:inline-flex;align-items:center;gap:8px;
     font-family:var(--mono);font-size:.8rem;letter-spacing:.03em;
@@ -320,4 +322,41 @@
 .prose a{color:var(--amber);text-decoration:underline;text-underline-offset:3px}
 .prose blockquote{border-left:3px solid var(--amber);padding:.2em 0 .2em 1.1em;margin:1.4em 0;color:var(--muted);font-style:italic}
 .prose code{font-family:var(--mono);font-size:.9em;background:var(--panel-2);border:1px solid var(--line);border-radius:5px;padding:.1em .4em}
+
+/* ---------- RTL / ARABIC ---------- */
+[dir="rtl"]{font-family:'Tajawal',system-ui,sans-serif}
+[dir="rtl"] .hero::before{right:auto;left:-120px}
+[dir="rtl"] .hero-grid{direction:rtl}
+[dir="rtl"] .hero-actions{flex-direction:row-reverse;justify-content:flex-end}
+[dir="rtl"] .record-tab{text-align:right}
+[dir="rtl"] .record-rows .row{flex-direction:row-reverse}
+[dir="rtl"] .caps-in{direction:rtl}
+[dir="rtl"] .head{text-align:right}
+[dir="rtl"] .work-grid{direction:rtl}
+[dir="rtl"] .case{text-align:right}
+[dir="rtl"] .ehead{flex-direction:row-reverse}
+[dir="rtl"] .pipe{direction:rtl}
+[dir="rtl"] .stage{border-left:none;border-right:1px solid var(--amber);padding-left:0;padding-right:28px}
+[dir="rtl"] .stage:not(:last-child)::before{left:auto;right:-1px}
+[dir="rtl"] .stage .num{text-align:right}
+[dir="rtl"] .about-grid{direction:rtl}
+[dir="rtl"] .facts .record-rows .row{flex-direction:row-reverse}
+[dir="rtl"] .contact-actions{flex-direction:row-reverse;justify-content:flex-end}
+[dir="rtl"] .foot-in{flex-direction:row-reverse;text-align:right}
+[dir="rtl"] .foot-in>div{flex-direction:row-reverse}
+[dir="rtl"] .ext-grid{direction:rtl}
+[dir="rtl"] .ext{text-align:right}
+[dir="rtl"] .outcome{text-align:right}
+[dir="rtl"] .eyebrow{text-align:right}
+[dir="rtl"] .sub{text-align:right}
+[dir="rtl"] nav .nav-links{flex-direction:row-reverse}
+[dir="rtl"] .nav-in{flex-direction:row-reverse}
+[dir="rtl"] .nav-right{flex-direction:row-reverse}
+[dir="rtl"] .prose blockquote{border-left:none;border-right:3px solid var(--amber);padding-left:0;padding-right:1.1em}
+[dir="rtl"] .prose ul,[dir="rtl"] .prose ol{margin-left:0;margin-right:1.3em}
+[dir="rtl"] .hero h1{text-align:right}
+@media(max-width:860px){
+  [dir="rtl"] .stage{padding:0 28px 0 0;border-left:none;border-right:1px solid var(--amber)}
+  [dir="rtl"] .stage:not(:last-child)::before{right:16px;left:auto}
+}
 .prose strong{color:var(--text)}

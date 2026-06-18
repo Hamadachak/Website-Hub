@@ -1,0 +1,148 @@
+---
+import Base from "../../../layouts/Base.astro";
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "HubSpot Migration",
+  "description": "HubSpot data migration: structured, clean, and without disrupting operations. From Salesforce, Pipedrive or Excel.",
+  "provider": { "@id": "https://mohammad-chakrouf.de/#person" },
+  "areaServed": [
+    { "@type": "Country", "name": "Germany" },
+    { "@type": "Country", "name": "Austria" },
+    { "@type": "Country", "name": "Switzerland" }
+  ],
+  "serviceType": "CRM Migration Consulting"
+};
+---
+<Base
+  title="HubSpot Migration — Mohammad Chakrouf, HubSpot Consultant Berlin"
+  description="HubSpot data migration: structured, clean, and without disrupting operations. Senior HubSpot consultant in Berlin for DACH companies."
+>
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow"><span class="b">Service</span> · HubSpot Migration</p>
+    <h1 style="font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,5.5vw,4rem);line-height:1.05;letter-spacing:-.025em;max-width:16ch;margin:20px 0 22px">From your old CRM to HubSpot — without data chaos.</h1>
+    <p class="sub" style="max-width:50ch">I migrate your contacts, deals and historical data cleanly, deduplicated and structured — so your team can work in the new system right after go-live.</p>
+    <div class="hero-actions" style="margin-top:28px">
+      <a href="/en/#contact" class="btn btn-primary">Discuss project</a>
+      <a href="/en/#work" class="btn btn-ghost">View case studies</a>
+    </div>
+  </div>
+</header>
+
+<div class="caps">
+  <div class="wrap caps-in">
+    <span class="tag">Salesforce → HubSpot</span>
+    <span class="tag">Pipedrive → HubSpot</span>
+    <span class="tag">Excel / Sheets</span>
+    <span class="tag">Data Mapping</span>
+    <span class="tag">Deduplication</span>
+    <span class="tag">Data Hygiene</span>
+    <span class="tag">Validation</span>
+    <span class="tag">Rollback Plan</span>
+  </div>
+</div>
+
+<section class="block" id="leistung">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">What I deliver</p>
+      <h2>Migration without nasty surprises.</h2>
+    </div>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div class="case reveal">
+        <span class="ctag">01</span>
+        <h3>Data Audit &amp; Mapping</h3>
+        <p>I analyse your source data — properties, objects, relations — and design the target model in HubSpot. No surprises after the import.</p>
+      </div>
+      <div class="case reveal">
+        <span class="ctag">02</span>
+        <h3>Cleanup before import</h3>
+        <p>Merge duplicates, clean outdated fields, normalise inconsistent values. Dirty data doesn't travel to the new system.</p>
+      </div>
+      <div class="case reveal">
+        <span class="ctag">03</span>
+        <h3>Step-by-step migration</h3>
+        <p>Staging first, then validation, then production. With a rollback option — so one error doesn't mean downtime.</p>
+      </div>
+      <div class="case reveal">
+        <span class="ctag">04</span>
+        <h3>Acceptance &amp; handover</h3>
+        <p>Sampling check, completeness review, documentation of decisions. The team takes over a system they understand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">Typical starting points</p>
+      <h2>When a clean migration is critical.</h2>
+    </div>
+    <div class="ext-grid reveal">
+      <div class="ext">
+        <div class="ehead"><div class="glyph" aria-hidden="true">↗</div><h3>Moving from Salesforce or Pipedrive</h3></div>
+        <p>Historical deals, contacts and activities need to be transferred in a structured way — without data loss and without weeks of manual cleanup.</p>
+      </div>
+      <div class="ext">
+        <div class="ehead"><div class="glyph" aria-hidden="true">⊞</div><h3>Merger &amp; consolidation</h3></div>
+        <p>Multiple CRM instances land in one account. The data model needs to be right from the start, so reporting doesn't immediately start lying.</p>
+      </div>
+      <div class="ext">
+        <div class="ehead"><div class="glyph" aria-hidden="true">▦</div><h3>Excel / Sheets as 'CRM'</h3></div>
+        <p>When a company outgrows spreadsheets, the first import is the most important one. I make sure it's the last manual export.</p>
+      </div>
+      <div class="ext">
+        <div class="ehead"><div class="glyph" aria-hidden="true">◎</div><h3>HubSpot restructuring</h3></div>
+        <p>Sometimes the goal isn't a new system but a clean one: reorganise properties, consolidate objects, delete legacy data.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">More services</p>
+      <h2>What else I offer.</h2>
+    </div>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <a class="case" href="/en/leistungen/revops-fuer-startups/" style="text-decoration:none;display:block">
+        <span class="ctag">RevOps</span>
+        <h3>RevOps for Startups</h3>
+        <p>Marketing, Sales and Service on one data foundation — for reliable reporting and scalable growth.</p>
+      </a>
+      <a class="case" href="/en/leistungen/hubspot-fuer-b2b-saas/" style="text-decoration:none;display:block">
+        <span class="ctag">B2B SaaS</span>
+        <h3>HubSpot for B2B SaaS</h3>
+        <p>PQL scoring, trial flows, churn signals — HubSpot as a growth engine for software companies.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="block contact" style="position:relative;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2>Discuss a migration project?</h2>
+    <p class="sub">Briefly describe what needs to be migrated and where the data comes from — then I'll assess how much effort is realistic.</p>
+    <div class="contact-actions">
+      <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach"
+        class="btn btn-primary"
+        target="_blank"
+        rel="noopener"
+        aria-label="Book a call (opens in new tab)">Book a call</a>
+      <a href="mailto:chakroufmohammad@gmail.com" class="btn btn-ghost">Send an email</a>
+      <a href="https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/"
+        class="btn btn-ghost"
+        target="_blank"
+        rel="noopener"
+        aria-label="LinkedIn (opens in new tab)">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+</Base>

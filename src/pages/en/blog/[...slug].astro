@@ -1,6 +1,7 @@
 ---
-import Base from "../../layouts/Base.astro";
+import Base from "../../../layouts/Base.astro";
 import { getCollection, render } from "astro:content";
+import { marked } from "marked";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
@@ -9,11 +10,14 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const fmt = (d: Date) => d.toLocaleDateString("de-DE", { year: "numeric", month: "long", day: "numeric" });
+const fmt = (d: Date) => d.toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" });
+const title = post.data.titleEn ?? post.data.title;
+const description = post.data.descriptionEn ?? post.data.description;
+const bodyEnHtml = post.data.bodyEn ? marked.parse(post.data.bodyEn) : null;
 ---
 <Base
-  title={`${post.data.title} — Mohammad Chakrouf`}
-  description={post.data.description}
+  title={`${title} — Mohammad Chakrouf`}
+  description={description}
   image={post.data.heroImage}
   type="article"
 >
@@ -25,7 +29,7 @@ const fmt = (d: Date) => d.toLocaleDateString("de-DE", { year: "numeric", month:
       {post.data.heroImage && (
         <img
           src={post.data.heroImage}
-          alt={post.data.title}
+          alt={title}
           width="760"
           height="399"
           loading="eager"
@@ -33,11 +37,13 @@ const fmt = (d: Date) => d.toLocaleDateString("de-DE", { year: "numeric", month:
         />
       )}
 
-      <h1 style="font-family:var(--display);font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:0 0 32px">{post.data.title}</h1>
+      <h1 style="font-family:var(--display);font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:0 0 32px">{title}</h1>
 
-      <div class="prose">
-        <Content />
-      </div>
+      {bodyEnHtml ? (
+        <div class="prose" set:html={bodyEnHtml} />
+      ) : (
+        <div class="prose"><Content /></div>
+      )}
 
       {post.data.visuals && post.data.visuals.length > 0 && (
         <div style="margin:40px 0 8px">
@@ -56,36 +62,36 @@ const fmt = (d: Date) => d.toLocaleDateString("de-DE", { year: "numeric", month:
 
       {post.data.sourceUrl && (
         <p style="margin-top:36px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--mono);font-size:.78rem;color:var(--muted)">
-          Quelle:&nbsp;
+          Source:&nbsp;
           <a
             href={post.data.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${post.data.sourceTitle || post.data.sourceUrl} (öffnet in neuem Tab)`}
+            aria-label={`${post.data.sourceTitle || post.data.sourceUrl} (opens in new tab)`}
             style="color:var(--amber);text-decoration:underline;text-underline-offset:3px"
           >{post.data.sourceTitle || post.data.sourceUrl}</a>
         </p>
       )}
 
-      <p style="margin-top:44px"><a href="/blog/" class="btn btn-ghost">← Alle Beiträge</a></p>
+      <p style="margin-top:44px"><a href="/en/blog/" class="btn btn-ghost">← All posts</a></p>
 
       <div style="margin-top:56px;padding-top:32px;border-top:1px solid var(--line)">
-        <p class="eyebrow">Passende Leistungen</p>
+        <p class="eyebrow">Related services</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:20px">
-          <a class="case" href="/leistungen/hubspot-migration/" style="text-decoration:none;display:block;padding:20px 22px">
+          <a class="case" href="/en/leistungen/hubspot-migration/" style="text-decoration:none;display:block;padding:20px 22px">
             <span class="ctag">Migration</span>
-            <h3 style="font-size:1rem;margin:10px 0 8px">HubSpot-Migration</h3>
-            <p style="font-size:.88rem">Sauber migriert, kein Chaos.</p>
+            <h3 style="font-size:1rem;margin:10px 0 8px">HubSpot Migration</h3>
+            <p style="font-size:.88rem">Clean migration, no chaos.</p>
           </a>
-          <a class="case" href="/leistungen/revops-fuer-startups/" style="text-decoration:none;display:block;padding:20px 22px">
+          <a class="case" href="/en/leistungen/revops-fuer-startups/" style="text-decoration:none;display:block;padding:20px 22px">
             <span class="ctag">RevOps</span>
-            <h3 style="font-size:1rem;margin:10px 0 8px">RevOps für Startups</h3>
-            <p style="font-size:.88rem">Eine Datenbasis für alle Teams.</p>
+            <h3 style="font-size:1rem;margin:10px 0 8px">RevOps for Startups</h3>
+            <p style="font-size:.88rem">One data foundation for all teams.</p>
           </a>
-          <a class="case" href="/leistungen/hubspot-fuer-b2b-saas/" style="text-decoration:none;display:block;padding:20px 22px">
+          <a class="case" href="/en/leistungen/hubspot-fuer-b2b-saas/" style="text-decoration:none;display:block;padding:20px 22px">
             <span class="ctag">B2B SaaS</span>
-            <h3 style="font-size:1rem;margin:10px 0 8px">HubSpot für B2B-SaaS</h3>
-            <p style="font-size:.88rem">PQL, Trial-Flows, Churn-Signale.</p>
+            <h3 style="font-size:1rem;margin:10px 0 8px">HubSpot for B2B SaaS</h3>
+            <p style="font-size:.88rem">PQL, trial flows, churn signals.</p>
           </a>
         </div>
       </div>

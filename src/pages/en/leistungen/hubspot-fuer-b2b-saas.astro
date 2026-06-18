@@ -1,0 +1,148 @@
+---
+import Base from "../../../layouts/Base.astro";
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "HubSpot for B2B SaaS",
+  "description": "HubSpot as a growth engine for B2B SaaS: trial-to-paid flows, product-qualified leads and scalable CRM architecture for software companies.",
+  "provider": { "@id": "https://mohammad-chakrouf.de/#person" },
+  "areaServed": [
+    { "@type": "Country", "name": "Germany" },
+    { "@type": "Country", "name": "Austria" },
+    { "@type": "Country", "name": "Switzerland" }
+  ],
+  "serviceType": "HubSpot Consulting"
+};
+---
+<Base
+  title="HubSpot for B2B SaaS — Mohammad Chakrouf, HubSpot Consultant Berlin"
+  description="HubSpot as a growth engine for B2B SaaS: trial-to-paid flows, product-qualified leads and scalable CRM architecture for software companies."
+>
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow"><span class="b">Service</span> · HubSpot for B2B SaaS</p>
+    <h1 style="font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,5.5vw,4rem);line-height:1.05;letter-spacing:-.025em;max-width:16ch;margin:20px 0 22px">HubSpot as a growth engine for B2B SaaS companies.</h1>
+    <p class="sub" style="max-width:50ch">I set up HubSpot to reflect your SaaS growth process: from trial activation through the sales handoff to expansion and churn prevention.</p>
+    <div class="hero-actions" style="margin-top:28px">
+      <a href="/en/#contact" class="btn btn-primary">Request a call</a>
+      <a href="/en/#work" class="btn btn-ghost">View case studies</a>
+    </div>
+  </div>
+</header>
+
+<div class="caps">
+  <div class="wrap caps-in">
+    <span class="tag">Trial-to-Paid Flows</span>
+    <span class="tag">PQL Scoring</span>
+    <span class="tag">Onboarding Automation</span>
+    <span class="tag">Expansion Revenue</span>
+    <span class="tag">Churn Signals</span>
+    <span class="tag">Sales Handoff</span>
+    <span class="tag">API Integrations</span>
+    <span class="tag">Customer Success</span>
+  </div>
+</div>
+
+<section class="block" id="leistung">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">SaaS-specific HubSpot setups</p>
+      <h2>Standard HubSpot isn't enough for SaaS.</h2>
+    </div>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div class="case reveal">
+        <span class="ctag">Product-Qualified Leads</span>
+        <h3>PQL scoring instead of classic lead scoring</h3>
+        <p>Usage behaviour from your product flows into HubSpot. Sales sees who is active — not just who downloaded a whitepaper.</p>
+      </div>
+      <div class="case reveal">
+        <span class="ctag">Trial &amp; Onboarding</span>
+        <h3>Trial flows that convert</h3>
+        <p>Automated onboarding sequences, activation triggers, in-app events as HubSpot properties. The trial → paid transition becomes a structured process.</p>
+      </div>
+      <div class="case reveal">
+        <span class="ctag">Expansion &amp; Retention</span>
+        <h3>Detect churn signals early</h3>
+        <p>Health scores based on usage data, escalation workflows for Customer Success, expansion triggers for upsell conversations.</p>
+      </div>
+      <div class="case reveal">
+        <span class="ctag">Integrations</span>
+        <h3>HubSpot at the centre of your stack</h3>
+        <p>Stripe, Segment, Intercom, custom APIs — I integrate your tools so HubSpot functions as the single source of truth, not a data graveyard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">Why a SaaS-specific approach</p>
+      <h2>Classic HubSpot setups don't fit SaaS.</h2>
+    </div>
+    <div class="ext-grid reveal">
+      <div class="ext">
+        <div class="ehead"><div class="glyph" aria-hidden="true">◎</div><h3>SaaS lifecycle ≠ standard lifecycle</h3></div>
+        <p>MQL → SQL → Opportunity only partially works for SaaS. Trial, PQL, Expansion and Churn Risk are distinct stages that HubSpot needs to know about.</p>
+      </div>
+      <div class="ext">
+        <div class="ehead"><div class="glyph" aria-hidden="true">↗</div><h3>Product data must go into the CRM</h3></div>
+        <p>Without usage data, Sales and CS make decisions in the dark. I build the bridge between your app and HubSpot.</p>
+      </div>
+      <div class="ext">
+        <div class="ehead"><div class="glyph" aria-hidden="true">★</div><h3>Scalability from day one</h3></div>
+        <p>What works manually with 50 customers breaks at 500. I design setups that grow with you.</p>
+      </div>
+      <div class="ext">
+        <div class="ehead"><div class="glyph" aria-hidden="true">▦</div><h3>Revenue reporting for investors</h3></div>
+        <p>ARR, MRR, Churn Rate, NRR — clean in HubSpot, not manually assembled from four sheets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">More services</p>
+      <h2>What else I offer.</h2>
+    </div>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <a class="case" href="/en/leistungen/hubspot-migration/" style="text-decoration:none;display:block">
+        <span class="ctag">Migration</span>
+        <h3>HubSpot Migration</h3>
+        <p>From Salesforce, Pipedrive or Excel to HubSpot — structured, clean, without operational disruption.</p>
+      </a>
+      <a class="case" href="/en/leistungen/revops-fuer-startups/" style="text-decoration:none;display:block">
+        <span class="ctag">RevOps</span>
+        <h3>RevOps for Startups</h3>
+        <p>Marketing, Sales and Service on one data foundation — for reliable reporting and scalable growth.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="block contact" style="position:relative;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2>Structure your SaaS growth with HubSpot?</h2>
+    <p class="sub">Tell me where your current setup hits limits — trial conversion, churn, reporting — and I'll see how we can solve it.</p>
+    <div class="contact-actions">
+      <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach"
+        class="btn btn-primary"
+        target="_blank"
+        rel="noopener"
+        aria-label="Book a call (opens in new tab)">Book a call</a>
+      <a href="mailto:chakroufmohammad@gmail.com" class="btn btn-ghost">Send an email</a>
+      <a href="https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/"
+        class="btn btn-ghost"
+        target="_blank"
+        rel="noopener"
+        aria-label="LinkedIn (opens in new tab)">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+</Base>

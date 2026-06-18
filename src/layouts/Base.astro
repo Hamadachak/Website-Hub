@@ -1,144 +1,127 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import "../styles/global.css";
-interface Props { title: string; description: string; titleEn?: string; descriptionEn?: string; image?: string; type?: string; }
-const { title, description, titleEn, descriptionEn, image, type } = Astro.props;
+import BaseHead from '../components/BaseHead.astro';
+import '../styles/global.css';
+import { ui, getCanonicalPath, type Lang } from '../i18n/ui';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: string;
+  /** Pass false to suppress hreflang (e.g. Impressum). */
+  hreflang?: boolean;
+}
+const { title, description, image, type, hreflang = true } = Astro.props;
+
+const lang = (Astro.currentLocale ?? 'de') as Lang;
+const t = ui[lang];
+const isRtl = lang === 'ar';
 const path = Astro.url.pathname;
+const canonicalPath = getCanonicalPath(path);
+
+// Locale-specific URL helpers
+const deHref = (p: string) => p;
+const enHref = (p: string) => `/en${p}`;
+const arHref = (p: string) => `/ar${p}`;
+
+const navBase = canonicalPath === '/' ? '/' : canonicalPath;
+const deRoot = '/';
+const enRoot = '/en/';
+const arRoot = '/ar/';
+
+// Detect active section for nav highlights
+const isServices = path.includes('/leistungen');
+const isBlog = path.includes('/blog');
 ---
 <!DOCTYPE html>
-<html lang="de">
+<html lang={lang} dir={isRtl ? 'rtl' : 'ltr'}>
 <head>
-  <BaseHead title={title} description={description} image={image} type={type} />
+  <BaseHead
+    title={title}
+    description={description}
+    image={image}
+    type={type}
+    lang={lang}
+    canonicalPath={hreflang ? canonicalPath : undefined}
+  />
   <slot name="head" />
 </head>
 <body>
-<a class="skip-link" href="#main-content">Zum Inhalt springen / Skip to content</a>
-<nav aria-label="Hauptnavigation">
+<a class="skip-link" href="#main-content">{t.skip}</a>
+<nav aria-label={isRtl ? 'التنقل الرئيسي' : 'Hauptnavigation'}>
   <div class="nav-in">
-    <a class="brand" href="/" aria-label="Mohammad Chakrouf – Startseite"><span class="mark" aria-hidden="true">MC</span><span>chakrouf</span></a>
+    <a class="brand" href={lang === 'de' ? deRoot : lang === 'en' ? enRoot : arRoot}
+       aria-label="Mohammad Chakrouf">
+      <span class="mark" aria-hidden="true">MC</span><span>chakrouf</span>
+    </a>
     <div class="nav-links">
-      <a href="/#work" data-de="Projekte" data-en="Work">Projekte</a>
-      <a href="/#approach" data-de="Ansatz" data-en="Approach">Ansatz</a>
-      <a href="/#build" data-de="Build" data-en="Build">Build</a>
-      <a href="/#about" data-de="Über mich" data-en="About">Über mich</a>
-      <a href="/#leistungen" data-de="Leistungen" data-en="Services" aria-current={path.startsWith('/leistungen') ? 'page' : undefined}>Leistungen</a>
-      <a href="/blog/" data-de="Blog" data-en="Blog" aria-current={path.startsWith('/blog') ? 'page' : undefined}>Blog</a>
+      <a href={`${lang === 'de' ? '' : lang === 'en' ? '/en' : '/ar'}/#work`}>{t.nav.work}</a>
+      <a href={`${lang === 'de' ? '' : lang === 'en' ? '/en' : '/ar'}/#approach`}>{t.nav.approach}</a>
+      <a href={`${lang === 'de' ? '' : lang === 'en' ? '/en' : '/ar'}/#build`}>{t.nav.build}</a>
+      <a href={`${lang === 'de' ? '' : lang === 'en' ? '/en' : '/ar'}/#about`}>{t.nav.about}</a>
+      <a href={lang === 'de' ? '/#leistungen' : lang === 'en' ? '/en/#leistungen' : '/ar/#leistungen'}
+         aria-current={isServices ? 'page' : undefined}>{t.nav.services}</a>
+      <a href={lang === 'de' ? '/blog/' : lang === 'en' ? '/en/blog/' : '/ar/blog/'}
+         aria-current={isBlog ? 'page' : undefined}>{t.nav.blog}</a>
     </div>
     <div class="nav-right">
-      <div class="langtoggle" role="group" aria-label="Sprache / Language">
-        <button id="lang-de" class="active"
-          aria-label="Auf Deutsch anzeigen"
-          aria-pressed="true"
-          onclick="setLang('de')">DE</button>
-        <button id="lang-en"
-          aria-label="Show in English"
-          aria-pressed="false"
-          onclick="setLang('en')">EN</button>
+      <div class="langtoggle" role="group" aria-label={t.langLabel}>
+        <a href={deHref(navBase === '/' ? '/' : navBase)}
+           class:list={['lang-btn', lang === 'de' && 'active']}
+           aria-current={lang === 'de' ? 'true' : undefined}
+           hreflang="de">DE</a>
+        <a href={enHref(navBase)}
+           class:list={['lang-btn', lang === 'en' && 'active']}
+           aria-current={lang === 'en' ? 'true' : undefined}
+           hreflang="en">EN</a>
+        <a href={arHref(navBase)}
+           class:list={['lang-btn', lang === 'ar' && 'active']}
+           aria-current={lang === 'ar' ? 'true' : undefined}
+           hreflang="ar">ع</a>
       </div>
       <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach"
         class="btn btn-primary nav-cta"
         target="_blank"
         rel="noopener"
-        data-de="Termin buchen"
-        data-en="Book a call"
-        data-de-aria="Termin buchen (öffnet in neuem Tab)"
-        data-en-aria="Book a call (opens in new tab)"
-        aria-label="Termin buchen (öffnet in neuem Tab)">Termin buchen</a>
+        aria-label={t.nav.ctaAriaOpen}>{t.nav.ctaLabel}</a>
     </div>
   </div>
 </nav>
 <main id="main-content" tabindex="-1">
-  {/* Hidden nodes carry bilingual page title + description for JS */}
-  <span id="page-title-de" style="display:none">{title}</span>
-  <span id="page-title-en" style="display:none">{titleEn || title}</span>
-  <span id="page-desc-de" style="display:none">{description}</span>
-  <span id="page-desc-en" style="display:none">{descriptionEn || description}</span>
   <slot />
 </main>
 <footer>
   <div class="wrap foot-in">
-    <span>Mohammad Chakrouf · Senior HubSpot Consultant · Berlin</span>
+    <span>Mohammad Chakrouf · {t.footer.role}</span>
     <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
-      <a href="/leistungen/hubspot-migration">HubSpot-Migration</a>
-      <a href="/leistungen/revops-fuer-startups">RevOps für Startups</a>
-      <a href="/leistungen/hubspot-fuer-b2b-saas">HubSpot für B2B-SaaS</a>
+      <a href={lang === 'de' ? '/leistungen/hubspot-migration/' : lang === 'en' ? '/en/leistungen/hubspot-migration/' : '/ar/leistungen/hubspot-migration/'}>{t.footer.migration}</a>
+      <a href={lang === 'de' ? '/leistungen/revops-fuer-startups/' : lang === 'en' ? '/en/leistungen/revops-fuer-startups/' : '/ar/leistungen/revops-fuer-startups/'}>{t.footer.revops}</a>
+      <a href={lang === 'de' ? '/leistungen/hubspot-fuer-b2b-saas/' : lang === 'en' ? '/en/leistungen/hubspot-fuer-b2b-saas/' : '/ar/leistungen/hubspot-fuer-b2b-saas/'}>{t.footer.saas}</a>
       <span style="color:var(--line)" aria-hidden="true">|</span>
-      <a href="/impressum">Impressum</a>
-      <a href="/datenschutz">Datenschutz</a>
-      <a href="/barrierefreiheit">Barrierefreiheit</a>
+      <a href="/impressum/">{t.footer.impressum}</a>
+      <a href="/datenschutz/">{t.footer.datenschutz}</a>
+      <a href="/barrierefreiheit/">{t.footer.barrierefreiheit}</a>
     </div>
-    <span>© <span id="year"></span> · <span data-de="Selbst gebaut" data-en="Built by hand">Selbst gebaut</span></span>
+    <span>© <span id="year"></span> · {t.footer.built}</span>
   </div>
 </footer>
 <script is:inline>(function () {
-  var KEY = 'lang';
+  // Year
+  var yr = document.getElementById('year');
+  if (yr) yr.textContent = new Date().getFullYear();
 
-  function apply(l) {
-    document.documentElement.lang = l;
-    // text nodes with bilingual attributes
-    var nodes = document.querySelectorAll('[data-de],[data-en]');
-    for (var i = 0; i < nodes.length; i++) {
-      var el = nodes[i];
-      var val = (l === 'en') ? el.getAttribute('data-en') : el.getAttribute('data-de');
-      if (val !== null) el.textContent = val;
-    }
-    // bilingual aria-label on external links
-    var ariaNodes = document.querySelectorAll('[data-de-aria],[data-en-aria]');
-    for (var n = 0; n < ariaNodes.length; n++) {
-      var an = ariaNodes[n];
-      var av = (l === 'en') ? an.getAttribute('data-en-aria') : an.getAttribute('data-de-aria');
-      if (av !== null) an.setAttribute('aria-label', av);
-    }
-    // bilingual body blocks (blog posts)
-    var blocks = document.querySelectorAll('[data-lang-block]');
-    for (var j = 0; j < blocks.length; j++) {
-      blocks[j].style.display = (blocks[j].getAttribute('data-lang-block') === l) ? '' : 'none';
-    }
-    // toggle buttons
-    var de = document.getElementById('lang-de');
-    var en = document.getElementById('lang-en');
-    if (de && en) {
-      de.classList.toggle('active', l === 'de');
-      en.classList.toggle('active', l === 'en');
-      de.setAttribute('aria-pressed', String(l === 'de'));
-      en.setAttribute('aria-pressed', String(l === 'en'));
-    }
-    // document.title + meta description
-    var titleNode = document.getElementById('page-title-' + l);
-    if (titleNode) document.title = titleNode.textContent;
-    var descNode = document.getElementById('page-desc-' + l);
-    var metaDesc = document.querySelector('meta[name="description"]');
-    if (descNode && metaDesc) metaDesc.setAttribute('content', descNode.textContent);
+  // Scroll-reveal
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    for (var k = 0; k < els.length; k++) els[k].classList.add('in');
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    for (var m = 0; m < els.length; m++) io.observe(els[m]);
   }
-
-  window.setLang = function (l) {
-    try { localStorage.setItem(KEY, l); } catch (e) {}
-    apply(l);
-  };
-
-  document.addEventListener('DOMContentLoaded', function () {
-    // restore persisted language (default: 'de')
-    var saved = 'de';
-    try { saved = localStorage.getItem(KEY) || 'de'; } catch (e) {}
-    apply(saved);
-
-    // scroll reveals
-    var els = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window)) {
-      for (var k = 0; k < els.length; k++) els[k].classList.add('in');
-    } else {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
-        });
-      }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
-      for (var m = 0; m < els.length; m++) io.observe(els[m]);
-    }
-
-    // year
-    var yr = document.getElementById('year');
-    if (yr) yr.textContent = new Date().getFullYear();
-  });
 })();</script>
 </body>
 </html>

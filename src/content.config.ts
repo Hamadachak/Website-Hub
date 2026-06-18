@@ -7,11 +7,14 @@ const blog = defineCollection({
     // Primary (German)
     title:       z.string(),
     description: z.string(),
-    // Secondary (English) — optional; falls back to German if absent
+    // English — optional; falls back to German if absent
     titleEn:       z.string().optional(),
     descriptionEn: z.string().optional(),
-    // English body stored as a YAML literal block scalar
     bodyEn: z.string().optional(),
+    // Arabic — optional; falls back to English then German
+    titleAr:       z.string().optional(),
+    descriptionAr: z.string().optional(),
+    bodyAr: z.string().optional(),
     // Dates & status
     pubDate: z.coerce.date(),
     draft:   z.boolean().default(false),

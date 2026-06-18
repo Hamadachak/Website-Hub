@@ -1,0 +1,211 @@
+---
+import Base from "../../layouts/Base.astro";
+const professionalServiceLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "محمد شكروف — مستشار HubSpot في برلين",
+  "description": "مستشار HubSpot مستقل في برلين. هندسة CRM، هجرة البيانات وعمليات الإيرادات للشركات B2B في منطقة DACH والشرق الأوسط.",
+  "url": "https://mohammad-chakrouf.de/ar/",
+  "address": { "@type": "PostalAddress", "addressLocality": "Berlin", "addressCountry": "DE" },
+  "areaServed": [
+    { "@type": "Country", "name": "Germany" },
+    { "@type": "Country", "name": "United Arab Emirates" },
+    { "@type": "Country", "name": "Saudi Arabia" },
+    { "@type": "Country", "name": "Qatar" }
+  ],
+  "knowsAbout": ["HubSpot","CRM","Revenue Operations","Data Migration","Marketing Automation"]
+};
+---
+<Base
+  title="استشاري HubSpot في برلين – CRM وRevOps وهجرة البيانات | محمد شكروف"
+  description="مستشار HubSpot مستقل في برلين. هندسة CRM، هجرة البيانات وعمليات الإيرادات للشركات B2B في منطقة DACH والشرق الأوسط."
+>
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(professionalServiceLd)} />
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow"><span class="b">مستقل</span> · برلين · HubSpot وRevOps</p>
+        <h1>من فوضى HubSpot إلى نظام تثق به فرقتك.</h1>
+        <p class="sub">مستشار HubSpot مستقل في برلين. أصمّم بنى CRM، وأنقل البيانات بدون فوضى، وأؤتمت العمليات عبر التسويق والمبيعات والخدمة — وأبني أدوات مخصصة عندما لا يكفي الحل الجاهز.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">تواصل معي</a>
+          <a href="#work" class="btn btn-ghost">استعرض المشاريع</a>
+        </div>
+        <p class="status"><span class="dot" aria-hidden="true"></span>متاح للمشاريع · 3 أيام / أسبوع</p>
+      </div>
+      <div class="record reveal">
+        <div class="record-tab">// سجل البيانات</div>
+        <div class="record-head">
+          <div class="avatar">MC</div>
+          <div>
+            <div class="name">Mohammad Chakrouf</div>
+            <div class="role">كبير مستشاري HubSpot</div>
+          </div>
+        </div>
+        <div class="record-rows">
+          <div class="row"><span class="k">الدور</span><span class="v">مهندس CRM · RevOps</span></div>
+          <div class="row"><span class="k">الموقع</span><span class="v">برلين · عن بُعد (DACH)</span></div>
+          <div class="row"><span class="k">الخبرة</span><span class="v">6 سنوات · جميع الـ Hubs</span></div>
+          <div class="row"><span class="k">التخصص</span><span class="v">الهندسة · الهجرة · الأتمتة</span></div>
+          <div class="row"><span class="k">التقنيات</span><span class="v">HubSpot CLI · React · Node.js</span></div>
+          <div class="row"><span class="k">اللغات</span><span class="v">العربية · الألمانية · الإنجليزية</span></div>
+          <div class="row"><span class="k">الحالة</span><span class="v"><span class="mini-dot" aria-hidden="true"></span>متاح</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="caps">
+  <div class="wrap caps-in">
+    <span class="tag">نمذجة الكائنات</span>
+    <span class="tag">هجرة البيانات</span>
+    <span class="tag">أتمتة سير العمل</span>
+    <span class="tag">التقارير ولوحات البيانات</span>
+    <span class="tag">التكاملات</span>
+    <span class="tag">إضافات UI مخصصة</span>
+    <span class="tag">دورة الحياة والمسارات</span>
+    <span class="tag">جودة البيانات</span>
+  </div>
+</div>
+
+<section class="block" id="work">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">مشاريع مختارة</p>
+      <h2>تنظيم وإعادة بناء وتشغيل.</h2>
+    </div>
+    <div class="work-grid">
+      <article class="case reveal">
+        <span class="ctag">B2B · اندماج · ~130 موظفاً</span>
+        <h3>خمس شركات، نظام CRM واحد</h3>
+        <p>توحيد خمس شركات مندمجة على حساب HubSpot واحد. صممت نموذج الكائنات من الصفر، ونقلت البيانات من أنظمة متعددة، وحددت استراتيجية مسار موحدة ونفّذتها على مراحل — دون تعطيل العمليات الجارية.</p>
+        <p class="outcome"><b>النتيجة</b> · نموذج بيانات موحد ومسار واحد من 5 أنظمة قديمة، مباشر لـ ~130 مستخدماً.</p>
+      </article>
+      <article class="case reveal">
+        <span class="ctag">B2B SaaS · مستمر</span>
+        <h3>إعادة هيكلة CRM أثناء النمو</h3>
+        <p>تفويض مستمر (3 أيام / أسبوع): تنظيف وإعادة هيكلة منظومة HubSpot التي نمت بشكل عشوائي. إعادة ترتيب الخصائص ومراحل دورة الحياة والأتمتة لضمان موثوقية التقارير وثقة الفريق بالنظام.</p>
+        <p class="outcome"><b>المحور</b> · جودة البيانات، نموذج دورة حياة نظيف، تقارير موثوقة.</p>
+      </article>
+      <article class="case reveal">
+        <span class="ctag">PropTech · برلين</span>
+        <h3>نظام تذاكر مع منطق التوزيع الدوري</h3>
+        <p>بنيت نظام تذاكر متكاملاً في HubSpot لشركة إدارة عقارات برلينية — بما يشمل منطق المسار والتعيين التلقائي بنظام الدوري، لتوزيع الطلبات بشكل عادل وشفاف.</p>
+        <p class="outcome"><b>النتيجة</b> · تدفق دعم منظم مع توزيع تلقائي وعادل للعبء.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="approach" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">منهجية العمل</p>
+      <h2>مسار واحد — من المعطوب إلى الموثوق.</h2>
+    </div>
+    <div class="pipe reveal">
+      <div class="stage"><div class="num">01</div><h3>الاستكشاف</h3><p>فهم ما هو معطوب. مراجعة البيانات والعمليات وسبب كذب التقارير.</p></div>
+      <div class="stage"><div class="num">02</div><h3>الهندسة المعمارية</h3><p>تصميم نموذج كائنات وبيانات يصمد لسنتين قادمتين.</p></div>
+      <div class="stage"><div class="num">03</div><h3>الهجرة</h3><p>نقل البيانات بنظافة — بلا مكررات، بلا سجلات معلّقة.</p></div>
+      <div class="stage"><div class="num">04</div><h3>الأتمتة</h3><p>تحويل العمليات إلى سير عمل موثوقة لا يتجاوزها الفريق.</p></div>
+      <div class="stage"><div class="num">05</div><h3>التمكين</h3><p>تمكين الفريق بدلاً من خلق تبعية. التسليم، التوثيق، التدريب.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="build" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">أبعد من الإعداد</p>
+      <h2>لا أكتفي بالإعداد. أبني.</h2>
+    </div>
+    <p class="build-intro reveal">إضافات HubSpot UI مخصصة باستخدام React وHubSpot CLI وNode.js. عندما لا يكفي الحل الجاهز، أبني البطاقة المفقودة بنفسي — مباشرةً في السجل، حيث يعمل الفريق.</p>
+    <div class="ext-grid">
+      <div class="ext reveal">
+        <div class="ehead"><div class="glyph" aria-hidden="true">★</div><h3>بطاقة مؤشر صحة الحساب</h3></div>
+        <p>تقييم صحة الحساب وعرض المؤشر مباشرةً في السجل.</p>
+        <p class="stack">React · HubSpot CLI · Node.js</p>
+      </div>
+      <div class="ext reveal">
+        <div class="ehead"><div class="glyph" aria-hidden="true">⌖</div><h3>بطاقة عنوان العقار</h3></div>
+        <p>عناوين مع تكامل خرائط Google مباشرةً في بطاقة CRM — مرئية لا مجرد محفوظة.</p>
+        <p class="stack">React · Google Maps API · Node.js</p>
+      </div>
+      <div class="ext reveal">
+        <div class="ehead"><div class="glyph" aria-hidden="true">●</div><h3>الملاحظات الصوتية</h3></div>
+        <p>تسجيل الملاحظات الصوتية وإرفاقها بالسجل مباشرةً — أسرع من الكتابة بعد المكالمة.</p>
+        <p class="stack">React · HubSpot CLI · Node.js</p>
+      </div>
+      <div class="ext reveal">
+        <div class="ehead"><div class="glyph" aria-hidden="true">▦</div><h3>مولّد GIF</h3></div>
+        <p>لمسة مرحة — لأن الأدوات الداخلية الجيدة يمكن أن تكون ممتعة أيضاً.</p>
+        <p class="stack">React · HubSpot CLI</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="about" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about reveal">
+        <p class="eyebrow">نبذة عني</p>
+        <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,3.2vw,2.4rem);line-height:1.1;letter-spacing:-.02em;margin:14px 0 24px">منفّذ وبانٍ — لا مجرد استراتيجي.</h2>
+        <p>ست سنوات في HubSpot عبر جميع الـ Hubs — التسويق والمبيعات والخدمة والعمليات. عملت في Trusted Shops وشركة برلينية لإدارة العقارات، حيث بنيت كل شيء من التقارير إلى نظام التذاكر المخصص.</p>
+        <p>أتخصص في تحويل الأنظمة الفوضوية إلى منظومة يثق بها الفريق فعلاً. كمستشار HubSpot مستقل، أعمل مع شركات B2B والوكالات في منطقة DACH والشرق الأوسط.</p>
+        <p><strong>المحاور الرئيسية:</strong> عمليات الإيرادات · هجرة البيانات · التقارير</p>
+      </div>
+      <div class="facts reveal">
+        <div class="record-tab">// الملف الشخصي</div>
+        <div class="record-rows" style="padding-top:10px">
+          <div class="row"><span class="k">الخبرة</span><span class="v">6 سنوات HubSpot</span></div>
+          <div class="row"><span class="k">الـ Hubs</span><span class="v">التسويق · المبيعات · الخدمة · Ops</span></div>
+          <div class="row"><span class="k">البرمجة</span><span class="v">React · Node.js · HubSpot CLI</span></div>
+          <div class="row"><span class="k">النموذج</span><span class="v">مشروع · تفويض · مقاولة فرعية</span></div>
+          <div class="row"><span class="k">النطاق</span><span class="v">DACH · الشرق الأوسط · عن بُعد</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="leistungen" style="border-top:1px solid var(--line);padding:56px 0">
+  <div class="wrap">
+    <p class="eyebrow">الخدمات</p>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:28px">
+      <a class="case" href="/ar/leistungen/hubspot-migration/" style="text-decoration:none;display:block">
+        <span class="ctag">هجرة</span>
+        <h3>هجرة HubSpot</h3>
+        <p>من Salesforce أو Pipedrive أو Excel إلى HubSpot — منظمة ونظيفة بدون انقطاع في العمليات.</p>
+      </a>
+      <a class="case" href="/ar/leistungen/revops-fuer-startups/" style="text-decoration:none;display:block">
+        <span class="ctag">RevOps</span>
+        <h3>RevOps للشركات الناشئة</h3>
+        <p>التسويق والمبيعات والخدمة على قاعدة بيانات واحدة — لتقارير موثوقة ونمو قابل للتوسع.</p>
+      </a>
+      <a class="case" href="/ar/leistungen/hubspot-fuer-b2b-saas/" style="text-decoration:none;display:block">
+        <span class="ctag">B2B SaaS</span>
+        <h3>HubSpot لـ B2B SaaS</h3>
+        <p>تسجيل PQL، تدفقات التجربة، إشارات الإلغاء — HubSpot كمحرك نمو لشركات البرمجيات.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="block contact" id="contact" style="position:relative">
+  <div class="wrap">
+    <p class="eyebrow">التواصل</p>
+    <h2>هل أنت مستعد لـ HubSpot يعمل بكفاءة؟</h2>
+    <p class="sub">سواء كان مشروعاً، تفويضاً لـ RevOps، أو مقاولة فرعية لوكالة — أخبرني باختصار عمّا تعمل عليه.</p>
+    <div class="contact-actions">
+      <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach" class="btn btn-primary" target="_blank" rel="noopener" aria-label="احجز مكالمة (يفتح في نافذة جديدة)">احجز مكالمة</a>
+      <a href="mailto:chakroufmohammad@gmail.com" class="btn btn-ghost">أرسل بريداً إلكترونياً</a>
+      <a href="https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/" class="btn btn-ghost" target="_blank" rel="noopener" aria-label="LinkedIn (يفتح في نافذة جديدة)">LinkedIn</a>
+      <a href="https://www.malt.de/profile/mohammadchakrouf" class="btn btn-ghost" target="_blank" rel="noopener" aria-label="Malt (يفتح في نافذة جديدة)">Malt</a>
+    </div>
+    <p class="status"><span class="dot" aria-hidden="true"></span>متاح للمشاريع · 3 أيام / أسبوع</p>
+  </div>
+</section>
+</Base>

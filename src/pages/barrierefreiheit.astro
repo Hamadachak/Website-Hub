@@ -3,58 +3,50 @@ import Base from "../layouts/Base.astro";
 ---
 <Base
   title="Barrierefreiheit — Mohammad Chakrouf"
-  titleEn="Accessibility — Mohammad Chakrouf"
   description="Erklärung zur Barrierefreiheit für mohammad-chakrouf.de gemäß WCAG 2.1 AA."
-  descriptionEn="Accessibility statement for mohammad-chakrouf.de in accordance with WCAG 2.1 AA."
+  hreflang={false}
 >
 <article class="block">
   <div class="wrap" style="max-width:760px">
-    <p class="eyebrow" data-de="Barrierefreiheit" data-en="Accessibility">Barrierefreiheit</p>
-    <h1 style="font-family:var(--display);font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:14px 0 40px"
-      data-de="Erklärung zur Barrierefreiheit"
-      data-en="Accessibility Statement">Erklärung zur Barrierefreiheit</h1>
+    <p class="eyebrow">Barrierefreiheit</p>
+    <h1 style="font-family:var(--display);font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:14px 0 40px">Erklärung zur Barrierefreiheit</h1>
 
     <div class="prose">
 
-      <h2 data-de="Ziel" data-en="Goal">Ziel</h2>
-      <p data-de="Diese Website strebt die Konformität mit den Web Content Accessibility Guidelines (WCAG) 2.1 auf Stufe AA (EN 301 549) an. Ziel ist eine nutzbare, verständliche und robuste Erfahrung für alle Besucherinnen und Besucher, unabhängig von Hilfstechnologien oder Einschränkungen."
-         data-en="This website aims to conform to the Web Content Accessibility Guidelines (WCAG) 2.1, Level AA (EN 301 549). The goal is a usable, understandable and robust experience for all visitors, regardless of assistive technology or disability.">Diese Website strebt die Konformität mit den Web Content Accessibility Guidelines (WCAG) 2.1 auf Stufe AA (EN 301 549) an. Ziel ist eine nutzbare, verständliche und robuste Erfahrung für alle Besucherinnen und Besucher, unabhängig von Hilfstechnologien oder Einschränkungen.</p>
+      <h2>Ziel</h2>
+      <p>Diese Website strebt die Konformität mit den Web Content Accessibility Guidelines (WCAG) 2.1 auf Stufe AA (EN 301 549) an. Ziel ist eine nutzbare, verständliche und robuste Erfahrung für alle Besucherinnen und Besucher, unabhängig von Hilfstechnologien oder Einschränkungen.</p>
 
-      <h2 data-de="Stand der Umsetzung" data-en="Implementation status">Stand der Umsetzung</h2>
-      <p data-de="Folgende Maßnahmen wurden umgesetzt:" data-en="The following measures have been implemented:">Folgende Maßnahmen wurden umgesetzt:</p>
+      <h2>Stand der Umsetzung</h2>
+      <p>Folgende Maßnahmen wurden umgesetzt:</p>
       <ul>
-        <li data-de="Tastaturnavigation und sichtbare Fokusindikatoren auf allen interaktiven Elementen" data-en="Keyboard navigation and visible focus indicators on all interactive elements">Tastaturnavigation und sichtbare Fokusindikatoren auf allen interaktiven Elementen</li>
-        <li data-de="Skip-to-Content-Link als erstes fokussierbares Element" data-en="Skip-to-content link as the first focusable element">Skip-to-Content-Link als erstes fokussierbares Element</li>
-        <li data-de="Semantische HTML-Struktur mit korrekter Überschriftenhierarchie (eine h1 pro Seite)" data-en="Semantic HTML structure with correct heading hierarchy (one h1 per page)">Semantische HTML-Struktur mit korrekter Überschriftenhierarchie (eine h1 pro Seite)</li>
-        <li data-de="ARIA-Landmarks: nav, main, footer" data-en="ARIA landmarks: nav, main, footer">ARIA-Landmarks: nav, main, footer</li>
-        <li data-de="Farbkontrast ≥ 4,5:1 für Fließtext, ≥ 3:1 für große Texte und UI-Komponenten" data-en="Colour contrast ≥ 4.5:1 for body text, ≥ 3:1 for large text and UI components">Farbkontrast ≥ 4,5:1 für Fließtext, ≥ 3:1 für große Texte und UI-Komponenten</li>
-        <li data-de="Zweisprachige Sprachumschaltung (DE/EN) mit html-lang-Update und aria-pressed" data-en="Bilingual language toggle (DE/EN) with html lang update and aria-pressed">Zweisprachige Sprachumschaltung (DE/EN) mit html-lang-Update und aria-pressed</li>
-        <li data-de="Selbst gehostete Schriften — keine Verbindungen zu externen Tracking-Diensten" data-en="Self-hosted fonts — no connections to external tracking services">Selbst gehostete Schriften — keine Verbindungen zu externen Tracking-Diensten</li>
-        <li data-de="prefers-reduced-motion: Animationen und Scroll-Effekte werden deaktiviert" data-en="prefers-reduced-motion: animations and scroll effects are disabled">prefers-reduced-motion: Animationen und Scroll-Effekte werden deaktiviert</li>
-        <li data-de="Externe Links mit Hinweis „öffnet in neuem Tab" im barrierefreien Namen" data-en="External links with 'opens in new tab' in the accessible name">Externe Links mit Hinweis „öffnet in neuem Tab" im barrierefreien Namen</li>
-        <li data-de="Dekorative Elemente mit aria-hidden ausgezeichnet" data-en="Decorative elements marked with aria-hidden">Dekorative Elemente mit aria-hidden ausgezeichnet</li>
+        <li>Tastaturnavigation und sichtbare Fokusindikatoren auf allen interaktiven Elementen</li>
+        <li>Skip-to-Content-Link als erstes fokussierbares Element</li>
+        <li>Semantische HTML-Struktur mit korrekter Überschriftenhierarchie (eine h1 pro Seite)</li>
+        <li>ARIA-Landmarks: nav, main, footer</li>
+        <li>Farbkontrast ≥ 4,5:1 für Fließtext, ≥ 3:1 für große Texte und UI-Komponenten</li>
+        <li>Dreisprachige Sprachumschaltung (DE/EN/AR) mit URL-basiertem Routing und html-lang-Attribut</li>
+        <li>Selbst gehostete Schriften — keine Verbindungen zu externen Tracking-Diensten</li>
+        <li>prefers-reduced-motion: Animationen und Scroll-Effekte werden deaktiviert</li>
+        <li>Externe Links mit Hinweis „öffnet in neuem Tab" im barrierefreien Namen</li>
+        <li>Dekorative Elemente mit aria-hidden ausgezeichnet</li>
       </ul>
 
-      <h2 data-de="Bekannte Einschränkungen" data-en="Known limitations">Bekannte Einschränkungen</h2>
-      <p data-de="Diese Erklärung ist ein Arbeitsstand. Automatisierte und manuelle Tests werden laufend durchgeführt. Festgestellte Mängel werden zeitnah behoben."
-         data-en="This statement reflects work in progress. Automated and manual tests are ongoing. Identified issues are addressed promptly.">Diese Erklärung ist ein Arbeitsstand. Automatisierte und manuelle Tests werden laufend durchgeführt. Festgestellte Mängel werden zeitnah behoben.</p>
+      <h2>Bekannte Einschränkungen</h2>
+      <p>Diese Erklärung ist ein Arbeitsstand. Automatisierte und manuelle Tests werden laufend durchgeführt. Festgestellte Mängel werden zeitnah behoben.</p>
 
-      <h2 data-de="Hinweis zur rechtlichen Geltung" data-en="Legal scope note">Hinweis zur rechtlichen Geltung</h2>
-      <p data-de="Das Barrierefreiheitsstärkungsgesetz (BFSG) gilt ab Juni 2025 für bestimmte private Dienstleister im B2C-Bereich. Diese Website richtet sich primär an gewerbliche Auftraggeber (B2B). Die Erklärung wird freiwillig bereitgestellt."
-         data-en="The German Accessibility Strengthening Act (BFSG) applies from June 2025 to certain private B2C service providers. This website primarily addresses commercial clients (B2B). This statement is provided voluntarily.">Das Barrierefreiheitsstärkungsgesetz (BFSG) gilt ab Juni 2025 für bestimmte private Dienstleister im B2C-Bereich. Diese Website richtet sich primär an gewerbliche Auftraggeber (B2B). Die Erklärung wird freiwillig bereitgestellt.</p>
+      <h2>Hinweis zur rechtlichen Geltung</h2>
+      <p>Das Barrierefreiheitsstärkungsgesetz (BFSG) gilt ab Juni 2025 für bestimmte private Dienstleister im B2C-Bereich. Diese Website richtet sich primär an gewerbliche Auftraggeber (B2B). Die Erklärung wird freiwillig bereitgestellt.</p>
 
-      <h2 data-de="Feedback und Kontakt" data-en="Feedback and contact">Feedback und Kontakt</h2>
-      <p data-de="Wenn Sie Barrieren auf dieser Website feststellen oder Unterstützung benötigen, schreiben Sie mir bitte:"
-         data-en="If you encounter accessibility barriers on this website or need assistance, please write to:">Wenn Sie Barrieren auf dieser Website feststellen oder Unterstützung benötigen, schreiben Sie mir bitte:</p>
+      <h2>Feedback und Kontakt</h2>
+      <p>Wenn Sie Barrieren auf dieser Website feststellen oder Unterstützung benötigen, schreiben Sie mir bitte:</p>
       <p>
         <a href="mailto:chakroufmohammad@gmail.com">chakroufmohammad@gmail.com</a>
       </p>
-      <p data-de="Ich bemühe mich um eine Rückmeldung innerhalb von 5 Werktagen."
-         data-en="I aim to respond within 5 business days.">Ich bemühe mich um eine Rückmeldung innerhalb von 5 Werktagen.</p>
+      <p>Ich bemühe mich um eine Rückmeldung innerhalb von 5 Werktagen.</p>
 
     </div>
 
-    <p style="margin-top:44px"><a href="/" class="btn btn-ghost" data-de="← Zurück zur Startseite" data-en="← Back to home">← Zurück zur Startseite</a></p>
+    <p style="margin-top:44px"><a href="/" class="btn btn-ghost">← Zurück zur Startseite</a></p>
   </div>
 </article>
 </Base>

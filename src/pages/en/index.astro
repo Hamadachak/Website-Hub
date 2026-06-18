@@ -1,0 +1,211 @@
+---
+import Base from "../../layouts/Base.astro";
+const professionalServiceLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Mohammad Chakrouf — HubSpot Consultant Berlin",
+  "description": "Freelance Senior HubSpot Consultant in Berlin. CRM architecture, data migration and RevOps for B2B companies in DACH and the Middle East.",
+  "url": "https://mohammad-chakrouf.de/en/",
+  "address": { "@type": "PostalAddress", "addressLocality": "Berlin", "addressCountry": "DE" },
+  "areaServed": [
+    { "@type": "Country", "name": "Germany" },
+    { "@type": "Country", "name": "Austria" },
+    { "@type": "Country", "name": "Switzerland" },
+    { "@type": "Country", "name": "United Arab Emirates" }
+  ],
+  "knowsAbout": ["HubSpot","CRM","Revenue Operations","Data Migration","Marketing Automation"]
+};
+---
+<Base
+  title="HubSpot Consultant Berlin – CRM, RevOps & Data Migration | Mohammad Chakrouf"
+  description="Freelance Senior HubSpot Consultant in Berlin. CRM architecture, data migration and RevOps for B2B companies and agencies in DACH and the Middle East."
+>
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(professionalServiceLd)} />
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow"><span class="b">Freelance</span> · Berlin · HubSpot &amp; RevOps</p>
+        <h1>From chaotic HubSpot to a system your team actually trusts.</h1>
+        <p class="sub">HubSpot Consultant and Freelancer in Berlin. I design CRM architectures, migrate data without chaos, and automate processes across Marketing, Sales and Service — and build custom tools when the standard doesn't cut it.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Get in touch</a>
+          <a href="#work" class="btn btn-ghost">View projects</a>
+        </div>
+        <p class="status"><span class="dot" aria-hidden="true"></span>Available for projects · 3 days / week</p>
+      </div>
+      <div class="record reveal">
+        <div class="record-tab">// Record</div>
+        <div class="record-head">
+          <div class="avatar">MC</div>
+          <div>
+            <div class="name">Mohammad Chakrouf</div>
+            <div class="role">Senior HubSpot Consultant</div>
+          </div>
+        </div>
+        <div class="record-rows">
+          <div class="row"><span class="k">Role</span><span class="v">CRM Architect · RevOps</span></div>
+          <div class="row"><span class="k">Location</span><span class="v">Berlin · Remote (DACH)</span></div>
+          <div class="row"><span class="k">Experience</span><span class="v">6 years · all Hubs</span></div>
+          <div class="row"><span class="k">Focus</span><span class="v">Architecture · Migration · Automation</span></div>
+          <div class="row"><span class="k">Stack</span><span class="v">HubSpot CLI · React · Node.js</span></div>
+          <div class="row"><span class="k">Languages</span><span class="v">German · English</span></div>
+          <div class="row"><span class="k">Status</span><span class="v"><span class="mini-dot" aria-hidden="true"></span>Available</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="caps">
+  <div class="wrap caps-in">
+    <span class="tag">Object Modelling</span>
+    <span class="tag">Data Migration</span>
+    <span class="tag">Workflow Automation</span>
+    <span class="tag">Reporting &amp; Dashboards</span>
+    <span class="tag">Integrations</span>
+    <span class="tag">Custom UI Extensions</span>
+    <span class="tag">Lifecycle &amp; Pipelines</span>
+    <span class="tag">Data Hygiene</span>
+  </div>
+</div>
+
+<section class="block" id="work">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">Selected Projects</p>
+      <h2>Clean up, rebuild, make it work.</h2>
+    </div>
+    <div class="work-grid">
+      <article class="case reveal">
+        <span class="ctag">B2B · Merger · ~130 employees</span>
+        <h3>Five companies, one CRM</h3>
+        <p>Consolidated five merged companies onto a single HubSpot account. Designed the object model from scratch, migrated data from multiple legacy systems, defined a shared pipeline strategy and rolled it out in phases — without disrupting day-to-day operations.</p>
+        <p class="outcome"><b>Result</b> · One unified data model and pipeline from 5 legacy systems, live for ~130 users.</p>
+      </article>
+      <article class="case reveal">
+        <span class="ctag">B2B SaaS · Ongoing</span>
+        <h3>CRM restructuring during growth</h3>
+        <p>Ongoing mandate (3 days / week): cleaning up and restructuring an organically grown HubSpot setup. Properties, lifecycle stages and automations are being reorganised so that reporting becomes reliable again and the team trusts the system.</p>
+        <p class="outcome"><b>Focus</b> · Data hygiene, clean lifecycle model, reliable reporting.</p>
+      </article>
+      <article class="case reveal">
+        <span class="ctag">PropTech · Berlin</span>
+        <h3>Ticket system with rotation logic</h3>
+        <p>Built a complete ticket system in HubSpot for a Berlin property management company — including pipeline logic and automatic assignment via round-robin rotation, so requests are distributed fairly and transparently.</p>
+        <p class="outcome"><b>Result</b> · Structured support flow with automatic, fair load balancing.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="approach" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">How I work</p>
+      <h2>One pipeline — from broken to reliable.</h2>
+    </div>
+    <div class="pipe reveal">
+      <div class="stage"><div class="num">01</div><h3>Discovery</h3><p>Understand what's broken. Audit of data, processes, and why reporting lies.</p></div>
+      <div class="stage"><div class="num">02</div><h3>Architecture</h3><p>Design an object and data model that will still hold up in two years.</p></div>
+      <div class="stage"><div class="num">03</div><h3>Migration</h3><p>Transfer data cleanly — no duplicates, no orphaned records.</p></div>
+      <div class="stage"><div class="num">04</div><h3>Automation</h3><p>Turn processes into reliable workflows the team won't work around.</p></div>
+      <div class="stage"><div class="num">05</div><h3>Enablement</h3><p>Empower the team instead of creating dependency. Handover, docs, training.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="build" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">Beyond configuration</p>
+      <h2>I don't just configure. I build.</h2>
+    </div>
+    <p class="build-intro reveal">Custom HubSpot UI Extensions with React, the HubSpot CLI and Node.js. When the standard isn't enough, I build the missing card myself — right in the record, where the team works.</p>
+    <div class="ext-grid">
+      <div class="ext reveal">
+        <div class="ehead"><div class="glyph" aria-hidden="true">★</div><h3>Company Health Score Card</h3></div>
+        <p>Evaluates account health and displays the score directly in the record.</p>
+        <p class="stack">React · HubSpot CLI · Node.js</p>
+      </div>
+      <div class="ext reveal">
+        <div class="ehead"><div class="glyph" aria-hidden="true">⌖</div><h3>Property Address Card</h3></div>
+        <p>Addresses with Google Maps integration directly in the CRM card — visible, not just stored.</p>
+        <p class="stack">React · Google Maps API · Node.js</p>
+      </div>
+      <div class="ext reveal">
+        <div class="ehead"><div class="glyph" aria-hidden="true">●</div><h3>Voice Notes</h3></div>
+        <p>Record and attach voice notes directly to a record — faster than typing after a call.</p>
+        <p class="stack">React · HubSpot CLI · Node.js</p>
+      </div>
+      <div class="ext reveal">
+        <div class="ehead"><div class="glyph" aria-hidden="true">▦</div><h3>GIF Generator</h3></div>
+        <p>A small bit of fun — because good internal tools can be enjoyable too.</p>
+        <p class="stack">React · HubSpot CLI</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="about" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about reveal">
+        <p class="eyebrow">About</p>
+        <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,3.2vw,2.4rem);line-height:1.1;letter-spacing:-.02em;margin:14px 0 24px">Operator and builder — not just a strategist.</h2>
+        <p>Six years of HubSpot across all Hubs — Marketing, Sales, Service and Operations. Past roles include Trusted Shops and a Berlin property management company, where I built everything from reporting to a custom ticket system.</p>
+        <p>I take a chaotic setup and turn it into a system the team genuinely trusts. As a HubSpot Freelancer, I work with B2B companies and agencies in DACH and the Middle East.</p>
+        <p><strong>In focus:</strong> Revenue Operations · Data Migration · Reporting</p>
+      </div>
+      <div class="facts reveal">
+        <div class="record-tab">// Profile</div>
+        <div class="record-rows" style="padding-top:10px">
+          <div class="row"><span class="k">Experience</span><span class="v">6 years HubSpot</span></div>
+          <div class="row"><span class="k">Hubs</span><span class="v">Marketing · Sales · Service · Ops</span></div>
+          <div class="row"><span class="k">Engineering</span><span class="v">React · Node.js · HubSpot CLI</span></div>
+          <div class="row"><span class="k">Model</span><span class="v">Project · Mandate · Subcontracting</span></div>
+          <div class="row"><span class="k">Region</span><span class="v">DACH · Remote</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="leistungen" style="border-top:1px solid var(--line);padding:56px 0">
+  <div class="wrap">
+    <p class="eyebrow">Services</p>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:28px">
+      <a class="case" href="/en/leistungen/hubspot-migration/" style="text-decoration:none;display:block">
+        <span class="ctag">Migration</span>
+        <h3>HubSpot Migration</h3>
+        <p>From Salesforce, Pipedrive or Excel to HubSpot — structured, clean, without operational disruption.</p>
+      </a>
+      <a class="case" href="/en/leistungen/revops-fuer-startups/" style="text-decoration:none;display:block">
+        <span class="ctag">RevOps</span>
+        <h3>RevOps for Startups</h3>
+        <p>Marketing, Sales and Service on one data foundation — for reliable reporting and scalable growth.</p>
+      </a>
+      <a class="case" href="/en/leistungen/hubspot-fuer-b2b-saas/" style="text-decoration:none;display:block">
+        <span class="ctag">B2B SaaS</span>
+        <h3>HubSpot for B2B SaaS</h3>
+        <p>PQL scoring, trial flows, churn signals — HubSpot as a growth engine for software companies.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="block contact" id="contact" style="position:relative">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2>Ready for a HubSpot that behaves?</h2>
+    <p class="sub">Whether project work, a RevOps mandate or subcontracting for an agency — drop me a line about what you're working on.</p>
+    <div class="contact-actions">
+      <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach" class="btn btn-primary" target="_blank" rel="noopener" aria-label="Book a call (opens in new tab)">Book a call</a>
+      <a href="mailto:chakroufmohammad@gmail.com" class="btn btn-ghost">Send an email</a>
+      <a href="https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/" class="btn btn-ghost" target="_blank" rel="noopener" aria-label="LinkedIn (opens in new tab)">LinkedIn</a>
+      <a href="https://www.malt.de/profile/mohammadchakrouf" class="btn btn-ghost" target="_blank" rel="noopener" aria-label="Malt (opens in new tab)">Malt</a>
+    </div>
+    <p class="status"><span class="dot" aria-hidden="true"></span>Available for projects · 3 days / week</p>
+  </div>
+</section>
+</Base>

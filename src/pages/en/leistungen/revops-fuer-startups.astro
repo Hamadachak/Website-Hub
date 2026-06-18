@@ -1,0 +1,152 @@
+---
+import Base from "../../../layouts/Base.astro";
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "RevOps for Startups",
+  "description": "Revenue Operations for growing startups: Marketing, Sales and Service on one data foundation — for reliable reporting and scalable growth.",
+  "provider": { "@id": "https://mohammad-chakrouf.de/#person" },
+  "areaServed": [
+    { "@type": "Country", "name": "Germany" },
+    { "@type": "Country", "name": "Austria" },
+    { "@type": "Country", "name": "Switzerland" }
+  ],
+  "serviceType": "Revenue Operations Consulting"
+};
+---
+<Base
+  title="RevOps for Startups — Mohammad Chakrouf, HubSpot Consultant Berlin"
+  description="Revenue Operations for growing startups: Marketing, Sales and Service on one data foundation — for reliable reporting and scalable growth in DACH."
+>
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow"><span class="b">Service</span> · RevOps for Startups</p>
+    <h1 style="font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,5.5vw,4rem);line-height:1.05;letter-spacing:-.025em;max-width:16ch;margin:20px 0 22px">Marketing, Sales, Service — finally one data foundation.</h1>
+    <p class="sub" style="max-width:50ch">I build the RevOps foundation so your team stops pulling numbers from three different sources — and starts making decisions based on reliable data.</p>
+    <div class="hero-actions" style="margin-top:28px">
+      <a href="/en/#contact" class="btn btn-primary">Request a call</a>
+      <a href="/en/#about" class="btn btn-ghost">About me</a>
+    </div>
+  </div>
+</header>
+
+<div class="caps">
+  <div class="wrap caps-in">
+    <span class="tag">Lifecycle Model</span>
+    <span class="tag">Lead Routing</span>
+    <span class="tag">Pipeline Design</span>
+    <span class="tag">Attribution</span>
+    <span class="tag">Reporting &amp; Dashboards</span>
+    <span class="tag">CRM Hygiene</span>
+    <span class="tag">GTM Alignment</span>
+    <span class="tag">Tool Stack Audit</span>
+  </div>
+</div>
+
+<section class="block" id="leistung">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">What RevOps actually means</p>
+      <h2>Not a concept. A working foundation.</h2>
+    </div>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div class="case reveal">
+        <span class="ctag">Unified Data Model</span>
+        <h3>One object model for all teams</h3>
+        <p>Contact, Company, Deal, Ticket — clearly defined, consistently filled. No property sprawl, no manual handoffs between departments.</p>
+      </div>
+      <div class="case reveal">
+        <span class="ctag">Lifecycle &amp; Pipeline</span>
+        <h3>Lifecycle stages that maintain themselves</h3>
+        <p>Automatic stage transitions based on clear criteria — instead of manual discipline that breaks down after three weeks.</p>
+      </div>
+      <div class="case reveal">
+        <span class="ctag">Reporting</span>
+        <h3>Dashboards the team trusts</h3>
+        <p>MQL, SQL, Win Rate, Churn — from one source, not three sheets. I build dashboards your team uses every day.</p>
+      </div>
+      <div class="case reveal">
+        <span class="ctag">Process Design</span>
+        <h3>Lead routing and handoff logic</h3>
+        <p>When a lead moves from Marketing to Sales, how deals are escalated, how CS is notified — as reliable automation, not an email chain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">How I work</p>
+      <h2>From diagnosis to a running foundation.</h2>
+    </div>
+    <div class="pipe reveal">
+      <div class="stage">
+        <div class="num">01</div>
+        <h3>GTM Audit</h3>
+        <p>How do Marketing, Sales and Service work together today? Where do friction, data loss and blind spots in the funnel occur?</p>
+      </div>
+      <div class="stage">
+        <div class="num">02</div>
+        <h3>Model Design</h3>
+        <p>Design objects, properties, lifecycle stages and pipelines to reflect real processes — and to scale.</p>
+      </div>
+      <div class="stage">
+        <div class="num">03</div>
+        <h3>Implementation</h3>
+        <p>Setup in HubSpot: workflows, scoring, routing, dashboards. Step by step, with the team, not past them.</p>
+      </div>
+      <div class="stage">
+        <div class="num">04</div>
+        <h3>Handover</h3>
+        <p>Documentation, training, clear owners. The goal is independence — no long-term consultant lock-in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">More services</p>
+      <h2>What else I offer.</h2>
+    </div>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <a class="case" href="/en/leistungen/hubspot-migration/" style="text-decoration:none;display:block">
+        <span class="ctag">Migration</span>
+        <h3>HubSpot Migration</h3>
+        <p>From Salesforce, Pipedrive or Excel to HubSpot — structured, clean, without operational disruption.</p>
+      </a>
+      <a class="case" href="/en/leistungen/hubspot-fuer-b2b-saas/" style="text-decoration:none;display:block">
+        <span class="ctag">B2B SaaS</span>
+        <h3>HubSpot for B2B SaaS</h3>
+        <p>PQL scoring, trial flows, churn signals — HubSpot as a growth engine for software companies.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="block contact" style="position:relative;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2>RevOps challenge at your startup?</h2>
+    <p class="sub">Tell me where things are breaking down — reporting, handoffs, pipeline quality — and I'll show you how we can structure it.</p>
+    <div class="contact-actions">
+      <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach"
+        class="btn btn-primary"
+        target="_blank"
+        rel="noopener"
+        aria-label="Book a call (opens in new tab)">Book a call</a>
+      <a href="mailto:chakroufmohammad@gmail.com" class="btn btn-ghost">Send an email</a>
+      <a href="https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/"
+        class="btn btn-ghost"
+        target="_blank"
+        rel="noopener"
+        aria-label="LinkedIn (opens in new tab)">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+</Base>

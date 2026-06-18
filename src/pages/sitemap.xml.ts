@@ -6,16 +6,34 @@ export const GET: APIRoute = async ({ site }) => {
 
   const posts = await getCollection('blog', ({ data }) => !data.draft);
 
-  const urls = [
-    `${base}/`,
-    `${base}/leistungen/hubspot-migration/`,
-    `${base}/leistungen/revops-fuer-startups/`,
-    `${base}/leistungen/hubspot-fuer-b2b-saas/`,
-    `${base}/blog/`,
-    ...posts.map(p => `${base}/blog/${p.id}/`),
-    `${base}/impressum/`,
-    `${base}/datenschutz/`,
-    `${base}/barrierefreiheit/`,
+  const staticPages = [
+    '/',
+    '/leistungen/hubspot-migration/',
+    '/leistungen/revops-fuer-startups/',
+    '/leistungen/hubspot-fuer-b2b-saas/',
+    '/blog/',
+    '/impressum/',
+    '/datenschutz/',
+    '/barrierefreiheit/',
+  ];
+
+  const localedPages = [
+    '/',
+    '/leistungen/hubspot-migration/',
+    '/leistungen/revops-fuer-startups/',
+    '/leistungen/hubspot-fuer-b2b-saas/',
+    '/blog/',
+  ];
+
+  const blogSlugs = posts.map(p => `/blog/${p.id}/`);
+
+  const urls: string[] = [
+    ...staticPages.map(p => `${base}${p}`),
+    ...localedPages.map(p => `${base}/en${p}`),
+    ...localedPages.map(p => `${base}/ar${p}`),
+    ...blogSlugs.map(s => `${base}${s}`),
+    ...blogSlugs.map(s => `${base}/en${s}`),
+    ...blogSlugs.map(s => `${base}/ar${s}`),
   ];
 
   const xml = [
@@ -26,8 +44,6 @@ export const GET: APIRoute = async ({ site }) => {
   ].join('\n');
 
   return new Response(xml, {
-    headers: {
-      'Content-Type': 'application/xml; charset=utf-8',
-    },
+    headers: { 'Content-Type': 'application/xml; charset=utf-8' },
   });
 };

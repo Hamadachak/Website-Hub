@@ -1,0 +1,103 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { getCollection, render } from "astro:content";
+import { marked } from "marked";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) => d.toLocaleDateString("ar-AE", { year: "numeric", month: "long", day: "numeric" });
+const title = post.data.titleAr ?? post.data.titleEn ?? post.data.title;
+const description = post.data.descriptionAr ?? post.data.descriptionEn ?? post.data.description;
+const bodyArHtml = post.data.bodyAr ? marked.parse(post.data.bodyAr) : null;
+const bodyEnHtml = post.data.bodyEn ? marked.parse(post.data.bodyEn) : null;
+---
+<Base
+  title={`${title} — محمد شكروف`}
+  description={description}
+  image={post.data.heroImage}
+  type="article"
+>
+  <article class="block">
+    <div class="wrap" style="max-width:760px">
+
+      <p class="eyebrow">{fmt(post.data.pubDate)}</p>
+
+      {post.data.heroImage && (
+        <img
+          src={post.data.heroImage}
+          alt={title}
+          width="760"
+          height="399"
+          loading="eager"
+          style="width:100%;height:auto;border-radius:12px;margin:24px 0 32px;border:1px solid var(--line);display:block"
+        />
+      )}
+
+      <h1 style="font-family:var(--display);font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:0 0 32px">{title}</h1>
+
+      {bodyArHtml ? (
+        <div class="prose" set:html={bodyArHtml} />
+      ) : bodyEnHtml ? (
+        <div class="prose" set:html={bodyEnHtml} />
+      ) : (
+        <div class="prose"><Content /></div>
+      )}
+
+      {post.data.visuals && post.data.visuals.length > 0 && (
+        <div style="margin:40px 0 8px">
+          {post.data.visuals.map((src) => (
+            <img
+              src={src}
+              alt="Key Takeaways"
+              width="700"
+              height="200"
+              loading="lazy"
+              style="width:100%;max-width:700px;height:auto;display:block;margin:0 0 16px"
+            />
+          ))}
+        </div>
+      )}
+
+      {post.data.sourceUrl && (
+        <p style="margin-top:36px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--mono);font-size:.78rem;color:var(--muted)">
+          المصدر:&nbsp;
+          <a
+            href={post.data.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${post.data.sourceTitle || post.data.sourceUrl} (يفتح في نافذة جديدة)`}
+            style="color:var(--amber);text-decoration:underline;text-underline-offset:3px"
+          >{post.data.sourceTitle || post.data.sourceUrl}</a>
+        </p>
+      )}
+
+      <p style="margin-top:44px"><a href="/ar/blog/" class="btn btn-ghost">← جميع المقالات</a></p>
+
+      <div style="margin-top:56px;padding-top:32px;border-top:1px solid var(--line)">
+        <p class="eyebrow">خدمات ذات صلة</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:20px">
+          <a class="case" href="/ar/leistungen/hubspot-migration/" style="text-decoration:none;display:block;padding:20px 22px">
+            <span class="ctag">هجرة</span>
+            <h3 style="font-size:1rem;margin:10px 0 8px">هجرة HubSpot</h3>
+            <p style="font-size:.88rem">هجرة نظيفة، بلا فوضى.</p>
+          </a>
+          <a class="case" href="/ar/leistungen/revops-fuer-startups/" style="text-decoration:none;display:block;padding:20px 22px">
+            <span class="ctag">RevOps</span>
+            <h3 style="font-size:1rem;margin:10px 0 8px">RevOps للشركات الناشئة</h3>
+            <p style="font-size:.88rem">قاعدة بيانات واحدة لجميع الفرق.</p>
+          </a>
+          <a class="case" href="/ar/leistungen/hubspot-fuer-b2b-saas/" style="text-decoration:none;display:block;padding:20px 22px">
+            <span class="ctag">B2B SaaS</span>
+            <h3 style="font-size:1rem;margin:10px 0 8px">HubSpot لـ B2B SaaS</h3>
+            <p style="font-size:.88rem">PQL، تدفقات التجربة، إشارات الإلغاء.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+</Base>

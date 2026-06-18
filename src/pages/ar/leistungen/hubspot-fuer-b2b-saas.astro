@@ -1,0 +1,148 @@
+---
+import Base from "../../../layouts/Base.astro";
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "HubSpot لشركات B2B SaaS",
+  "description": "HubSpot كمحرك نمو لـ B2B SaaS: تدفقات التجربة إلى الدفع، والعملاء المؤهلون بالمنتج، وبنية CRM قابلة للتوسع لشركات البرمجيات.",
+  "provider": { "@id": "https://mohammad-chakrouf.de/#person" },
+  "areaServed": [
+    { "@type": "Country", "name": "Germany" },
+    { "@type": "Country", "name": "United Arab Emirates" },
+    { "@type": "Country", "name": "Saudi Arabia" }
+  ],
+  "serviceType": "HubSpot Consulting"
+};
+---
+<Base
+  title="HubSpot لشركات B2B SaaS — محمد شكروف، مستشار HubSpot في برلين"
+  description="HubSpot كمحرك نمو لـ B2B SaaS: تدفقات التجربة إلى الدفع، والعملاء المؤهلون بالمنتج، وبنية CRM قابلة للتوسع لشركات البرمجيات."
+>
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow"><span class="b">خدمة</span> · HubSpot لـ B2B SaaS</p>
+    <h1 style="font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,5.5vw,4rem);line-height:1.05;letter-spacing:-.025em;max-width:16ch;margin:20px 0 22px">HubSpot كمحرك نمو لشركات B2B SaaS.</h1>
+    <p class="sub" style="max-width:50ch">أبني HubSpot ليعكس عملية نمو SaaS الخاصة بك: من تفعيل التجربة عبر التسليم للمبيعات وصولاً إلى التوسع ومنع الإلغاء.</p>
+    <div class="hero-actions" style="margin-top:28px">
+      <a href="/ar/#contact" class="btn btn-primary">طلب استشارة</a>
+      <a href="/ar/#work" class="btn btn-ghost">استعرض المشاريع</a>
+    </div>
+  </div>
+</header>
+
+<div class="caps">
+  <div class="wrap caps-in">
+    <span class="tag">تدفقات التجربة إلى الدفع</span>
+    <span class="tag">تسجيل PQL</span>
+    <span class="tag">أتمتة الإعداد</span>
+    <span class="tag">إيرادات التوسع</span>
+    <span class="tag">إشارات الإلغاء</span>
+    <span class="tag">تسليم المبيعات</span>
+    <span class="tag">تكاملات API</span>
+    <span class="tag">نجاح العملاء</span>
+  </div>
+</div>
+
+<section class="block" id="leistung">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">إعدادات HubSpot المخصصة لـ SaaS</p>
+      <h2>HubSpot القياسي لا يكفي لـ SaaS.</h2>
+    </div>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div class="case reveal">
+        <span class="ctag">Product-Qualified Leads</span>
+        <h3>تسجيل PQL بدلاً من تسجيل العملاء المحتملين الكلاسيكي</h3>
+        <p>سلوك الاستخدام من منتجك يتدفق إلى HubSpot. يرى فريق المبيعات من هو نشط — لا فقط من نزّل ورقة بيضاء.</p>
+      </div>
+      <div class="case reveal">
+        <span class="ctag">Trial &amp; Onboarding</span>
+        <h3>تدفقات تجريبية تحوّل</h3>
+        <p>تسلسلات إعداد آلية ومحفزات التفعيل وأحداث داخل التطبيق كخصائص HubSpot. يصبح الانتقال من التجربة إلى الدفع عملية منظمة.</p>
+      </div>
+      <div class="case reveal">
+        <span class="ctag">التوسع والاحتفاظ</span>
+        <h3>الكشف المبكر عن إشارات الإلغاء</h3>
+        <p>مؤشرات صحة مبنية على بيانات الاستخدام، وسير عمل تصعيد لنجاح العملاء، ومحفزات توسع لمحادثات البيع التصاعدي.</p>
+      </div>
+      <div class="case reveal">
+        <span class="ctag">التكاملات</span>
+        <h3>HubSpot في مركز مكدّسك</h3>
+        <p>Stripe وSegment وIntercom وAPIs مخصصة — أدمج أدواتك بحيث يعمل HubSpot كمصدر الحقيقة الوحيد، لا مقبرة بيانات.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">لماذا نهج مخصص لـ SaaS</p>
+      <h2>الإعدادات الكلاسيكية لـ HubSpot لا تناسب SaaS.</h2>
+    </div>
+    <div class="ext-grid reveal">
+      <div class="ext">
+        <div class="ehead"><div class="glyph" aria-hidden="true">◎</div><h3>دورة حياة SaaS ≠ دورة الحياة القياسية</h3></div>
+        <p>MQL → SQL → Opportunity تعمل لـ SaaS جزئياً فقط. التجربة وPQL والتوسع وخطر الإلغاء مراحل مستقلة يجب أن يعرفها HubSpot.</p>
+      </div>
+      <div class="ext">
+        <div class="ehead"><div class="glyph" aria-hidden="true">↗</div><h3>بيانات المنتج يجب أن تدخل CRM</h3></div>
+        <p>بدون بيانات الاستخدام، يتخذ المبيعات ونجاح العملاء قراراتهم في الظلام. أبني الجسر بين تطبيقك وHubSpot.</p>
+      </div>
+      <div class="ext">
+        <div class="ehead"><div class="glyph" aria-hidden="true">★</div><h3>قابلية التوسع من اليوم الأول</h3></div>
+        <p>ما يعمل يدوياً مع 50 عميلاً ينهار عند 500. أصمم إعدادات تنمو معك.</p>
+      </div>
+      <div class="ext">
+        <div class="ehead"><div class="glyph" aria-hidden="true">▦</div><h3>تقارير الإيرادات للمستثمرين</h3></div>
+        <p>ARR وMRR ومعدل الإلغاء وNRR — نظيفة في HubSpot، لا مجمّعة يدوياً من أربعة جداول.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">خدمات أخرى</p>
+      <h2>ماذا أقدم أيضاً.</h2>
+    </div>
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <a class="case" href="/ar/leistungen/hubspot-migration/" style="text-decoration:none;display:block">
+        <span class="ctag">هجرة</span>
+        <h3>هجرة HubSpot</h3>
+        <p>من Salesforce أو Pipedrive أو Excel إلى HubSpot — منظمة ونظيفة بدون انقطاع في العمليات.</p>
+      </a>
+      <a class="case" href="/ar/leistungen/revops-fuer-startups/" style="text-decoration:none;display:block">
+        <span class="ctag">RevOps</span>
+        <h3>RevOps للشركات الناشئة</h3>
+        <p>التسويق والمبيعات والخدمة على قاعدة بيانات واحدة — لتقارير موثوقة ونمو قابل للتوسع.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="block contact" style="position:relative;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow">التواصل</p>
+    <h2>هل تريد هيكلة نمو SaaS مع HubSpot؟</h2>
+    <p class="sub">أخبرني أين يصل إعدادك الحالي إلى حدوده — تحويل التجربة، الإلغاء، التقارير — وسأرى كيف يمكننا حلها.</p>
+    <div class="contact-actions">
+      <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach"
+        class="btn btn-primary"
+        target="_blank"
+        rel="noopener"
+        aria-label="احجز مكالمة (يفتح في نافذة جديدة)">احجز مكالمة</a>
+      <a href="mailto:chakroufmohammad@gmail.com" class="btn btn-ghost">أرسل بريداً إلكترونياً</a>
+      <a href="https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/"
+        class="btn btn-ghost"
+        target="_blank"
+        rel="noopener"
+        aria-label="LinkedIn (يفتح في نافذة جديدة)">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+</Base>

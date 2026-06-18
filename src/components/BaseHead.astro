@@ -1,55 +1,47 @@
 ---
-interface Props { title: string; description: string; image?: string; type?: string; }
-const { title, description, image = "/og.png", type = "website" } = Astro.props;
+import { ogLocale, getAlternates, type Lang } from '../i18n/ui';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: string;
+  lang: Lang;
+  /** Locale-neutral path (e.g. "/leistungen/hubspot-migration/"). Pass undefined to skip hreflang. */
+  canonicalPath?: string;
+}
+const { title, description, image = '/og.png', type = 'website', lang, canonicalPath } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const imageURL = new URL(image, Astro.site).href;
+const alternates = canonicalPath ? getAlternates(String(Astro.site), canonicalPath) : null;
 
 const graphLd = {
-  "@context": "https://schema.org",
-  "@graph": [
+  '@context': 'https://schema.org',
+  '@graph': [
     {
-      "@type": "Person",
-      "@id": "https://mohammad-chakrouf.de/#person",
-      "name": "Mohammad Chakrouf",
-      "jobTitle": "Senior HubSpot Consultant",
-      "url": "https://mohammad-chakrouf.de/",
-      "image": "https://mohammad-chakrouf.de/og.png",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Berlin",
-        "addressCountry": "DE"
-      },
-      "knowsAbout": [
-        "HubSpot",
-        "CRM-Architektur",
-        "RevOps",
-        "Datenmigration",
-        "Marketing Automation",
-        "HubSpot UI Extensions"
-      ],
-      "knowsLanguage": ["de", "en"],
-      "sameAs": [
-        "https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/",
-        "https://www.malt.de/profile/mohammadchakrouf"
-      ]
+      '@type': 'Person',
+      '@id': 'https://mohammad-chakrouf.de/#person',
+      name: 'Mohammad Chakrouf',
+      jobTitle: 'Senior HubSpot Consultant',
+      url: 'https://mohammad-chakrouf.de/',
+      image: 'https://mohammad-chakrouf.de/og.png',
+      address: { '@type': 'PostalAddress', addressLocality: 'Berlin', addressCountry: 'DE' },
+      knowsAbout: ['HubSpot', 'CRM-Architektur', 'RevOps', 'Datenmigration', 'Marketing Automation', 'HubSpot UI Extensions'],
+      knowsLanguage: ['de', 'en', 'ar'],
+      sameAs: ['https://www.linkedin.com/in/mohammad-chakrouf-ba2818208/', 'https://www.malt.de/profile/mohammadchakrouf'],
     },
     {
-      "@type": "ProfessionalService",
-      "@id": "https://mohammad-chakrouf.de/#service",
-      "name": "Mohammad Chakrouf – HubSpot & RevOps Consulting",
-      "url": "https://mohammad-chakrouf.de/",
-      "image": "https://mohammad-chakrouf.de/og.png",
-      "provider": { "@id": "https://mohammad-chakrouf.de/#person" },
-      "areaServed": ["DE", "AT", "CH"],
-      "availableLanguage": ["de", "en"],
-      "serviceType": [
-        "HubSpot Consulting",
-        "CRM Architecture",
-        "Data Migration",
-        "RevOps"
-      ]
-    }
-  ]
+      '@type': 'ProfessionalService',
+      '@id': 'https://mohammad-chakrouf.de/#service',
+      name: 'Mohammad Chakrouf – HubSpot & RevOps Consulting',
+      url: 'https://mohammad-chakrouf.de/',
+      image: 'https://mohammad-chakrouf.de/og.png',
+      provider: { '@id': 'https://mohammad-chakrouf.de/#person' },
+      areaServed: ['DE', 'AT', 'CH', 'AE', 'SA', 'QA', 'KW', 'BH', 'OM'],
+      availableLanguage: ['de', 'en', 'ar'],
+      serviceType: ['HubSpot Consulting', 'CRM Architecture', 'Data Migration', 'RevOps'],
+    },
+  ],
 };
 ---
 <meta charset="utf-8" />
@@ -58,15 +50,37 @@ const graphLd = {
 <link rel="canonical" href={canonical} />
 <title>{title}</title>
 <meta name="description" content={description} />
+
+{/* hreflang alternates — only for pages that have all 3 locale versions */}
+{alternates && (
+  <>
+    <link rel="alternate" hreflang="de" href={alternates.de} />
+    <link rel="alternate" hreflang="en" href={alternates.en} />
+    <link rel="alternate" hreflang="ar" href={alternates.ar} />
+    <link rel="alternate" hreflang="x-default" href={alternates.de} />
+  </>
+)}
+
 <meta property="og:type" content={type} />
 <meta property="og:url" content={canonical} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
-<meta property="og:locale" content="de_DE" />
+<meta property="og:locale" content={ogLocale[lang]} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageURL} />
+
 <link rel="preload" as="font" type="font/woff2" href="/fonts/archivo-latin.woff2" crossorigin="anonymous" />
+
+{/* Arabic font — Tajawal, only loaded on Arabic pages */}
+{lang === 'ar' && (
+  <>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  </>
+)}
+
 <script type="application/ld+json" set:html={JSON.stringify(graphLd)} />
