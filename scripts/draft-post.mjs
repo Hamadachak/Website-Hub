@@ -66,6 +66,74 @@ export function writePostFile(blogDir, slug, contents) {
   return filePath;
 }
 
+// ── Topic relevance + source-URL dedup + freshest-unused selection ────────────
+
+// On-topic keyword filter (matched against title + summary + feed name). Keeps
+// the post focused on the positioning and screens out off-topic items that slip
+// in from broader feeds. Trusted feeds (HubSpot/CRM/Sales) pass via their name.
+const TOPIC_RE = /\b(hubspot|crm|revops|revenue operations|sales ops|sales operations|gtm|go-to-market|pipeline|lifecycle|lead|leads|marketing automation|workflow|deal|deals|contact|contacts|property|properties|segmentation|attribution|reporting|dashboard|salesforce|b2b|saas|onboarding|churn|retention|forecast|forecasting|automation|ai|artificial intelligence|llm|chatgpt|copilot|agent|agents|integration|api|sdk)\b/i;
+
+export function isRelevant(item) {
+  const hay = `${item.title || ''} ${item.description || ''} ${item.source || ''}`;
+  return TOPIC_RE.test(hay);
+}
+
+// Normalize a URL for dedup comparison: drop protocol + leading www, lowercase
+// host+path, strip the entire query string (incl. UTM params), hash, and any
+// trailing slash. Two URLs that point at the same article compare equal.
+export function normalizeUrl(u) {
+  if (!u) return '';
+  const s = String(u).trim();
+  try {
+    const url = new URL(s);
+    const host = url.host.replace(/^www\./i, '');
+    const path = url.pathname.replace(/\/+$/, '');
+    return (host + path).toLowerCase();
+  } catch {
+    return s.toLowerCase()
+      .replace(/[?#].*$/, '')
+      .replace(/^https?:\/\//, '')
+      .replace(/^www\./, '')
+      .replace(/\/+$/, '');
+  }
+}
+
+// Collect the normalized sourceUrl of every published post (front-matter scan).
+export function publishedSourceUrls(blogDir) {
+  const set = new Set();
+  let files = [];
+  try { files = readdirSync(blogDir).filter(f => f.endsWith('.md')); } catch { return set; }
+  for (const f of files) {
+    let txt = '';
+    try { txt = readFileSync(join(blogDir, f), 'utf8'); } catch { continue; }
+    const fm = txt.split(/\n---\s*(?:\n|$)/)[0];           // front-matter region
+    const m  = fm.match(/^sourceUrl:\s*["']?([^"'\n]+?)["']?\s*$/m);
+    if (m) set.add(normalizeUrl(m[1]));
+  }
+  return set;
+}
+
+function dateValue(d) {
+  const t = d ? Date.parse(d) : NaN;
+  return Number.isNaN(t) ? 0 : t;
+}
+
+// Pick the freshest candidate that is BOTH on-topic and not-yet-covered:
+//   - passes the relevance filter
+//   - its source URL is not already published
+//   - its title-derived slug is not already taken (best-effort; the fail-loud
+//     assertSlugAvailable guard remains the final backstop at write time)
+// Returns the chosen item, or null when nothing fresh remains.
+export function selectTopic(items, { publishedUrls = new Set(), slugs = [] } = {}) {
+  const taken = slugs.map(s => s.toLowerCase());
+  const pool = items
+    .filter(isRelevant)
+    .filter(it => !publishedUrls.has(normalizeUrl(it.link)))
+    .filter(it => !taken.includes(slugify(it.title)))
+    .sort((a, b) => dateValue(b.pubDate) - dateValue(a.pubDate));
+  return pool[0] || null;
+}
+
 // ── RSS helpers ──────────────────────────────────────────────────────────────
 
 async function fetchFeed({ name, url }) {
@@ -235,37 +303,54 @@ async function main() {
   const allItems = (await Promise.all(feeds.map(fetchFeed))).flat();
   if (!allItems.length) throw new Error('No items fetched from any feed. Check feed URLs and network.');
 
-  // Prefer items from the last 14 days; fall back to all if nothing recent
-  const cutoff = Date.now() - 14 * 24 * 60 * 60 * 1000;
-  const recent = allItems.filter(({ pubDate }) => {
+  // ── Topic selection: on-topic + source-URL-unused + freshest ───────────────
+  // Already-covered sources and already-used slugs are excluded up front, so a
+  // run can never re-pick an article we've published. The deterministic pick is
+  // the most recent remaining item.
+  const publishedUrls = publishedSourceUrls(BLOG_DIR);
+  const usedSlugs     = existingSlugs(BLOG_DIR);
+
+  // Prefer items from the last 14 days; fall back to all relevant if none recent.
+  const cutoff   = Date.now() - 14 * 24 * 60 * 60 * 1000;
+  const relevant = allItems.filter(isRelevant);
+  const recent   = relevant.filter(({ pubDate }) => {
     if (!pubDate) return true;
     const d = new Date(pubDate);
     return isNaN(d.getTime()) || d.getTime() > cutoff;
   });
-  const candidates = (recent.length ? recent : allItems).slice(0, 20);
+  const pool   = recent.length ? recent : relevant;
+  const chosen = selectTopic(pool, { publishedUrls, slugs: usedSlugs });
 
-  console.log(`\n✍  Sending ${candidates.length} items to Together AI (Llama-3.3-70B-Turbo)…`);
+  if (!chosen) {
+    console.log(
+      '\n✅ No fresh topics: every on-topic candidate is already covered ' +
+      '(source URL or slug) or nothing relevant was found. ' +
+      'Exiting cleanly without opening a PR.',
+    );
+    return;
+  }
 
-  // Split the prompt into two calls:
-  //   1. Metadata as JSON (short strings only — avoids control-char JSON parse errors)
+  console.log(`\n🎯 Selected (freshest unused): "${chosen.title}"  [${chosen.source}]`);
+  console.log(`   ${chosen.link}`);
+
+  // Two model calls:
+  //   1. Metadata as JSON (short strings only — avoids control-char parse errors)
   //   2. Body text as plain delimited sections (no JSON wrapping)
+  // sourceUrl/sourceTitle are set from `chosen` (not the model) so future
+  // dedup matches exactly what we covered.
 
   const metaRaw = await togetherChat(`\
 You write for Mohammad Chakrouf — Freelance Senior HubSpot Consultant in Berlin.
 Audience: B2B Ops teams, RevOps managers, SaaS decision-makers in the DACH region.
 
-Recent items from HubSpot, AI, CRM, and RevOps sources:
-
-${candidates.map((it, i) =>
-  `[${i + 1}] ${it.source}\nTitle: ${it.title}\nURL: ${it.link}\nDate: ${it.pubDate || 'unknown'}\nSummary: ${it.description || '(none)'}`
-).join('\n\n---\n\n')}
-
-Choose the SINGLE most relevant and timely item for this audience.
-Prefer: HubSpot product updates, AI in CRM, RevOps strategy, B2B SaaS operations.
+Write metadata for a bilingual (DE/EN) blog post based on THIS source article:
+Source: ${chosen.source}
+Title: ${chosen.title}
+URL: ${chosen.link}
+Summary: ${chosen.description || '(none)'}
 
 Return ONLY this JSON object (no markdown fences, no extra text, short strings only — NO body content here):
 {
-  "selected": <number of chosen item>,
   "slug": "german-slug-no-umlauts-max-60-chars",
   "titleDe": "German title max 80 chars",
   "titleEn": "English title max 80 chars",
@@ -273,16 +358,11 @@ Return ONLY this JSON object (no markdown fences, no extra text, short strings o
   "descriptionEn": "English meta description max 160 chars",
   "heroImagePrompt": "Visual concept for abstract hero: shapes, light, metaphor. No people, text, logos.",
   "takeawaysDe": ["3-5 key points in German each max 70 chars"],
-  "takeawaysEn": ["3-5 key points in English each max 70 chars"],
-  "sourceTitle": "Exact title of chosen article",
-  "sourceUrl": "Exact URL of chosen article"
+  "takeawaysEn": ["3-5 key points in English each max 70 chars"]
 }`);
 
   const metaText = metaRaw.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim();
   const meta = JSON.parse(metaText);
-
-  // Identify the chosen source item for context
-  const chosen = candidates[meta.selected - 1] || candidates[0];
 
   const bodyRaw = await togetherChat(`\
 You write for Mohammad Chakrouf — Freelance Senior HubSpot Consultant in Berlin.
@@ -345,8 +425,8 @@ Respond with EXACTLY this structure (keep the delimiter lines verbatim):
     `draft: true`,
     heroImage ? `heroImage: "${heroImage}"` : null,
     `visuals:\n  - "${takeawaysSvg}"`,
-    `sourceTitle: "${q(meta.sourceTitle || '')}"`,
-    `sourceUrl: "${q(meta.sourceUrl || '')}"`,
+    `sourceTitle: "${q(chosen.title || '')}"`,
+    `sourceUrl: "${q(chosen.link || '')}"`,
     `bodyEn: |\n${blockScalar}`,
     '---',
   ].filter(Boolean);

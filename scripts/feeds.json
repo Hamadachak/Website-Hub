@@ -1,5 +1,5 @@
 {
-  "_note": "Edit this file to control which RSS feeds the weekly blog bot monitors. It fetches up to 5 items per feed and filters to the last 14 days. If a feed URL fails it is silently skipped — check the Actions log.",
+  "_note": "RSS feeds the weekly blog bot monitors. It fetches up to 5 items per feed, keeps on-topic items (HubSpot/CRM/RevOps relevance filter), skips any article whose source URL is already covered by a published post, and picks the freshest remaining item. A failing feed URL is silently skipped — check the Actions log. All URLs below were verified live + parseable on 2026-06-18.",
   "feeds": [
     {
       "name": "HubSpot Marketing Blog",
@@ -10,8 +10,32 @@
       "url": "https://blog.hubspot.com/sales/rss.xml"
     },
     {
+      "name": "HubSpot Service Blog",
+      "url": "https://blog.hubspot.com/service/rss.xml"
+    },
+    {
+      "name": "HubSpot Website Blog",
+      "url": "https://blog.hubspot.com/website/rss.xml"
+    },
+    {
       "name": "HubSpot Product Updates",
       "url": "https://www.hubspot.com/product-updates/rss.xml"
+    },
+    {
+      "name": "HubSpot Developers Changelog",
+      "url": "https://developers.hubspot.com/changelog/rss.xml"
+    },
+    {
+      "name": "Close CRM Blog",
+      "url": "https://www.close.com/blog/rss.xml"
+    },
+    {
+      "name": "Sales Hacker",
+      "url": "https://www.saleshacker.com/feed/"
+    },
+    {
+      "name": "Salesforce Blog",
+      "url": "https://www.salesforce.com/blog/feed/"
     },
     {
       "name": "Anthropic News",
@@ -20,10 +44,6 @@
     {
       "name": "OpenAI News",
       "url": "https://openai.com/news/rss.xml"
-    },
-    {
-      "name": "Salesforce Blog",
-      "url": "https://www.salesforce.com/blog/feed/"
     }
   ]
 }
