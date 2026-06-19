@@ -4,7 +4,7 @@ titleEn: "HubSpot's new AI agents: what they mean for sales and service ops"
 description: "Prospecting Agent, Customer Agent und Smart Deal Progression aus dem Spring 2026 Spotlight — und was die nutzungsbasierten Preise für RevOps wirklich bedeuten."
 descriptionEn: "Prospecting Agent, Customer Agent and Smart Deal Progression from the Spring 2026 Spotlight — and what usage-based pricing really means for RevOps."
 pubDate: 2026-06-19
-draft: true
+draft: false
 sourceTitle: "HubSpot Spring 2026 Spotlight"
 sourceUrl: "https://www.hubspot.com/company-news/spring-2026-spotlight"
 bodyEn: |
