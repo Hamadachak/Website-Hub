@@ -68,7 +68,8 @@
       "Bash(perl -0pi -e 's/^draft: true/draft: false/m' src/content/blog/hubspot-spring-2026-spotlight-revops.md)",
       "Bash(perl -0pi -e 's/^draft: false/draft: true/m' src/content/blog/hubspot-spring-2026-spotlight-revops.md)",
       "Bash(perl -0pi -e 's/^draft: true/draft: false/m' src/content/blog/hubspot-ki-agenten-revops.md)",
-      "Bash(perl -0pi -e 's/^draft: true/draft: false/m' src/content/blog/hubspot-aeo-ki-sichtbarkeit.md)"
+      "Bash(perl -0pi -e 's/^draft: true/draft: false/m' src/content/blog/hubspot-aeo-ki-sichtbarkeit.md)",
+      "Bash(perl -0pi -e 's/^draft: true/draft: false/m' src/content/blog/hubspot-mcp-connector-governance.md)"
     ]
   }
 }
