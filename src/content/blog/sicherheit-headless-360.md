@@ -4,7 +4,7 @@ titleEn: "Security in Headless 360"
 description: "Erfahren Sie, wie Headless 360 Sicherheit und Governance bietet"
 descriptionEn: "Learn how Headless 360 builds in security and governance"
 pubDate: 2026-06-18
-draft: false
+draft: true
 heroImage: "/blog/images/sicherheit-headless-360-hero.png"
 visuals:
   - "/blog/visuals/sicherheit-headless-360-takeaways.svg"
