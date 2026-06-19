@@ -142,6 +142,15 @@ const de = {
       status: "Verfügbar für Projekte · 3 Tage / Woche",
     },
   },
+  blog: {
+    metaTitle: "Blog — Mohammad Chakrouf",
+    metaDescription: "Insights zu HubSpot, CRM, RevOps und KI für B2B- und B2C-Unternehmen.",
+    eyebrow: "Blog",
+    h1: "Insights zu HubSpot, CRM & RevOps",
+    empty: "Bald geht es hier los.",
+    back: "← Alle Beiträge",
+    relatedEyebrow: "Passende Leistungen",
+  },
   common: {
     serviceEyebrow: "Leistung",
     relatedEyebrow: "Weitere Leistungen",

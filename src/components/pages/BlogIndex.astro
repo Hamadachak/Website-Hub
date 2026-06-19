@@ -1,0 +1,52 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+import { getDict, localizedPath, type Locale } from "../../i18n";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = getDict(locale);
+const isEn = locale === "en";
+
+// German index lists every published post; English index only posts that have
+// an English translation (bodyEn).
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .filter((p) => (isEn ? !!p.data.bodyEn : true))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const fmt = (dt: Date) =>
+  dt.toLocaleDateString(isEn ? "en-GB" : "de-DE", { year: "numeric", month: "long", day: "numeric" });
+
+const alternates = [
+  { hreflang: "de", path: "/blog/" },
+  { hreflang: "en", path: "/en/blog/" },
+  { hreflang: "x-default", path: "/blog/" },
+];
+const switchTargets = { de: "/blog/", en: "/en/blog/", ar: "/en/blog/" } as const;
+---
+<Base
+  title={t.blog.metaTitle}
+  description={t.blog.metaDescription}
+  locale={locale}
+  alternates={alternates}
+  switchTargets={switchTargets}
+>
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">{t.blog.eyebrow}</p>
+        <h1 style="font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,3.6vw,2.7rem);line-height:1.08;letter-spacing:-.02em;margin:14px 0 0">{t.blog.h1}</h1>
+      </div>
+      <div class="work-grid">
+        {posts.map((post) => (
+          <a class="case" href={localizedPath(`/blog/${post.id}/`, locale)} style="display:block;text-decoration:none">
+            <span class="ctag">{fmt(post.data.pubDate)}</span>
+            <h3>{isEn ? (post.data.titleEn ?? post.data.title) : post.data.title}</h3>
+            <p>{isEn ? (post.data.descriptionEn ?? post.data.description) : post.data.description}</p>
+          </a>
+        ))}
+        {posts.length === 0 && <p style="color:var(--muted)">{t.blog.empty}</p>}
+      </div>
+    </div>
+  </section>
+</Base>

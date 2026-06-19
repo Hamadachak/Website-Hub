@@ -1,0 +1,133 @@
+---
+import Base from "../../layouts/Base.astro";
+import { render, type CollectionEntry } from "astro:content";
+import { marked } from "marked";
+import { getDict, localizedPath, type Locale } from "../../i18n";
+
+interface Props { locale: Locale; post: CollectionEntry<"blog"> }
+const { locale, post } = Astro.props;
+const t = getDict(locale);
+const isEn = locale === "en";
+const hasEn = !!post.data.bodyEn;
+
+const title = isEn ? (post.data.titleEn ?? post.data.title) : post.data.title;
+const description = isEn ? (post.data.descriptionEn ?? post.data.description) : post.data.description;
+
+const slug = post.id;
+const dePath = `/blog/${slug}/`;
+const enPath = `/en/blog/${slug}/`;
+
+// German body comes from the .md file; English from the bodyEn frontmatter.
+const Content = isEn ? null : (await render(post)).Content;
+const enHtml = isEn ? marked.parse(post.data.bodyEn!) : null;
+
+const fmt = (dt: Date) =>
+  dt.toLocaleDateString(isEn ? "en-GB" : "de-DE", { year: "numeric", month: "long", day: "numeric" });
+
+// hreflang: link DE↔EN only when both exist; x-default → German.
+const alternates = (isEn || hasEn)
+  ? [
+      { hreflang: "de", path: dePath },
+      { hreflang: "en", path: enPath },
+      { hreflang: "x-default", path: dePath },
+    ]
+  : [
+      { hreflang: "de", path: dePath },
+      { hreflang: "x-default", path: dePath },
+    ];
+
+// Switcher: jump to the same post in the other language; if no translation,
+// fall back to that language's blog index (never a different-language page).
+const switchTargets = isEn
+  ? { de: dePath, en: enPath, ar: enPath }
+  : { de: dePath, en: hasEn ? enPath : "/en/blog/", ar: hasEn ? enPath : "/en/blog/" };
+
+const ORIGIN = "https://mohammad-chakrouf.de";
+const blogPostingLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "inLanguage": locale,
+  "datePublished": post.data.pubDate.toISOString().slice(0, 10),
+  ...(post.data.heroImage ? { "image": `${ORIGIN}${post.data.heroImage}` } : {}),
+  "author": { "@id": `${ORIGIN}/#person` },
+  "publisher": { "@id": `${ORIGIN}/#person` },
+  "mainEntityOfPage": `${ORIGIN}${isEn ? enPath : dePath}`,
+};
+
+const services = [
+  { slug: "hubspot-migration", card: t.home.services.cards[0] },
+  { slug: "revops-fuer-startups", card: t.home.services.cards[1] },
+  { slug: "hubspot-fuer-b2b-saas", card: t.home.services.cards[2] },
+];
+---
+<Base
+  title={`${title} — Mohammad Chakrouf`}
+  description={description}
+  locale={locale}
+  image={post.data.heroImage}
+  type="article"
+  alternates={alternates}
+  switchTargets={switchTargets}
+>
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(blogPostingLd)} />
+  <article class="block">
+    <div class="wrap" style="max-width:760px">
+
+      <p class="eyebrow">{fmt(post.data.pubDate)}</p>
+
+      {post.data.heroImage && (
+        <img
+          src={post.data.heroImage}
+          alt={title}
+          width="760"
+          height="399"
+          loading="eager"
+          style="width:100%;height:auto;border-radius:12px;margin:24px 0 32px;border:1px solid var(--line);display:block"
+        />
+      )}
+
+      <h1 style="font-family:var(--display);font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:0 0 32px">{title}</h1>
+
+      {isEn
+        ? <div class="prose" set:html={enHtml} />
+        : <div class="prose"><Content /></div>}
+
+      {post.data.visuals && post.data.visuals.length > 0 && (
+        <div style="margin:40px 0 8px">
+          {post.data.visuals.map((src) => (
+            <img src={src} alt="Key Takeaways" width="700" height="200" loading="lazy" style="width:100%;max-width:700px;height:auto;display:block;margin:0 0 16px" />
+          ))}
+        </div>
+      )}
+
+      {post.data.sourceUrl && (
+        <p style="margin-top:36px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--mono);font-size:.78rem;color:var(--muted)">
+          {t.source}:&nbsp;
+          <a
+            href={post.data.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style="color:var(--amber);text-decoration:underline;text-underline-offset:3px"
+          >{post.data.sourceTitle || post.data.sourceUrl}</a>
+        </p>
+      )}
+
+      <p style="margin-top:44px"><a href={localizedPath("/blog/", locale)} class="btn btn-ghost">{t.blog.back}</a></p>
+
+      <div style="margin-top:56px;padding-top:32px;border-top:1px solid var(--line)">
+        <p class="eyebrow">{t.blog.relatedEyebrow}</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:20px">
+          {services.map((s) => (
+            <a class="case" href={localizedPath(`/leistungen/${s.slug}/`, locale)} style="text-decoration:none;display:block;padding:20px 22px">
+              <span class="ctag">{s.card.tag}</span>
+              <h3 style="font-size:1rem;margin:10px 0 8px">{s.card.h3}</h3>
+              <p style="font-size:.88rem">{s.card.p}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </article>
+</Base>

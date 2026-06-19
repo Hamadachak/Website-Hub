@@ -7,33 +7,40 @@ interface Props {
   title: string;
   description: string;
   locale?: Locale;          // current page locale (default: de)
-  logicalPath?: string;     // set on fully-localized pages (home + services) → enables hreflang
-  titleEn?: string;         // blog only: client-side DE/EN title swap
-  descriptionEn?: string;   // blog only
+  logicalPath?: string;     // fully-localized pages (home + services) → auto hreflang + switcher
+  alternates?: Array<{ hreflang: string; path: string }> | null; // explicit hreflang override (blog)
+  switchTargets?: Partial<Record<Locale, string>>;               // explicit switcher targets (blog)
+  titleEn?: string;         // legacy inline DE/EN title swap (barrierefreiheit)
+  descriptionEn?: string;
   image?: string;
   type?: string;
 }
 
 const {
   title, description, locale = "de", logicalPath,
+  alternates: alternatesProp, switchTargets,
   titleEn, descriptionEn, image, type,
 } = Astro.props;
 
 const t = getDict(locale);
 const d = dirOf(locale);
 const path = Astro.url.pathname;
-const alternates = logicalPath != null ? getAlternates(logicalPath) : null;
+const alternates = alternatesProp ?? (logicalPath != null ? getAlternates(logicalPath) : null);
 const homeBase = localizedPath("/", locale);
+// "Blog" nav link is language-aware. Arabic has no blog yet → English blog.
+const blogHref = locale === "de" ? "/blog/" : "/en/blog/";
 
 // Switcher target for a given locale:
+//  - explicit switchTargets win (blog: jump to the same post in the other language)
 //  - localized pages → the same page in that locale
-//  - other pages (blog/legal) → that locale's home (current page for its own locale)
+//  - other pages (legal) → that locale's home (current page for its own locale)
 const switchTarget = (loc: Locale): string =>
-  logicalPath != null
+  switchTargets?.[loc] ??
+  (logicalPath != null
     ? localizedPath(logicalPath, loc)
     : loc === locale
       ? path
-      : localizedPath("/", loc);
+      : localizedPath("/", loc));
 
 const skip =
   locale === "ar" ? "تخطَّ إلى المحتوى"
@@ -58,7 +65,7 @@ const bookUrl = "https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach";
       <a href={`${homeBase}#approach`}>{t.nav.approach}</a>
       <a href={`${homeBase}#build`}>{t.nav.build}</a>
       <a href={`${homeBase}#about`}>{t.nav.about}</a>
-      <a href="/blog/" aria-current={path.startsWith("/blog") ? "page" : undefined}>{t.nav.blog}</a>
+      <a href={blogHref} aria-current={path.startsWith("/blog") || path.startsWith("/en/blog") ? "page" : undefined}>{t.nav.blog}</a>
     </div>
     <div class="nav-right">
       <div class="langtoggle" role="group" aria-label={t.switcher.label}>

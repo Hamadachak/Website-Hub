@@ -1,0 +1,13 @@
+---
+import { getCollection } from "astro:content";
+import BlogPost from "../../../components/pages/BlogPost.astro";
+
+// Only posts that have an English translation get an English page.
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft && !!data.bodyEn);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+---
+<BlogPost locale="en" post={post} />
