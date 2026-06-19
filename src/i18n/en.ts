@@ -144,6 +144,15 @@ const en: Dict = {
       status: "Available for projects · 3 days / week",
     },
   },
+  blog: {
+    metaTitle: "Blog — Mohammad Chakrouf",
+    metaDescription: "Insights on HubSpot, CRM, RevOps and AI for B2B companies.",
+    eyebrow: "Blog",
+    h1: "Insights on HubSpot, CRM & RevOps",
+    empty: "Coming soon.",
+    back: "← All posts",
+    relatedEyebrow: "Related services",
+  },
   common: {
     serviceEyebrow: "Service",
     relatedEyebrow: "More services",

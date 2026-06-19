@@ -10,6 +10,11 @@
  *   5. Write src/content/blog/<slug>.md + public/blog/{images,visuals}/
  *   6. Output slug + titel to $GITHUB_OUTPUT for the PR step
  *
+ * One .md is the source of truth (German body + bodyEn frontmatter). The Astro
+ * routes split it into two real pages: German at /blog/<slug>/ and English at
+ * /en/blog/<slug>/ — no client-side toggle. A post only gets an English page
+ * when bodyEn is present.
+ *
  * Required env:  TOGETHER_API_KEY
  */
 

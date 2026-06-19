@@ -144,6 +144,15 @@ const ar: Dict = {
       status: "متاح للمشاريع · 3 أيام / الأسبوع",
     },
   },
+  blog: {
+    metaTitle: "المدوّنة — محمد شقروف",
+    metaDescription: "رؤى حول HubSpot وCRM وRevOps والذكاء الاصطناعي لشركات B2B وB2C.",
+    eyebrow: "المدوّنة",
+    h1: "رؤى حول HubSpot وCRM وRevOps",
+    empty: "قريبًا.",
+    back: "→ كل المقالات",
+    relatedEyebrow: "خدمات ذات صلة",
+  },
   common: {
     serviceEyebrow: "خدمة",
     relatedEyebrow: "خدمات أخرى",

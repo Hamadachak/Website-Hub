@@ -51,9 +51,11 @@ jobs:
           body: |
             Automatisch generierter Blog-Entwurf (Together AI: Llama-3.3-70B-Instruct-Turbo + FLUX.1-schnell).
 
+            Ergibt zwei Seiten: Deutsch unter `/blog/<slug>/` und Englisch unter `/en/blog/<slug>/` (nur wenn `bodyEn` vorhanden).
+
             **Checkliste vor dem Merge:**
-            - [ ] Deutschen Text gelesen und ggf. korrigiert
-            - [ ] Englischen Text geprüft
+            - [ ] Deutschen Text (`/blog/<slug>/`) gelesen und ggf. korrigiert
+            - [ ] Englischen Text (`/en/blog/<slug>/`) geprüft
             - [ ] Hero-Bild passt zum Thema (liegt in `public/blog/images/`)
             - [ ] Key-Takeaways-Karte stimmt (`public/blog/visuals/`)
             - [ ] `draft: true` → `draft: false` in der `.md`-Datei setzen
