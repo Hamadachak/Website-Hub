@@ -4,7 +4,7 @@ titleEn: "HubSpot AEO: AI visibility as a RevOps metric"
 description: "Mit HubSpot AEO wird Sichtbarkeit in KI-Antworten (ChatGPT, Perplexity) messbar. Warum das eine Demand-Gen-Kennzahl ist — und wie ihr sie ins Reporting holt."
 descriptionEn: "HubSpot AEO makes visibility in AI answers (ChatGPT, Perplexity) measurable. Why it's a demand-gen metric — and how to bring it into your reporting."
 pubDate: 2026-06-19
-draft: true
+draft: false
 sourceTitle: "HubSpot Spring 2026 Spotlight"
 sourceUrl: "https://www.hubspot.com/company-news/spring-2026-spotlight"
 bodyEn: |
