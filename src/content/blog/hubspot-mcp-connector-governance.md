@@ -4,7 +4,7 @@ titleEn: "Who gets to tap your CRM data? MCP and AI-connector governance in HubS
 description: "Der HubSpot MCP Server ist GA, dazu Governance-Tools in Public Beta. Warum KI-Connectoren eine Daten-Governance-Frage für RevOps sind — und worauf ihr achten solltet."
 descriptionEn: "The HubSpot MCP Server is GA, with governance tools in public beta. Why AI connectors are a data-governance question for RevOps — and what to watch."
 pubDate: 2026-06-19
-draft: true
+draft: false
 sourceTitle: "HubSpot Spring 2026 Spotlight — Developer Changelog"
 sourceUrl: "https://developers.hubspot.com/changelog/spring-2026-spotlight"
 bodyEn: |
