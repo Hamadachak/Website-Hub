@@ -201,6 +201,16 @@ const de = {
       ],
       contactH2: "Migrationsvorhaben besprechen?",
       contactSub: "Schildern Sie kurz, was migriert werden soll und woher die Daten kommen — dann schaue ich, wie viel Aufwand realistisch ist.",
+      faq: {
+        eyebrow: "Häufige Fragen",
+        h2: "HubSpot-Migration — kurz beantwortet.",
+        items: [
+          { q: "Wie lange dauert eine HubSpot-Migration?", a: "Je nach Datenmenge und Anzahl der Quellsysteme typischerweise zwei bis sechs Wochen — inklusive Audit, Mapping, Staging-Import, Validierung und Go-live. Einen realistischen Zeitplan bekommen Sie nach dem Daten-Audit, nicht vorher geschätzt." },
+          { q: "Gehen bei der Migration Daten verloren?", a: "Nein. Vor dem Import steht ein vollständiges Audit mit Feld-Mapping, danach folgen Staging-Import, Stichproben- und Vollständigkeitsprüfung. Für den Produktionsimport gibt es einen Rollback-Plan — ein Fehler bedeutet keinen Datenverlust." },
+          { q: "Kann das Team während der Migration weiterarbeiten?", a: "Ja. Die Migration läuft schrittweise neben dem laufenden Betrieb: erst Staging, dann Validierung, dann ein geplanter Cutover. Es gibt keinen wochenlangen Systemstillstand." },
+          { q: "Aus welchen Systemen migrieren Sie?", a: "Am häufigsten Salesforce, Pipedrive und Excel/Google Sheets. Andere CRMs und Eigenentwicklungen gehen über Export oder API — entscheidend ist das Datenmodell, nicht das Logo des Altsystems." },
+        ],
+      },
     },
     revops: {
       metaTitle: "RevOps für Startups — Mohammad Chakrouf, HubSpot Berater Berlin",
@@ -232,6 +242,16 @@ const de = {
       ],
       contactH2: "RevOps-Thema im Startup?",
       contactSub: "Schildern Sie, wo es bei Ihnen hakt — Reporting, Handoffs, Pipeline-Qualität — und ich sage Ihnen, wie wir das strukturieren können.",
+      faq: {
+        eyebrow: "Häufige Fragen",
+        h2: "RevOps für Startups — kurz beantwortet.",
+        items: [
+          { q: "Ab wann lohnt sich RevOps für ein Startup?", a: "Spätestens, wenn Marketing, Sales und Service unterschiedliche Zahlen berichten oder das Reporting aus mehreren Sheets zusammengebaut wird. Je früher das Datenmodell steht, desto billiger ist es — nachträglich aufzuräumen kostet ein Vielfaches." },
+          { q: "Brauchen wir dafür ein eigenes RevOps-Team?", a: "Nein. Ich baue die Grundlage — Objektmodell, Lifecycle, Routing, Dashboards — und übergebe sie mit Dokumentation und klaren Ownern an Ihr bestehendes Team. Das Ziel ist Unabhängigkeit, kein dauerhafter Berater-Lock-in." },
+          { q: "Wie schnell sehen wir erste Ergebnisse?", a: "Das GTM-Audit liefert nach ein bis zwei Wochen ein klares Bild, wo Daten und Prozesse brechen. Erste verlässliche Dashboards stehen je nach Setup meist nach vier bis acht Wochen." },
+          { q: "Arbeiten Sie remote oder vor Ort?", a: "Remote im gesamten DACH-Raum; in Berlin auch vor Ort. Die Zusammenarbeit läuft in kurzen, regelmäßigen Terminen mit Ihrem Team — nicht als Blackbox-Projekt." },
+        ],
+      },
     },
     b2bsaas: {
       metaTitle: "HubSpot für B2B-SaaS — Mohammad Chakrouf, HubSpot Berater Berlin",
@@ -263,6 +283,16 @@ const de = {
       ],
       contactH2: "SaaS-Wachstum mit HubSpot strukturieren?",
       contactSub: "Schildern Sie, wo Ihr aktuelles Setup an Grenzen stößt — Trial-Conversion, Churn, Reporting — und ich schaue, wie wir das lösen.",
+      faq: {
+        eyebrow: "Häufige Fragen",
+        h2: "HubSpot für B2B-SaaS — kurz beantwortet.",
+        items: [
+          { q: "Was unterscheidet ein SaaS-Setup von Standard-HubSpot?", a: "Der Lifecycle: Trial, Product-Qualified Lead, Expansion und Churn-Risk sind eigene Stationen, die Standard-HubSpot nicht kennt. Dazu kommen Nutzungsdaten aus dem Produkt, die ins CRM fließen müssen, damit Sales und CS nicht im Blindflug arbeiten." },
+          { q: "Wie kommen unsere Produktdaten in HubSpot?", a: "Je nach Stack über Segment, Stripe, eigene APIs oder Webhooks. Wichtig ist weniger der Weg als das Modell: welche Events als Properties landen, wie sie Scores und Workflows treiben — das entwerfe ich zuerst, dann kommt die Integration." },
+          { q: "Funktioniert das auch mit Product-Led Growth?", a: "Gerade dann. PQL-Scoring auf Basis echter Nutzung ist der Kern eines PLG-Setups: Sales sieht, wer aktiv ist — nicht nur, wer ein Formular ausgefüllt hat. Trial-Flows und Aktivierungs-Trigger gehören dazu." },
+          { q: "Welche HubSpot-Lizenz brauchen wir dafür?", a: "Das hängt vom Setup ab — vieles geht mit Pro, manches braucht Enterprise. Im kostenlosen Erstgespräch bekommen Sie eine ehrliche Einschätzung, bevor Sie eine Lizenz kaufen, die Sie nicht brauchen." },
+        ],
+      },
     },
   },
 };

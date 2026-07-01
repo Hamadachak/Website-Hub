@@ -339,6 +339,17 @@
     .reveal{opacity:1;transform:none;transition:none}
   }
 
+/* ---------- FAQ ---------- */
+.faq-list{max-width:760px;margin-top:8px}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{font-family:var(--display);font-weight:700;font-size:1.05rem;margin:0}
+.faq-marker{font-family:var(--mono);font-size:1.2rem;color:var(--amber);flex-shrink:0;transition:transform .2s}
+.faq-item[open] .faq-marker{transform:rotate(45deg)}
+.faq-item>p{margin:0 0 20px;color:#cfd3da;line-height:1.7;max-width:64ch}
+[dir="rtl"] .faq-item>p{max-width:none}
+
 /* ---------- ARTICLE PROSE ---------- */
 .prose{font-size:1.08rem;line-height:1.75;color:var(--text)}
 .prose p{margin-bottom:1.2em;color:#cfd3da}
