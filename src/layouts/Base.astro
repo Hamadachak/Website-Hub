@@ -48,6 +48,11 @@ const skip =
   : "Zum Inhalt springen / Skip to content";
 
 const bookUrl = "https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach";
+
+const menuLabel =
+  locale === "ar" ? "القائمة"
+  : locale === "en" ? "Menu"
+  : "Menü";
 ---
 <!DOCTYPE html>
 <html lang={locale} dir={d}>
@@ -60,7 +65,7 @@ const bookUrl = "https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach";
 <nav aria-label="Navigation">
   <div class="nav-in">
     <a class="brand" href={homeBase} aria-label="Mohammad Chakrouf – Home"><span class="mark" aria-hidden="true">MC</span><span>chakrouf</span></a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-menu">
       <a href={`${homeBase}#work`}>{t.nav.work}</a>
       <a href={`${homeBase}#approach`}>{t.nav.approach}</a>
       <a href={`${homeBase}#build`}>{t.nav.build}</a>
@@ -85,9 +90,30 @@ const bookUrl = "https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach";
         target="_blank"
         rel="noopener"
         aria-label={t.nav.bookCtaAria}>{t.nav.bookCta}</a>
+      <button class="nav-burger" id="nav-burger" aria-expanded="false" aria-controls="nav-menu" aria-label={menuLabel}>
+        <span class="burger-bar" aria-hidden="true"></span>
+        <span class="burger-bar" aria-hidden="true"></span>
+        <span class="burger-bar" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
 </nav>
+<script is:inline>(function () {
+  var burger = document.getElementById('nav-burger');
+  var nav = burger && burger.closest('nav');
+  if (!burger || !nav) return;
+  burger.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  // Close the panel when a menu link is tapped (same-page anchors don't reload).
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('.nav-links a')) {
+      nav.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();</script>
 <main id="main-content" tabindex="-1">
   {/* Hidden nodes carry the alternate-language title/desc for the blog's client-side swap */}
   {titleEn && <span id="page-title-de" style="display:none">{title}</span>}

@@ -14,7 +14,7 @@ bodyEn: |
   As a Freelance Senior HubSpot Consultant in Berlin, I regularly support B2B companies in optimizing their digital presence. One of the current challenges is getting indexed by ChatGPT to increase visibility and reach. In this article, I will provide you with a practical guide on how to optimize your website and content for indexing by ChatGPT.
   
   ## What is ChatGPT and Why is Indexing Important?
-  ChatGPT is a KI-based chatbot system developed by OpenAI. It allows users to ask questions and receive answers in natural language. Indexing by ChatGPT is important because it enables your company to appear in ChatGPT's search results, thereby reaching a broader target audience.
+  ChatGPT is an AI-based chatbot system developed by OpenAI. It allows users to ask questions and receive answers in natural language. Indexing by ChatGPT is important because it enables your company to appear in ChatGPT's search results, thereby reaching a broader target audience.
   
   ## Step 1: Optimize Content
   To get indexed by ChatGPT, your content needs to be optimized. Here are some tips:

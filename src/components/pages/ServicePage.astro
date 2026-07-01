@@ -40,6 +40,16 @@ const serviceTypeMap: Record<ServiceKey, string> = {
   revops: "Revenue Operations Consulting",
   b2bsaas: "HubSpot Consulting",
 };
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": sp.faq.items.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+};
+
 const serviceLd = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -62,6 +72,7 @@ const serviceLd = {
   logicalPath={`/leistungen/${slug}/`}
 >
 <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
+<script slot="head" type="application/ld+json" set:html={JSON.stringify(faqLd)} />
 
 <header class="hero" id="top">
   <div class="wrap">
@@ -141,6 +152,23 @@ const serviceLd = {
           <h3>{r.card.h3}</h3>
           <p>{r.card.p}</p>
         </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="block" id="faq" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">{sp.faq.eyebrow}</p>
+      <h2>{sp.faq.h2}</h2>
+    </div>
+    <div class="faq-list reveal">
+      {sp.faq.items.map((f) => (
+        <details class="faq-item">
+          <summary><h3>{f.q}</h3><span class="faq-marker" aria-hidden="true">+</span></summary>
+          <p>{f.a}</p>
+        </details>
       ))}
     </div>
   </div>
