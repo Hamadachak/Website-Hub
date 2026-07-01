@@ -132,6 +132,15 @@ const en: Dict = {
         { tag: "B2B SaaS", h3: "HubSpot for B2B SaaS", p: "PQL scoring, trial flows, churn signals — HubSpot as a growth engine for software companies." },
       ],
     },
+    offer: {
+      eyebrow: "Free offer",
+      badge: "30 min · free",
+      q1: "You've got HubSpot, but your reporting doesn't give you numbers you can rely on?",
+      q2: "Your pipeline looks full, but you don't know what's actually going to close?",
+      body: "In 30 minutes we'll look at your setup together. You'll get an honest assessment of where you stand, what's working and where the biggest potential lies.",
+      cta: "Book a free intro call",
+      ctaAria: "Book a free intro call (opens in new tab)",
+    },
     contact: {
       eyebrow: "Contact",
       h2: "Want a HubSpot that behaves?",

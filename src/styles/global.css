@@ -267,6 +267,30 @@
   .contact-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
   .contact .status{justify-content:center;width:100%}
 
+  /* ---------- OFFER ---------- */
+  .offer{padding:64px 0}
+  .offer-card{
+    background:linear-gradient(180deg,var(--panel-2),var(--panel));
+    border:1px solid var(--line);border-radius:18px;
+    padding:44px 48px;position:relative;overflow:hidden;
+    box-shadow:0 30px 80px -50px rgba(0,0,0,.9);
+  }
+  .offer-card::before{
+    content:"";position:absolute;top:-120px;right:-80px;width:360px;height:360px;
+    background:radial-gradient(circle,rgba(255,154,60,.14),transparent 62%);pointer-events:none;
+  }
+  .offer-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--amber);border:1px solid rgba(255,154,60,.3);background:var(--amber-soft);
+    border-radius:999px;padding:6px 14px;margin-bottom:18px;position:relative;
+  }
+  .offer-card .eyebrow{margin-bottom:16px}
+  .offer-q{font-family:var(--display);font-weight:800;font-size:clamp(1.4rem,3vw,2rem);line-height:1.15;letter-spacing:-.02em;max-width:26ch;position:relative}
+  .offer-q + .offer-q{margin-top:10px;color:var(--muted)}
+  .offer-body{color:var(--muted);max-width:60ch;margin:22px 0 30px;font-size:1.05rem;position:relative}
+  .offer-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;position:relative}
+
   /* ---------- FOOTER ---------- */
   footer{border-top:1px solid var(--line);padding:30px 0}
   .foot-in{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-family:var(--mono);font-size:.76rem;color:var(--muted)}
@@ -308,6 +332,7 @@
     .stage .num{margin-bottom:10px}
     .stage{padding-bottom:26px}
     section.block{padding:64px 0}
+    .offer-card{padding:32px 24px}
   }
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;scroll-behavior:auto!important}
@@ -356,6 +381,7 @@
 [dir="rtl"] .stage:not(:last-child)::before{right:auto;left:0}
 [dir="rtl"] .skip-link{left:auto;right:0;border-radius:0 0 0 8px}
 [dir="rtl"] .hero::before{right:auto;left:-120px}
+[dir="rtl"] .offer-card::before{right:auto;left:-80px}
 [dir="rtl"] .prose blockquote{border-left:0;border-right:3px solid var(--amber);padding:.2em 1.1em .2em 0}
 @media(max-width:860px){
   [dir="rtl"] .stage:not(:last-child)::before{left:auto;right:16px}

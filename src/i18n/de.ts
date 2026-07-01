@@ -130,6 +130,15 @@ const de = {
         { tag: "B2B SaaS", h3: "HubSpot für B2B-SaaS", p: "PQL-Scoring, Trial-Flows, Churn-Signale — HubSpot als Wachstumsmotor für Software-Unternehmen." },
       ],
     },
+    offer: {
+      eyebrow: "Kostenloses Angebot",
+      badge: "30 Min · kostenlos",
+      q1: "Sie haben HubSpot, aber Ihr Reporting liefert keine belastbaren Zahlen?",
+      q2: "Ihre Pipeline sieht voll aus, aber Sie wissen nicht, was davon wirklich kommt?",
+      body: "In 30 Minuten schauen wir gemeinsam auf Ihr Setup. Sie bekommen eine ehrliche Einschätzung, wo Sie stehen, was funktioniert und wo das größte Potenzial liegt.",
+      cta: "Kostenloses Erstgespräch buchen",
+      ctaAria: "Kostenloses Erstgespräch buchen (öffnet in neuem Tab)",
+    },
     contact: {
       eyebrow: "Kontakt",
       h2: "Lust auf ein HubSpot, das sich benimmt?",
