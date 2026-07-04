@@ -25,86 +25,142 @@ const professionalServiceLd = {
 };
 
 const extTitles = ["Company Health Score Card", "Property Address Card", "Voice Notes", "GIF Generator"];
-const extGlyphs = ["★", "⌖", "●", "▦"];
 const extStacks = ["React · HubSpot CLI · Node.js", "React · Google Maps API · Node.js", "React · HubSpot CLI · Node.js", "React · HubSpot CLI"];
 const stageNums = ["01", "02", "03", "04", "05"];
 const serviceSlugs = ["hubspot-migration", "revops-fuer-startups", "hubspot-fuer-b2b-saas"];
+
+// Hero "chaos" layer: CRM object names scattering, then resolving into the record.
+// Object names are deliberately technical/English — consistent with the site's mono metadata voice.
+const chaosChips = ["contact", "company", "deal", "ticket", "property", "workflow", "pipeline", "lifecycle_stage"];
+
+// Waveform bar heights for the Voice Notes illustration (deterministic, no runtime randomness).
+const wave = [8, 14, 22, 30, 18, 26, 38, 24, 12, 20, 34, 42, 28, 16, 24, 36, 22, 10, 18, 30, 40, 26, 14, 8];
+// Amber cells in the 10×6 pixel grid of the GIF illustration.
+const gifOn = new Set([12, 13, 16, 17, 31, 38, 42, 43, 44, 45, 46, 47]);
 ---
 <Base title={h.metaTitle} description={h.metaDescription} locale={locale} logicalPath="/" type="website">
 <script slot="head" type="application/ld+json" set:html={JSON.stringify(professionalServiceLd)} />
 
-<header class="hero" id="top">
+<header class="hero hero-cine" id="top">
   <div class="wrap">
     <div class="hero-grid">
-      <div>
-        <p class="eyebrow"><span class="b">{h.hero.eyebrowLead}</span>{h.hero.eyebrowRest}</p>
-        <h1>{h.hero.h1}</h1>
-        <p class="sub">{h.hero.sub}</p>
+      <div class="hero-copy">
+        <p class="eyebrow hero-eyebrow"><span class="b">{h.hero.eyebrowLead}</span>{h.hero.eyebrowRest}</p>
+        <h1><span class="h1-mask"><span class="h1-line">{h.hero.h1}</span></span></h1>
+        <p class="sub hero-sub">{h.hero.sub}</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary">{h.hero.ctaContact}</a>
           <a href="#work" class="btn btn-ghost">{h.hero.ctaWork}</a>
         </div>
-        <p class="status"><span class="dot" aria-hidden="true"></span><span>{h.hero.status}</span></p>
+        <p class="status hero-status"><span class="dot" aria-hidden="true"></span><span>{h.hero.status}</span></p>
       </div>
 
-      <div class="record reveal">
-        <div class="record-tab">// <span>{h.record.tab}</span></div>
-        <div class="record-head">
-          <div class="avatar">MC</div>
-          <div>
-            <div class="name">Mohammad Chakrouf</div>
-            <div class="role">Senior HubSpot Consultant</div>
-          </div>
+      <div class="system">
+        <div class="chaos" aria-hidden="true">
+          {chaosChips.map((c, i) => <span class="chip" style={`--i:${i}`}>{c}</span>)}
         </div>
-        <div class="record-rows">
-          <div class="row"><span class="k">{h.record.roleK}</span><span class="v">CRM Architect · RevOps</span></div>
-          <div class="row"><span class="k">{h.record.locationK}</span><span class="v">{h.record.locationV}</span></div>
-          <div class="row"><span class="k">{h.record.experienceK}</span><span class="v">{h.record.experienceV}</span></div>
-          <div class="row"><span class="k">{h.record.focusK}</span><span class="v">{h.record.focusV}</span></div>
-          <div class="row"><span class="k">Stack</span><span class="v">HubSpot CLI · React · Node.js</span></div>
-          <div class="row"><span class="k">{h.record.languagesK}</span><span class="v">{h.record.languagesV}</span></div>
-          <div class="row"><span class="k">Status</span><span class="v"><span class="mini-dot" aria-hidden="true"></span><span>{h.record.statusV}</span></span></div>
+        <div class="record">
+          <div class="record-tab">// <span>{h.record.tab}</span></div>
+          <div class="record-head">
+            <div class="avatar">MC</div>
+            <div>
+              <div class="name">Mohammad Chakrouf</div>
+              <div class="role">Senior HubSpot Consultant</div>
+            </div>
+          </div>
+          <div class="record-rows">
+            <div class="row"><span class="k">{h.record.roleK}</span><span class="v">CRM Architect · RevOps</span></div>
+            <div class="row"><span class="k">{h.record.locationK}</span><span class="v">{h.record.locationV}</span></div>
+            <div class="row"><span class="k">{h.record.experienceK}</span><span class="v">{h.record.experienceV}</span></div>
+            <div class="row"><span class="k">{h.record.focusK}</span><span class="v">{h.record.focusV}</span></div>
+            <div class="row"><span class="k">Stack</span><span class="v">HubSpot CLI · React · Node.js</span></div>
+            <div class="row"><span class="k">{h.record.languagesK}</span><span class="v">{h.record.languagesV}</span></div>
+            <div class="row"><span class="k">Status</span><span class="v"><span class="mini-dot" aria-hidden="true"></span><span>{h.record.statusV}</span></span></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </header>
 
-<div class="caps">
-  <div class="wrap caps-in">
-    {h.caps.map((cap) => <span class="tag">{cap}</span>)}
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-set">
+      {h.caps.map((cap) => <span class="tk">{cap}<span class="tk-sep" aria-hidden="true">/</span></span>)}
+    </div>
+    <div class="ticker-set" aria-hidden="true">
+      {h.caps.map((cap) => <span class="tk">{cap}<span class="tk-sep" aria-hidden="true">/</span></span>)}
+    </div>
   </div>
 </div>
 
-<section class="block" id="work">
+<section class="block chapters" id="work">
   <div class="wrap">
-    <div class="head reveal">
+    <div class="head head-xl reveal">
       <p class="eyebrow">{h.work.eyebrow}</p>
       <h2>{h.work.h2}</h2>
     </div>
-    <div class="work-grid">
-      {h.work.cases.map((c) => (
-        <article class="case reveal">
-          <span class="ctag">{c.tag}</span>
+    {h.work.cases.map((c, i) => (
+      <article class="chapter reveal">
+        <div class="ch-meta">
+          <span class="ch-num" aria-hidden="true">{stageNums[i]}</span>
+          <span class="ch-tag">{c.tag}</span>
+          {i === 0 && (
+            <svg class="motif" viewBox="0 0 220 120" fill="none" aria-hidden="true">
+              <rect class="m-node" x="6" y="8" width="18" height="14" rx="3"/>
+              <rect class="m-node" x="6" y="34" width="18" height="14" rx="3"/>
+              <rect class="m-node" x="6" y="60" width="18" height="14" rx="3"/>
+              <rect class="m-node" x="6" y="86" width="18" height="14" rx="3"/>
+              <path class="m-line" d="M24 15 C 90 15, 120 56, 168 56"/>
+              <path class="m-line" d="M24 41 C 90 41, 120 58, 168 58"/>
+              <path class="m-line" d="M24 67 C 90 67, 120 62, 168 60"/>
+              <path class="m-line" d="M24 93 C 90 93, 120 64, 168 62"/>
+              <rect class="m-node m-node-hot" x="168" y="44" width="46" height="30" rx="5"/>
+            </svg>
+          )}
+          {i === 1 && (
+            <svg class="motif" viewBox="0 0 220 120" fill="none" aria-hidden="true">
+              <path class="m-line" d="M8 104 L 60 104 L 60 76 L 112 76 L 112 48 L 164 48 L 164 20 L 212 20"/>
+              <rect class="m-node" x="30" y="90" width="26" height="8" rx="2"/>
+              <rect class="m-node" x="82" y="62" width="26" height="8" rx="2"/>
+              <rect class="m-node" x="134" y="34" width="26" height="8" rx="2"/>
+              <rect class="m-node m-node-hot" x="184" y="6" width="26" height="8" rx="2"/>
+            </svg>
+          )}
+          {i === 2 && (
+            <svg class="motif" viewBox="0 0 220 120" fill="none" aria-hidden="true">
+              <circle class="m-line" cx="110" cy="60" r="42"/>
+              <rect class="m-node m-node-hot" x="96" y="46" width="28" height="28" rx="5"/>
+              <rect class="m-node" x="18" y="18" width="20" height="14" rx="3"/>
+              <rect class="m-node" x="18" y="88" width="20" height="14" rx="3"/>
+              <rect class="m-node" x="182" y="53" width="20" height="14" rx="3"/>
+              <path class="m-line" d="M38 25 C 66 25, 76 40, 84 48"/>
+              <path class="m-line" d="M38 95 C 66 95, 76 80, 84 72"/>
+              <path class="m-line" d="M182 60 L 152 60"/>
+            </svg>
+          )}
+        </div>
+        <div class="ch-body">
           <h3>{c.h3}</h3>
           <p>{c.body}</p>
-          <p class="outcome"><b>{c.outcomeLabel}</b> · <span>{c.outcomeText}</span></p>
-        </article>
-      ))}
-    </div>
+          <p class="ch-outcome"><b>{c.outcomeLabel}</b><span>{c.outcomeText}</span></p>
+        </div>
+      </article>
+    ))}
   </div>
 </section>
 
 <section class="block" id="approach" style="border-top:1px solid var(--line)">
   <div class="wrap">
-    <div class="head reveal">
+    <div class="head head-xl reveal">
       <p class="eyebrow">{h.approach.eyebrow}</p>
       <h2>{h.approach.h2}</h2>
     </div>
-    <div class="pipe reveal">
+    <div class="flow reveal">
+      <div class="flow-line" aria-hidden="true"></div>
       {h.approach.stages.map((s, i) => (
-        <div class="stage">
-          <div class="num">{stageNums[i]}</div>
+        <div class="fstage" style={`--d:${0.25 + i * 0.18}s`}>
+          <div class="fnum" aria-hidden="true">{stageNums[i]}</div>
           <h3>{s.h3}</h3>
           <p>{s.p}</p>
         </div>
@@ -115,19 +171,68 @@ const serviceSlugs = ["hubspot-migration", "revops-fuer-startups", "hubspot-fuer
 
 <section class="block" id="build" style="border-top:1px solid var(--line)">
   <div class="wrap">
-    <div class="head reveal">
+    <div class="head head-xl reveal">
       <p class="eyebrow">{h.build.eyebrow}</p>
       <h2>{h.build.h2}</h2>
     </div>
     <p class="build-intro reveal">{h.build.intro}</p>
-    <div class="ext-grid">
-      {h.build.ext.map((p, i) => (
-        <div class="ext reveal">
-          <div class="ehead"><div class="glyph" aria-hidden="true">{extGlyphs[i]}</div><h3>{extTitles[i]}</h3></div>
-          <p>{p}</p>
-          <p class="stack">{extStacks[i]}</p>
+    <div class="studio">
+      <div class="panel reveal">
+        <div class="viz viz-health" aria-hidden="true">
+          <span class="viz-tab">crm_record · company</span><span class="viz-tab viz-tab-r">ui_extension</span>
+          <div class="vh-score"><span class="vh-num">84</span><span class="vh-label">health_score</span></div>
+          <div class="vh-rows">
+            <span class="vh-bar" style="--w:86%"></span>
+            <span class="vh-bar" style="--w:64%"></span>
+            <span class="vh-bar" style="--w:92%"></span>
+            <span class="vh-bar" style="--w:48%"></span>
+            <span class="vh-bar vh-bar-hot" style="--w:84%"></span>
+          </div>
         </div>
-      ))}
+        <div class="panel-body">
+          <h3>{extTitles[0]}</h3>
+          <p>{h.build.ext[0]}</p>
+          <p class="stack">{extStacks[0]}</p>
+        </div>
+      </div>
+
+      <div class="panel reveal">
+        <div class="viz viz-map" aria-hidden="true">
+          <span class="viz-tab">crm_record · property</span><span class="viz-tab viz-tab-r">maps_api</span>
+          <span class="vm-pin"></span>
+          <span class="vm-field">address · verified</span>
+        </div>
+        <div class="panel-body">
+          <h3>{extTitles[1]}</h3>
+          <p>{h.build.ext[1]}</p>
+          <p class="stack">{extStacks[1]}</p>
+        </div>
+      </div>
+
+      <div class="panel reveal">
+        <div class="viz viz-voice" aria-hidden="true">
+          <span class="viz-tab">activity · voice_note</span><span class="viz-tab viz-tab-r">recorder</span>
+          {wave.map((v) => <span class="vv-bar" style={`--h:${v}px`}></span>)}
+          <span class="vv-field">voice_note → logged</span>
+        </div>
+        <div class="panel-body">
+          <h3>{extTitles[2]}</h3>
+          <p>{h.build.ext[2]}</p>
+          <p class="stack">{extStacks[2]}</p>
+        </div>
+      </div>
+
+      <div class="panel reveal">
+        <div class="viz viz-gif" aria-hidden="true">
+          <span class="viz-tab">attachment · .gif</span><span class="viz-tab viz-tab-r">generator</span>
+          {Array.from({ length: 60 }, (_, i) => <span class:list={["vg-px", { on: gifOn.has(i) }]}></span>)}
+        </div>
+        <div class="panel-body">
+          <h3>{extTitles[3]}</h3>
+          <p>{h.build.ext[3]}</p>
+          <p class="stack">{extStacks[3]}</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -137,7 +242,7 @@ const serviceSlugs = ["hubspot-migration", "revops-fuer-startups", "hubspot-fuer
     <div class="about-grid">
       <div class="about reveal">
         <p class="eyebrow">{h.about.eyebrow}</p>
-        <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,3.2vw,2.4rem);line-height:1.1;letter-spacing:-.02em;margin:14px 0 24px">{h.about.h2}</h2>
+        <h2 class="about-h2">{h.about.h2}</h2>
         <p>{h.about.p1}</p>
         <p>{h.about.p2}</p>
         <p><strong>{h.about.p3Label}</strong> <span>{h.about.p3Rest}</span></p>
@@ -156,15 +261,19 @@ const serviceSlugs = ["hubspot-migration", "revops-fuer-startups", "hubspot-fuer
   </div>
 </section>
 
-<section class="block" style="border-top:1px solid var(--line);padding:56px 0">
+<section class="block svc" style="border-top:1px solid var(--line)">
   <div class="wrap">
-    <p class="eyebrow">{h.services.eyebrow}</p>
-    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:28px">
+    <p class="eyebrow reveal">{h.services.eyebrow}</p>
+    <div class="svc-index">
       {h.services.cards.map((card, i) => (
-        <a class="case" href={svc(serviceSlugs[i])} style="text-decoration:none;display:block">
-          <span class="ctag">{card.tag}</span>
-          <h3>{card.h3}</h3>
-          <p>{card.p}</p>
+        <a class="svc-row reveal" href={svc(serviceSlugs[i])}>
+          <span class="svc-num" aria-hidden="true">{stageNums[i]}</span>
+          <span class="svc-main">
+            <span class="svc-tag">{card.tag}</span>
+            <h3>{card.h3}</h3>
+            <p>{card.p}</p>
+          </span>
+          <span class="svc-arrow" aria-hidden="true">→</span>
         </a>
       ))}
     </div>
@@ -173,11 +282,10 @@ const serviceSlugs = ["hubspot-migration", "revops-fuer-startups", "hubspot-fuer
 
 <section class="block offer" style="border-top:1px solid var(--line)">
   <div class="wrap">
-    <div class="offer-card reveal">
-      <span class="offer-badge mono">{h.offer.badge}</span>
-      <p class="eyebrow">{h.offer.eyebrow}</p>
+    <div class="offer-ed reveal">
+      <p class="eyebrow"><span class="b">{h.offer.badge}</span> · {h.offer.eyebrow}</p>
       <p class="offer-q">{h.offer.q1}</p>
-      <p class="offer-q">{h.offer.q2}</p>
+      <p class="offer-q offer-q-2">{h.offer.q2}</p>
       <p class="offer-body">{h.offer.body}</p>
       <div class="offer-actions">
         <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach" class="btn btn-primary" target="_blank" rel="noopener" aria-label={h.offer.ctaAria}>{h.offer.cta}</a>
