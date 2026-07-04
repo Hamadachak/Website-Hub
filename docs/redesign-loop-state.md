@@ -88,6 +88,14 @@ Findings & resolutions:
 - Each viz has a distinct structure + motion (bars/trend, staggered checklist, line-drawn map, waveform, map grid, signals→brief); all CSS, reveal-driven, reduced-motion covered, RTL verified.
 - Copy (problem + value per build) localized de/en/ar via new `build.items` dict shape.
 
+## Loop 7 — RevOps Orchestration capability (complete)
+- New homepage section `#orchestration` directly after Build: "HubSpot im Kern. Der Rest orchestriert darum." Scope kickers make the distinction explicit: Build = `// inside_hubspot`, Orchestration = `// around_hubspot`.
+- FLOW_01 (labeled WORKFLOW EXAMPLE): signal → clay·enrichment → hubspot·record (amber core node) → scoring → routing → owner·assigned → slack·alert; nodes/links activate sequentially on scroll; vertical flow on mobile; LTR-isolated inside RTL.
+- Two SYSTEM CONCEPT mono chains (deal-change approval loop; target-account research pipeline) — labeled, not client claims.
+- "System" record panel states the roles: architecture = Mohammad, CRM core = HubSpot, orchestration = Make·n8n, enrichment = Clay, integration = custom APIs — tools as components, HubSpot as core.
+- Subtle metadata: hero sub extended (…tools and integrations with Make, Clay, n8n and APIs), record Stack row → "HubSpot · Make · Clay · n8n · APIs", About facts + Orchestration row, ticker + "Make · Clay · n8n · APIs".
+- Localized de/en/ar; RTL verified (system panel mirrors, flow/chains stay LTR); reduced-motion static; no client names/metrics/claims.
+
 ## Remaining (accepted) issues
 - P2: service-page section heads still at base scale — intentionally deferred until homepage direction is approved
 - P3: footer untouched (functional, consistent, but plain)
