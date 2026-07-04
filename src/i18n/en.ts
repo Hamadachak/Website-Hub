@@ -103,12 +103,33 @@ const en: Dict = {
       eyebrow: "Beyond configuration",
       h2: "I don't just configure. I build.",
       intro: "Custom HubSpot UI extensions with React, the HubSpot CLI and Node.js. When the standard product runs out, I build the missing card myself — right inside the record, where the team works.",
-      ext: [
-        "Scores account health and surfaces it right inside the record.",
-        "Addresses with Google Maps integration inside the CRM card — visible, not just stored.",
-        "Record and attach voice notes directly on a record — faster than typing after the call.",
-        "A small toy — because good internal tools are allowed to be fun too.",
+      items: [
+        {
+          problem: "Account health is scattered across properties, tickets and activities — nobody sees it at a glance.",
+          value: "Scores account health from multiple CRM signals and shows score, components and trend right inside the Company record — including the areas that need attention.",
+        },
+        {
+          problem: "Deals die from undetected gaps: no economic buyer, a stale next step, thin engagement.",
+          value: "Checks qualification coverage inside the Deal record and resolves fragmented signals into a clear risk assessment with a recommended next action.",
+        },
+        {
+          problem: "B2B deals are decided by buying committees — but the CRM only shows a flat contact list.",
+          value: "Turns scattered contacts into a structured stakeholder map: roles, influence and engagement at a glance — with a warning when a key role is missing.",
+        },
+        {
+          problem: "After the call, nothing gets documented — typing is friction, and the CRM stays incomplete.",
+          value: "Capture a voice note in the record context and log it as a structured CRM activity — less input friction, more complete data.",
+        },
+        {
+          problem: "Location and property context lives outside the CRM — constant tab-switching costs focus.",
+          value: "Connects the record with map and property context without leaving HubSpot — address, location and related CRM data in one card.",
+        },
+        {
+          problem: "Before the customer meeting: five tabs, ten minutes of digging, no clear picture of the account.",
+          value: "Condenses relationship status, open deals, active contacts and risk signals into one concise, action-oriented account briefing inside the Company record.",
+        },
       ],
+      lab: "A small toy — because good internal tools are allowed to be fun too.",
     },
     about: {
       eyebrow: "About",

@@ -101,12 +101,33 @@ const de = {
       eyebrow: "Über Konfiguration hinaus",
       h2: "Ich konfiguriere nicht nur. Ich baue.",
       intro: "Custom HubSpot UI Extensions mit React, dem HubSpot CLI und Node.js. Wenn der Standard nicht reicht, baue ich die fehlende Karte selbst — direkt im Datensatz, wo das Team arbeitet.",
-      ext: [
-        "Bewertet die Gesundheit eines Accounts und zeigt den Score direkt im Datensatz an.",
-        "Adressen mit Google-Maps-Integration direkt in der CRM-Karte — sichtbar, nicht nur gespeichert.",
-        "Sprachnotizen direkt am Datensatz aufnehmen und ablegen — schneller als Tippen nach dem Call.",
-        "Eine kleine Spielerei — weil gute interne Tools auch Spaß machen dürfen.",
+      items: [
+        {
+          problem: "Account-Gesundheit steckt verteilt in Properties, Tickets und Aktivitäten — niemand sieht sie auf einen Blick.",
+          value: "Bewertet die Gesundheit eines Accounts über mehrere CRM-Signale und zeigt Score, Komponenten und Trend direkt im Company-Datensatz — inklusive der Bereiche, die Aufmerksamkeit brauchen.",
+        },
+        {
+          problem: "Deals sterben an unentdeckten Lücken: kein Economic Buyer, veralteter nächster Schritt, dünnes Engagement.",
+          value: "Prüft die Qualifikationsabdeckung direkt im Deal-Datensatz und verdichtet fragmentierte Signale zu einer klaren Risikoeinschätzung mit empfohlenem nächsten Schritt.",
+        },
+        {
+          problem: "B2B-Deals werden von Buying-Komitees entschieden — im CRM sieht man aber nur eine flache Kontaktliste.",
+          value: "Macht aus verstreuten Kontakten eine strukturierte Stakeholder-Karte: Rollen, Einfluss und Engagement auf einen Blick — mit Warnung, wenn eine Schlüsselrolle fehlt.",
+        },
+        {
+          problem: "Nach dem Call wird nicht dokumentiert — Tippen ist Reibung, und das CRM bleibt lückenhaft.",
+          value: "Sprachnotiz direkt im Datensatz-Kontext aufnehmen und als strukturierte CRM-Aktivität ablegen — weniger Eingabereibung, vollständigere Daten.",
+        },
+        {
+          problem: "Standort- und Objektkontext liegt außerhalb des CRM — ständiger Tab-Wechsel kostet Fokus.",
+          value: "Verbindet den Datensatz mit Karten- und Objektkontext, ohne dass das Team HubSpot verlässt — Adresse, Lage und zugehörige CRM-Daten in einer Karte.",
+        },
+        {
+          problem: "Vor dem Kundentermin: fünf Tabs, zehn Minuten Suche, kein klares Bild vom Account.",
+          value: "Verdichtet Beziehungsstatus, offene Deals, aktive Kontakte und Risikosignale zu einem knappen, handlungsorientierten Account-Briefing im Company-Datensatz.",
+        },
       ],
+      lab: "Eine kleine Spielerei — weil gute interne Tools auch Spaß machen dürfen.",
     },
     about: {
       eyebrow: "Über mich",
