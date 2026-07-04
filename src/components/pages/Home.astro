@@ -80,7 +80,7 @@ const gifOn = new Set([12, 13, 16, 17, 31, 38, 42, 43, 44, 45, 46, 47]);
             <div class="row"><span class="k">{h.record.locationK}</span><span class="v">{h.record.locationV}</span></div>
             <div class="row"><span class="k">{h.record.experienceK}</span><span class="v">{h.record.experienceV}</span></div>
             <div class="row"><span class="k">{h.record.focusK}</span><span class="v">{h.record.focusV}</span></div>
-            <div class="row"><span class="k">Stack</span><span class="v">HubSpot CLI · React · Node.js</span></div>
+            <div class="row"><span class="k">Stack</span><span class="v">HubSpot · Make · Clay · n8n · APIs</span></div>
             <div class="row"><span class="k">{h.record.languagesK}</span><span class="v">{h.record.languagesV}</span></div>
             <div class="row"><span class="k">Status</span><span class="v"><span class="mini-dot" aria-hidden="true"></span><span>{h.record.statusV}</span></span></div>
           </div>
@@ -179,6 +179,7 @@ const gifOn = new Set([12, 13, 16, 17, 31, 38, 42, 43, 44, 45, 46, 47]);
 <section class="block" id="build" style="border-top:1px solid var(--line)">
   <div class="wrap">
     <div class="head head-xl reveal">
+      <p class="scope-tag" aria-hidden="true">// inside_hubspot</p>
       <p class="eyebrow">{h.build.eyebrow}</p>
       <h2>{h.build.h2}</h2>
     </div>
@@ -325,6 +326,48 @@ const gifOn = new Set([12, 13, 16, 17, 31, 38, 42, 43, 44, 45, 46, 47]);
   </div>
 </section>
 
+<section class="block orch" id="orchestration" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head head-xl reveal">
+      <p class="scope-tag" aria-hidden="true">// around_hubspot</p>
+      <p class="eyebrow">{h.orch.eyebrow}</p>
+      <h2>{h.orch.h2}</h2>
+    </div>
+    <p class="build-intro reveal">{h.orch.intro}</p>
+
+    <div class="orch-main reveal">
+      <p class="bld-meta"><span class="bld-num">FLOW_01</span><span class:list={["st","st-proto"]}>WORKFLOW EXAMPLE</span></p>
+      <div class="orch-flow" dir="ltr" aria-hidden="true">
+        <span class="onode">signal</span><span class="olink"></span>
+        <span class="onode">clay · enrichment</span><span class="olink"></span>
+        <span class="onode onode-core">hubspot · record</span><span class="olink"></span>
+        <span class="onode">scoring</span><span class="olink"></span>
+        <span class="onode">routing</span><span class="olink"></span>
+        <span class="onode">owner · assigned</span><span class="olink"></span>
+        <span class="onode">slack · alert</span>
+      </div>
+      <p class="orch-caption">{h.orch.flowCaption}</p>
+    </div>
+
+    <div class="orch-grid">
+      <div class="orch-examples reveal">
+        <p class="orch-ex"><span class:list={["st","st-proto"]}>SYSTEM CONCEPT</span><span class="ex-chain" dir="ltr">hubspot · deal_change → make / n8n → external_system → approval_logic → hubspot · update</span></p>
+        <p class="orch-ex"><span class:list={["st","st-proto"]}>SYSTEM CONCEPT</span><span class="ex-chain" dir="ltr">target_accounts → clay · research → enrichment → qualification → hubspot · sync → sales_action</span></p>
+      </div>
+      <div class="facts reveal">
+        <div class="record-tab">// <span>{h.orch.rolesTab}</span></div>
+        <div class="record-rows" style="padding-top:10px">
+          <div class="row"><span class="k">{h.orch.archK}</span><span class="v">Mohammad Chakrouf</span></div>
+          <div class="row"><span class="k">{h.orch.coreK}</span><span class="v">HubSpot</span></div>
+          <div class="row"><span class="k">{h.orch.orchK}</span><span class="v">Make · n8n</span></div>
+          <div class="row"><span class="k">{h.orch.enrichK}</span><span class="v">Clay</span></div>
+          <div class="row"><span class="k">{h.orch.intK}</span><span class="v">Custom APIs</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="block" id="about" style="border-top:1px solid var(--line)">
   <div class="wrap">
     <div class="about-grid">
@@ -341,6 +384,7 @@ const gifOn = new Set([12, 13, 16, 17, 31, 38, 42, 43, 44, 45, 46, 47]);
           <div class="row"><span class="k">{h.about.experienceK}</span><span class="v">{h.about.experienceV}</span></div>
           <div class="row"><span class="k">Hubs</span><span class="v">Marketing · Sales · Service · Ops</span></div>
           <div class="row"><span class="k">Engineering</span><span class="v">React · Node.js · HubSpot CLI</span></div>
+          <div class="row"><span class="k">Orchestration</span><span class="v">Make · Clay · n8n · APIs</span></div>
           <div class="row"><span class="k">{h.about.modelK}</span><span class="v">{h.about.modelV}</span></div>
           <div class="row"><span class="k">{h.about.regionK}</span><span class="v">DACH · Remote</span></div>
         </div>

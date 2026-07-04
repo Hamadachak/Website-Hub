@@ -688,6 +688,52 @@ h1,h2,h3{text-wrap:balance}
 .lab-body h3{font-family:var(--display);font-weight:700;font-size:1.1rem;margin-bottom:6px}
 .lab-body .bld-value{margin-bottom:10px;font-size:.94rem}
 
+/* -- revops orchestration -------------------------------------- */
+.scope-tag{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;color:rgba(255,154,60,.65);margin-bottom:12px}
+.orch-main{margin-top:8px}
+.orch-flow{
+  display:flex;align-items:center;gap:10px;margin:20px 0 18px;
+  padding:26px 24px;border:1px solid var(--line);border-radius:16px;
+  background:linear-gradient(180deg,var(--panel-2),var(--panel));
+  overflow-x:auto;
+}
+.onode{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;white-space:nowrap;
+  color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:9px 13px;
+  background:var(--panel);flex:none;
+  opacity:.35;transition:opacity .5s var(--ease),border-color .5s var(--ease),color .5s var(--ease);
+}
+.onode-core{border-width:1.5px;font-weight:700}
+.olink{flex:1;min-width:12px;height:1px;background:var(--line);position:relative;overflow:hidden}
+.olink::after{
+  content:"";position:absolute;inset:0;background:var(--amber);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);
+}
+.orch-main.in .onode{opacity:1;color:var(--text)}
+.orch-main.in .onode-core{border-color:var(--amber);color:var(--amber)}
+.orch-main.in .onode:nth-of-type(1){transition-delay:.2s}
+.orch-main.in .olink:nth-of-type(2)::after{transform:scaleX(1);transition-delay:.45s}
+.orch-main.in .onode:nth-of-type(3){transition-delay:.7s}
+.orch-main.in .olink:nth-of-type(4)::after{transform:scaleX(1);transition-delay:.95s}
+.orch-main.in .onode:nth-of-type(5){transition-delay:1.2s}
+.orch-main.in .olink:nth-of-type(6)::after{transform:scaleX(1);transition-delay:1.45s}
+.orch-main.in .onode:nth-of-type(7){transition-delay:1.7s}
+.orch-main.in .olink:nth-of-type(8)::after{transform:scaleX(1);transition-delay:1.95s}
+.orch-main.in .onode:nth-of-type(9){transition-delay:2.2s}
+.orch-main.in .olink:nth-of-type(10)::after{transform:scaleX(1);transition-delay:2.45s}
+.orch-main.in .onode:nth-of-type(11){transition-delay:2.7s}
+.orch-main.in .olink:nth-of-type(12)::after{transform:scaleX(1);transition-delay:2.95s}
+.orch-main.in .onode:nth-of-type(13){transition-delay:3.2s}
+.orch-caption{color:var(--muted);font-size:.95rem;max-width:60ch;line-height:1.65}
+.orch-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:36px;margin-top:44px;align-items:start}
+.orch-ex{
+  display:flex;flex-direction:column;gap:10px;align-items:flex-start;
+  padding:20px 0;border-top:1px solid var(--line);
+}
+.orch-ex:first-child{border-top:none;padding-top:0}
+.ex-chain{font-family:var(--mono);font-size:.74rem;line-height:2;color:var(--muted);letter-spacing:.03em}
+.ex-chain{unicode-bidi:isolate}
+
 /* -- about heading ------------------------------------------- */
 .about-h2{
   font-family:var(--display);font-weight:800;
@@ -761,6 +807,12 @@ h1,h2,h3{text-wrap:balance}
   .bld:nth-of-type(even) .bld-viz{order:0}
   .bld-viz.viz{height:210px}
   .lab{grid-template-columns:1fr;gap:20px;padding:24px}
+  .orch-flow{flex-direction:column;align-items:stretch;gap:8px;overflow:visible}
+  .onode{text-align:center;white-space:normal}
+  .olink{flex:none;width:1px;min-width:0;height:16px;margin:0 auto}
+  .olink::after{transform-origin:top;transform:scaleY(0)}
+  .orch-main.in .olink::after{transform:scaleY(1)!important}
+  .orch-grid{grid-template-columns:1fr;gap:28px}
   .lab-viz{max-width:220px}
   .offer-q{max-width:none}
   .ticker-track{animation-duration:30s}
@@ -797,6 +849,9 @@ h1,h2,h3{text-wrap:balance}
   .va-signals span{transition:none}
   .bld.in .va-signals span{opacity:.45;transform:none}
   .viz-committee .m-line{stroke-dashoffset:0;animation:none!important}
+  .onode{opacity:1;color:var(--text);transition:none}
+  .onode-core{border-color:var(--amber);color:var(--amber)}
+  .olink::after{transform:none!important;transition:none}
   .vv-bar{transform:none;transition:none}
   .vm-pin::after{animation:none}
 }
