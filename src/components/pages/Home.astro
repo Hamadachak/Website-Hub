@@ -179,6 +179,7 @@ const gifOn = new Set([12, 13, 16, 17, 31, 38, 42, 43, 44, 45, 46, 47]);
     <div class="studio">
       <div class="panel reveal">
         <div class="viz viz-health" aria-hidden="true">
+          <span class="viz-tab">crm_record · company</span><span class="viz-tab viz-tab-r">ui_extension</span>
           <div class="vh-score"><span class="vh-num">84</span><span class="vh-label">health_score</span></div>
           <div class="vh-rows">
             <span class="vh-bar" style="--w:86%"></span>
@@ -197,6 +198,7 @@ const gifOn = new Set([12, 13, 16, 17, 31, 38, 42, 43, 44, 45, 46, 47]);
 
       <div class="panel reveal">
         <div class="viz viz-map" aria-hidden="true">
+          <span class="viz-tab">crm_record · property</span><span class="viz-tab viz-tab-r">maps_api</span>
           <span class="vm-pin"></span>
           <span class="vm-field">address · verified</span>
         </div>
@@ -209,6 +211,7 @@ const gifOn = new Set([12, 13, 16, 17, 31, 38, 42, 43, 44, 45, 46, 47]);
 
       <div class="panel reveal">
         <div class="viz viz-voice" aria-hidden="true">
+          <span class="viz-tab">activity · voice_note</span><span class="viz-tab viz-tab-r">recorder</span>
           {wave.map((v) => <span class="vv-bar" style={`--h:${v}px`}></span>)}
           <span class="vv-field">voice_note → logged</span>
         </div>
@@ -221,6 +224,7 @@ const gifOn = new Set([12, 13, 16, 17, 31, 38, 42, 43, 44, 45, 46, 47]);
 
       <div class="panel reveal">
         <div class="viz viz-gif" aria-hidden="true">
+          <span class="viz-tab">attachment · .gif</span><span class="viz-tab viz-tab-r">generator</span>
           {Array.from({ length: 60 }, (_, i) => <span class:list={["vg-px", { on: gifOn.has(i) }]}></span>)}
         </div>
         <div class="panel-body">

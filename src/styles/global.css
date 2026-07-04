@@ -65,6 +65,7 @@
     --display:'Archivo',system-ui,sans-serif;
     --body:'Hanken Grotesk',system-ui,sans-serif;
     --mono:'JetBrains Mono',ui-monospace,monospace;
+    --ease:cubic-bezier(.22,.8,.24,1);
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -306,7 +307,7 @@
   .foot-in a:hover{color:var(--amber)}
 
   /* ---------- REVEAL ANIM ---------- */
-  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
   .reveal.in{opacity:1;transform:none}
 
   /* ---------- SKIP LINK ---------- */
@@ -390,21 +391,21 @@
   position:absolute;font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;
   color:var(--muted);background:var(--panel);border:1px solid var(--line);
   border-radius:6px;padding:5px 10px;opacity:0;white-space:nowrap;
-  animation:chipLife 2.2s cubic-bezier(.4,0,.2,1) calc(.1s + var(--i)*.11s) forwards;
+  animation:chipLife 2.5s var(--ease) calc(.1s + var(--i)*.11s) forwards;
 }
-.chip:nth-child(1){top:2%;left:-6%;--dx:-30px;--dy:-18px;--r:-7deg}
-.chip:nth-child(2){top:-4%;left:52%;--dx:24px;--dy:-26px;--r:5deg}
-.chip:nth-child(3){top:18%;left:88%;--dx:36px;--dy:-8px;--r:8deg}
-.chip:nth-child(4){top:44%;left:-12%;--dx:-38px;--dy:6px;--r:-5deg}
-.chip:nth-child(5){top:60%;left:96%;--dx:34px;--dy:14px;--r:6deg}
-.chip:nth-child(6){top:86%;left:-4%;--dx:-26px;--dy:26px;--r:-8deg}
-.chip:nth-child(7){top:98%;left:44%;--dx:8px;--dy:34px;--r:4deg}
-.chip:nth-child(8){top:82%;left:82%;--dx:30px;--dy:24px;--r:-4deg}
+.chip:nth-child(1){top:2%;left:-6%;--dx:-30px;--dy:-18px;--r:-7deg;--tx:70px;--ty:120px}
+.chip:nth-child(2){top:-4%;left:52%;--dx:24px;--dy:-26px;--r:5deg;--tx:0;--ty:130px}
+.chip:nth-child(3){top:18%;left:88%;--dx:36px;--dy:-8px;--r:8deg;--tx:-100px;--ty:70px}
+.chip:nth-child(4){top:44%;left:-12%;--dx:-38px;--dy:6px;--r:-5deg;--tx:120px;--ty:10px}
+.chip:nth-child(5){top:60%;left:96%;--dx:34px;--dy:14px;--r:6deg;--tx:-110px;--ty:-15px}
+.chip:nth-child(6){top:86%;left:-4%;--dx:-26px;--dy:26px;--r:-8deg;--tx:90px;--ty:-90px}
+.chip:nth-child(7){top:98%;left:44%;--dx:8px;--dy:34px;--r:4deg;--tx:10px;--ty:-115px}
+.chip:nth-child(8){top:82%;left:82%;--dx:30px;--dy:24px;--r:-4deg;--tx:-85px;--ty:-75px}
 @keyframes chipLife{
   0%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--r))}
-  18%{opacity:.95}
-  62%{opacity:.95;transform:translate(calc(var(--dx)*.4),calc(var(--dy)*.4)) rotate(0)}
-  100%{opacity:0;transform:translate(0,0) scale(.86)}
+  16%{opacity:.95}
+  55%{opacity:.95;transform:translate(0,0) rotate(0)}
+  100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(.7)}
 }
 .hero-cine .record{opacity:0;animation:recordIn .9s cubic-bezier(.22,.8,.24,1) 1.15s forwards}
 @keyframes recordIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
@@ -416,6 +417,9 @@
 .hero-cine .record .row:nth-child(5){animation-delay:1.86s}
 .hero-cine .record .row:nth-child(6){animation-delay:1.95s}
 .hero-cine .record .row:nth-child(7){animation-delay:2.04s}
+
+/* -- art-directed line wrapping ------------------------------- */
+.hero-cine h1,.head-xl h2,.ch-body h3,.contact h2,.offer-q,.svc-main h3,.about-h2{text-wrap:balance}
 
 /* -- capability ticker ---------------------------------------- */
 .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 0;overflow:hidden}
@@ -467,6 +471,15 @@
 .chapter.in .motif .m-line{animation:draw 1.6s ease .3s forwards}
 .chapter.in .motif .m-node{opacity:1;transition-delay:.9s}
 @keyframes draw{to{stroke-dashoffset:0}}
+/* chapter 02: structure climbs step by step */
+.chapters .chapter:nth-of-type(2).in .motif rect:nth-of-type(1){transition-delay:1s}
+.chapters .chapter:nth-of-type(2).in .motif rect:nth-of-type(2){transition-delay:1.35s}
+.chapters .chapter:nth-of-type(2).in .motif rect:nth-of-type(3){transition-delay:1.7s}
+.chapters .chapter:nth-of-type(2).in .motif rect:nth-of-type(4){transition-delay:2.05s}
+/* chapter 03: the rotation ring actually rotates */
+.chapters .chapter:nth-of-type(3) .motif circle{stroke-dasharray:10 8;stroke-dashoffset:0;opacity:0;transition:opacity .8s var(--ease) .3s;animation:none}
+.chapters .chapter:nth-of-type(3).in .motif circle{opacity:1;animation:ringspin 26s linear .3s infinite}
+@keyframes ringspin{to{stroke-dashoffset:-360}}
 .ch-body h3{
   font-family:var(--display);font-weight:800;
   font-size:clamp(1.7rem,3.4vw,2.6rem);line-height:1.06;letter-spacing:-.02em;
@@ -512,8 +525,13 @@
 .panel-body p{color:var(--muted);font-size:.94rem;margin-bottom:14px}
 .panel-body .stack{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;color:var(--muted)}
 .viz{height:190px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.viz-tab{
+  position:absolute;top:14px;inset-inline-start:20px;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+}
+.viz-tab-r{inset-inline-start:auto;inset-inline-end:20px;color:rgba(255,154,60,.75)}
 
-.viz-health{display:flex;align-items:center;gap:28px;padding:0 30px}
+.viz-health{display:flex;align-items:center;gap:28px;padding:16px 30px 0}
 .vh-score{display:flex;flex-direction:column;flex:none}
 .vh-num{font-family:var(--display);font-weight:900;font-size:3.4rem;line-height:1;color:var(--amber)}
 .vh-label{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;color:var(--muted);margin-top:6px}
@@ -559,7 +577,7 @@
   background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 12px;
 }
 
-.viz-gif{display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(6,1fr);gap:5px;padding:20px 30px}
+.viz-gif{display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(6,1fr);gap:5px;padding:38px 30px 20px}
 .vg-px{background:var(--panel-2);border-radius:2px;border:1px solid var(--line);transition:background .4s ease}
 .vg-px.on{background:var(--amber-soft);border-color:rgba(255,154,60,.4)}
 .panel.in .vg-px.on{background:var(--amber);border-color:var(--amber);transition-delay:.5s}
@@ -638,6 +656,7 @@
   .flow-line{transform:none;transition:none}
   .fstage{opacity:1;transform:none;transition:none}
   .motif .m-line{stroke-dashoffset:0}
+  .chapters .chapter:nth-of-type(3) .motif circle{opacity:1;animation:none}
   .motif .m-node{opacity:1}
   .vh-bar::after{transform:scaleX(1);transition:none}
   .vv-bar{transform:none;transition:none}

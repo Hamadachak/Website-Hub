@@ -64,7 +64,22 @@ Findings & resolutions:
 - Rebuild green; ticker/offer/chapters/build/contact/mobile re-captured and reviewed at 1440 + 390.
 - Verification pending on preview: AR ticker direction (RTL keyframes), reduced-motion ticker wrap.
 
-## Next iteration priorities
-1. Review PR #18 deploy preview on real devices (user)
-2. P2: propagate `.head-xl` to service-page section heads if user approves direction
-3. P3: related-articles block on blog posts (data allows: same-tag matching)
+## Loop 4 — final art direction & polish (complete)
+- **Motion choreography:** single easing token `--ease` now drives reveal system, chips, panels — one motion voice sitewide.
+- **Typography:** `text-wrap:balance` on all display headings (h1, section h2, chapter h3, offer questions, contact, service rows) — no more orphaned last words; art-directed breaks without hardcoding locale-specific `<br>`.
+- **Hero legibility of the transformation:** chips previously settled in place and faded (absorption unreadable). Now each chip visibly converges toward the record card (`--tx/--ty` final translate) and scales down as it's absorbed. Chaos → record is now literal.
+- **Chapter identity:** 01 keeps converging line-draw; 02's structure nodes climb step-by-step (staggered transition delays); 03's ring is dashed and slowly rotates (dashoffset animation) — rotation logic made visible. Same system, three behaviors.
+- **Build credibility:** each scene gained interface chrome (`crm_record · company / ui_extension`, `activity · voice_note / recorder`, …) so panels read as real HubSpot UI-extension surfaces, not decoration. No functionality invented — labels are generic object/surface names.
+- Verified: build green, no console errors, 1440/1280/768/390 re-captured, reduced-motion overrides extended to the new ring animation.
+
+## Remaining (accepted) issues
+- P2: service-page section heads still at base scale — intentionally deferred until homepage direction is approved
+- P3: footer untouched (functional, consistent, but plain)
+- P3: chips can transiently overlap record rows mid-flight (reads as absorption; aria-hidden)
+- P3: blog has no related-articles block (only related services)
+
+## Intentionally NOT changed (loop 4)
+- Overall concept, palette, section order, copy — direction approved, no re-design
+- Offer/contact CTAs both booking-focused (conversion redundancy is deliberate)
+- Record card composition (signature element)
+- No parallax/pinning added — INP/scroll-jacking risk not worth it
