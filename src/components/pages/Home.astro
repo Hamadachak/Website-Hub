@@ -24,8 +24,15 @@ const professionalServiceLd = {
   "knowsAbout": ["HubSpot", "CRM", "Revenue Operations", "Datenmigration", "Marketing Automation"]
 };
 
-const extTitles = ["Company Health Score Card", "Property Address Card", "Voice Notes", "GIF Generator"];
-const extStacks = ["React · HubSpot CLI · Node.js", "React · Google Maps API · Node.js", "React · HubSpot CLI · Node.js", "React · HubSpot CLI"];
+// Build ledger: titles, honest status labels and stacks are locale-invariant metadata.
+const builds = [
+  { title: "Company Health Score", status: "INTERNAL BUILD", st: "internal", stack: "React · HubSpot CLI · Node.js" },
+  { title: "Deal Intelligence", status: "PROTOTYPE · UI EXTENSION", st: "proto", stack: "React · HubSpot UI Extensions" },
+  { title: "Buying Committee Map", status: "PROTOTYPE · UI EXTENSION", st: "proto", stack: "React · HubSpot UI Extensions" },
+  { title: "Voice Notes", status: "INTERNAL BUILD", st: "internal", stack: "React · HubSpot CLI · Node.js" },
+  { title: "Property Intelligence", status: "INTERNAL BUILD", st: "internal", stack: "React · Google Maps API · Node.js" },
+  { title: "Account Intelligence", status: "PROTOTYPE · UI EXTENSION", st: "proto", stack: "React · HubSpot UI Extensions" },
+];
 const stageNums = ["01", "02", "03", "04", "05"];
 const serviceSlugs = ["hubspot-migration", "revops-fuer-startups", "hubspot-fuer-b2b-saas"];
 
@@ -176,64 +183,145 @@ const gifOn = new Set([12, 13, 16, 17, 31, 38, 42, 43, 44, 45, 46, 47]);
       <h2>{h.build.h2}</h2>
     </div>
     <p class="build-intro reveal">{h.build.intro}</p>
-    <div class="studio">
-      <div class="panel reveal">
-        <div class="viz viz-health" aria-hidden="true">
+
+    <div class="builds">
+      <article class="bld reveal">
+        <div class="bld-viz viz viz-health" aria-hidden="true">
           <span class="viz-tab">crm_record · company</span><span class="viz-tab viz-tab-r">ui_extension</span>
-          <div class="vh-score"><span class="vh-num">84</span><span class="vh-label">health_score</span></div>
+          <div class="vh-score"><span class="vh-num">84 <span class="vh-trend">▲</span></span><span class="vh-label">health_score · trend</span></div>
           <div class="vh-rows">
             <span class="vh-bar" style="--w:86%"></span>
             <span class="vh-bar" style="--w:64%"></span>
             <span class="vh-bar" style="--w:92%"></span>
             <span class="vh-bar" style="--w:48%"></span>
             <span class="vh-bar vh-bar-hot" style="--w:84%"></span>
+            <span class="vh-flag">attention · engagement</span>
           </div>
         </div>
-        <div class="panel-body">
-          <h3>{extTitles[0]}</h3>
-          <p>{h.build.ext[0]}</p>
-          <p class="stack">{extStacks[0]}</p>
+        <div class="bld-body">
+          <p class="bld-meta"><span class="bld-num">BUILD_01</span><span class:list={["st","st-internal"]}>{builds[0].status}</span></p>
+          <h3>{builds[0].title}</h3>
+          <p class="bld-problem">{h.build.items[0].problem}</p>
+          <p class="bld-value">{h.build.items[0].value}</p>
+          <p class="stack">{builds[0].stack}</p>
         </div>
-      </div>
+      </article>
 
-      <div class="panel reveal">
-        <div class="viz viz-map" aria-hidden="true">
-          <span class="viz-tab">crm_record · property</span><span class="viz-tab viz-tab-r">maps_api</span>
-          <span class="vm-pin"></span>
-          <span class="vm-field">address · verified</span>
+      <article class="bld reveal">
+        <div class="bld-viz viz viz-deal" aria-hidden="true">
+          <span class="viz-tab">crm_record · deal</span><span class="viz-tab viz-tab-r">prototype</span>
+          <ul class="vd-list">
+            <li class="ok">economic_buyer · identified</li>
+            <li class="ok">decision_maker · engaged</li>
+            <li class="miss">next_step · stale</li>
+            <li class="miss">multi_threading · missing</li>
+          </ul>
+          <span class="vd-risk">risk_assessment · attention</span>
         </div>
-        <div class="panel-body">
-          <h3>{extTitles[1]}</h3>
-          <p>{h.build.ext[1]}</p>
-          <p class="stack">{extStacks[1]}</p>
+        <div class="bld-body">
+          <p class="bld-meta"><span class="bld-num">BUILD_02</span><span class:list={["st","st-proto"]}>{builds[1].status}</span></p>
+          <h3>{builds[1].title}</h3>
+          <p class="bld-problem">{h.build.items[1].problem}</p>
+          <p class="bld-value">{h.build.items[1].value}</p>
+          <p class="stack">{builds[1].stack}</p>
         </div>
-      </div>
+      </article>
 
-      <div class="panel reveal">
-        <div class="viz viz-voice" aria-hidden="true">
+      <article class="bld reveal">
+        <div class="bld-viz viz viz-committee" aria-hidden="true">
+          <span class="viz-tab">crm_record · deal</span><span class="viz-tab viz-tab-r">prototype</span>
+          <svg viewBox="0 0 300 170" fill="none">
+            <rect class="m-node m-node-hot" x="128" y="68" width="44" height="34" rx="6"/>
+            <text class="vc-t" x="150" y="89">deal</text>
+            <rect class="m-node" x="24" y="18" width="64" height="26" rx="5"/>
+            <text class="vc-t" x="56" y="35">champion</text>
+            <rect class="m-node" x="212" y="18" width="64" height="26" rx="5"/>
+            <text class="vc-t" x="244" y="35">decision</text>
+            <rect class="m-node" x="24" y="126" width="64" height="26" rx="5"/>
+            <text class="vc-t" x="56" y="143">influencer</text>
+            <rect class="m-node vc-missing" x="212" y="126" width="64" height="26" rx="5"/>
+            <text class="vc-t vc-t-warn" x="244" y="143">eb · ?</text>
+            <path class="m-line" d="M88 31 C 112 31, 120 60, 132 68"/>
+            <path class="m-line" d="M212 31 C 188 31, 180 60, 168 68"/>
+            <path class="m-line" d="M88 139 C 112 139, 120 110, 132 102"/>
+            <path class="m-line vc-dash" d="M212 139 C 188 139, 180 110, 168 102"/>
+          </svg>
+          <span class="vd-risk">missing · economic_buyer</span>
+        </div>
+        <div class="bld-body">
+          <p class="bld-meta"><span class="bld-num">BUILD_03</span><span class:list={["st","st-proto"]}>{builds[2].status}</span></p>
+          <h3>{builds[2].title}</h3>
+          <p class="bld-problem">{h.build.items[2].problem}</p>
+          <p class="bld-value">{h.build.items[2].value}</p>
+          <p class="stack">{builds[2].stack}</p>
+        </div>
+      </article>
+
+      <article class="bld reveal">
+        <div class="bld-viz viz viz-voice" aria-hidden="true">
           <span class="viz-tab">activity · voice_note</span><span class="viz-tab viz-tab-r">recorder</span>
           {wave.map((v) => <span class="vv-bar" style={`--h:${v}px`}></span>)}
           <span class="vv-field">voice_note → logged</span>
         </div>
-        <div class="panel-body">
-          <h3>{extTitles[2]}</h3>
-          <p>{h.build.ext[2]}</p>
-          <p class="stack">{extStacks[2]}</p>
+        <div class="bld-body">
+          <p class="bld-meta"><span class="bld-num">BUILD_04</span><span class:list={["st","st-internal"]}>{builds[3].status}</span></p>
+          <h3>{builds[3].title}</h3>
+          <p class="bld-problem">{h.build.items[3].problem}</p>
+          <p class="bld-value">{h.build.items[3].value}</p>
+          <p class="stack">{builds[3].stack}</p>
         </div>
-      </div>
+      </article>
 
-      <div class="panel reveal">
-        <div class="viz viz-gif" aria-hidden="true">
-          <span class="viz-tab">attachment · .gif</span><span class="viz-tab viz-tab-r">generator</span>
-          {Array.from({ length: 60 }, (_, i) => <span class:list={["vg-px", { on: gifOn.has(i) }]}></span>)}
+      <article class="bld reveal">
+        <div class="bld-viz viz viz-map" aria-hidden="true">
+          <span class="viz-tab">crm_record · property</span><span class="viz-tab viz-tab-r">maps_api</span>
+          <span class="vm-pin"></span>
+          <span class="vm-field">address · verified</span>
+          <span class="vm-field vm-field-2">property · metadata</span>
         </div>
-        <div class="panel-body">
-          <h3>{extTitles[3]}</h3>
-          <p>{h.build.ext[3]}</p>
-          <p class="stack">{extStacks[3]}</p>
+        <div class="bld-body">
+          <p class="bld-meta"><span class="bld-num">BUILD_05</span><span class:list={["st","st-internal"]}>{builds[4].status}</span></p>
+          <h3>{builds[4].title}</h3>
+          <p class="bld-problem">{h.build.items[4].problem}</p>
+          <p class="bld-value">{h.build.items[4].value}</p>
+          <p class="stack">{builds[4].stack}</p>
         </div>
-      </div>
+      </article>
+
+      <article class="bld reveal">
+        <div class="bld-viz viz viz-account" aria-hidden="true">
+          <span class="viz-tab">crm_record · company</span><span class="viz-tab viz-tab-r">prototype</span>
+          <div class="va-signals">
+            <span>last_touch</span><span>open_deals</span><span>contacts</span><span>risk</span>
+          </div>
+          <div class="va-brief">
+            <span class="va-brieftab">account_brief · next_action</span>
+            <span class="va-line" style="--w:92%"></span>
+            <span class="va-line" style="--w:74%"></span>
+            <span class="va-line va-line-hot" style="--w:56%"></span>
+          </div>
+        </div>
+        <div class="bld-body">
+          <p class="bld-meta"><span class="bld-num">BUILD_06</span><span class:list={["st","st-proto"]}>{builds[5].status}</span></p>
+          <h3>{builds[5].title}</h3>
+          <p class="bld-problem">{h.build.items[5].problem}</p>
+          <p class="bld-value">{h.build.items[5].value}</p>
+          <p class="stack">{builds[5].stack}</p>
+        </div>
+      </article>
     </div>
+
+    <aside class="lab reveal">
+      <div class="lab-viz" aria-hidden="true">
+        {Array.from({ length: 30 }, (_, i) => <span class:list={["vg-px", { on: gifOn.has(i * 2) }]}></span>)}
+      </div>
+      <div class="lab-body">
+        <p class="bld-meta"><span class="bld-num">LAB_01</span><span class:list={["st","st-lab"]}>EXPERIMENTAL · UI EXTENSION</span></p>
+        <h3>GIF Generator</h3>
+        <p class="bld-value">{h.build.lab}</p>
+        <p class="stack">React · HubSpot CLI</p>
+      </div>
+    </aside>
   </div>
 </section>
 

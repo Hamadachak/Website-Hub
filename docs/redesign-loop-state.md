@@ -80,6 +80,14 @@ Findings & resolutions:
 - **Related articles (P3, documented not implemented):** blog frontmatter has no tags/categories/topic taxonomy; any "related" logic would be word-matching guesswork. Requires adding a `topics:` field to the schema + backfilling posts first — noted as future work, no weak recommendations shipped.
 - QA: build green (27 pages), zero console errors on service/blog/article/AR routes, zero broken internal refs, RTL visually verified.
 
+## Loop 6 — Build section: engineering archive (complete)
+- Six numbered builds (BUILD_01–06) as alternating full-width ledger rows — no card grid.
+- New concepts: Deal Intelligence (qualification checklist resolving into risk assessment), Buying Committee Map (stakeholder relationship SVG with dashed missing-EB node + warning), Account Intelligence (signal chips resolving into an account brief).
+- Kept/repositioned: Company Health Score (+trend, attention flag), Voice Notes (input-friction value), Property Intelligence (location context without leaving HubSpot).
+- Honest status system: INTERNAL BUILD (amber chip) for the three tools presented as built; PROTOTYPE · UI EXTENSION for the three concepts; GIF Generator demoted to LAB_01 · EXPERIMENTAL strip (dashed border). No client names, metrics, results or deployments claimed anywhere.
+- Each viz has a distinct structure + motion (bars/trend, staggered checklist, line-drawn map, waveform, map grid, signals→brief); all CSS, reveal-driven, reduced-motion covered, RTL verified.
+- Copy (problem + value per build) localized de/en/ar via new `build.items` dict shape.
+
 ## Remaining (accepted) issues
 - P2: service-page section heads still at base scale — intentionally deferred until homepage direction is approved
 - P3: footer untouched (functional, consistent, but plain)
