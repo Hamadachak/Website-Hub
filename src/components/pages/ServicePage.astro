@@ -86,15 +86,20 @@ const serviceLd = {
   </div>
 </header>
 
-<div class="caps">
-  <div class="wrap caps-in">
-    {sp.caps.map((cap) => <span class="tag">{cap}</span>)}
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-set">
+      {sp.caps.map((cap) => <span class="tk">{cap}<span class="tk-sep" aria-hidden="true">/</span></span>)}
+    </div>
+    <div class="ticker-set" aria-hidden="true">
+      {sp.caps.map((cap) => <span class="tk">{cap}<span class="tk-sep" aria-hidden="true">/</span></span>)}
+    </div>
   </div>
 </div>
 
 <section class="block" id="leistung">
   <div class="wrap">
-    <div class="head reveal">
+    <div class="head head-xl reveal">
       <p class="eyebrow">{sp.s1Eyebrow}</p>
       <h2>{sp.s1H2}</h2>
     </div>
@@ -112,7 +117,7 @@ const serviceLd = {
 
 <section class="block" style="border-top:1px solid var(--line)">
   <div class="wrap">
-    <div class="head reveal">
+    <div class="head head-xl reveal">
       <p class="eyebrow">{sp.s2Eyebrow}</p>
       <h2>{sp.s2H2}</h2>
     </div>
@@ -141,7 +146,7 @@ const serviceLd = {
 
 <section class="block" style="border-top:1px solid var(--line)">
   <div class="wrap">
-    <div class="head reveal">
+    <div class="head head-xl reveal">
       <p class="eyebrow">{c.relatedEyebrow}</p>
       <h2>{c.relatedH2}</h2>
     </div>
@@ -159,7 +164,7 @@ const serviceLd = {
 
 <section class="block" id="faq" style="border-top:1px solid var(--line)">
   <div class="wrap">
-    <div class="head reveal">
+    <div class="head head-xl reveal">
       <p class="eyebrow">{sp.faq.eyebrow}</p>
       <h2>{sp.faq.h2}</h2>
     </div>

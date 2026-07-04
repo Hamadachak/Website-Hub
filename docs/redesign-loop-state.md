@@ -72,6 +72,14 @@ Findings & resolutions:
 - **Build credibility:** each scene gained interface chrome (`crm_record · company / ui_extension`, `activity · voice_note / recorder`, …) so panels read as real HubSpot UI-extension surfaces, not decoration. No functionality invented — labels are generic object/surface names.
 - Verified: build green, no console errors, 1440/1280/768/390 re-captured, reduced-motion overrides extended to the new ring animation.
 
+## Loop 5 — site-wide propagation (complete)
+- Service pages: `.head-xl` display scale on all section heads (deferred P2 resolved); capability pills replaced with the editorial ticker (de/en/ar, RTL direction verified).
+- Blog listing: card grid replaced with editorial index rows (date · title · description · arrow), matching the services index; h1 raised to display scale. Mobile stacks date above title.
+- Article pages: deliberately unchanged beyond global balanced-heading wrapping — long-form reading stays calm (per brief).
+- Global: `text-wrap:balance` on all h1/h2/h3.
+- **Related articles (P3, documented not implemented):** blog frontmatter has no tags/categories/topic taxonomy; any "related" logic would be word-matching guesswork. Requires adding a `topics:` field to the schema + backfilling posts first — noted as future work, no weak recommendations shipped.
+- QA: build green (27 pages), zero console errors on service/blog/article/AR routes, zero broken internal refs, RTL visually verified.
+
 ## Remaining (accepted) issues
 - P2: service-page section heads still at base scale — intentionally deferred until homepage direction is approved
 - P3: footer untouched (functional, consistent, but plain)

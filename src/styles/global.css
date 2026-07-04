@@ -419,7 +419,7 @@
 .hero-cine .record .row:nth-child(7){animation-delay:2.04s}
 
 /* -- art-directed line wrapping ------------------------------- */
-.hero-cine h1,.head-xl h2,.ch-body h3,.contact h2,.offer-q,.svc-main h3,.about-h2{text-wrap:balance}
+h1,h2,h3{text-wrap:balance}
 
 /* -- capability ticker ---------------------------------------- */
 .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 0;overflow:hidden}
@@ -613,6 +613,27 @@
 .svc-row:hover .svc-arrow{color:var(--amber);transform:translateX(6px)}
 [dir="rtl"] .svc-row:hover .svc-arrow{transform:scaleX(-1) translateX(6px)}
 
+/* -- blog editorial index -------------------------------------- */
+.blog-h1{font-family:var(--display);font-weight:800;font-size:clamp(2.1rem,4.6vw,3.6rem);line-height:1.06;letter-spacing:-.02em;margin:14px 0 0;max-width:20ch}
+.post-index{margin-top:8px}
+.post-row{
+  display:grid;grid-template-columns:170px 1fr auto;align-items:baseline;gap:28px;
+  padding:34px 0;border-top:1px solid var(--line);transition:padding .3s var(--ease);
+}
+.post-row:last-of-type{border-bottom:1px solid var(--line)}
+.post-date{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.post-main h3{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(1.3rem,2.6vw,1.9rem);line-height:1.12;letter-spacing:-.015em;margin-bottom:8px;
+  transition:color .25s;
+}
+.post-main p{color:var(--muted);font-size:.95rem;max-width:64ch}
+.post-row:hover{padding-inline-start:12px}
+.post-row:hover .post-main h3{color:var(--amber)}
+.post-row:hover .svc-arrow{color:var(--amber);transform:translateX(6px)}
+[dir="rtl"] .post-row:hover .svc-arrow{transform:scaleX(-1) translateX(6px)}
+.post-row .svc-arrow{align-self:center}
+
 /* -- responsive ----------------------------------------------- */
 @media(max-width:1024px){
   .chapters .chapter{grid-template-columns:200px 1fr;gap:36px}
@@ -643,6 +664,8 @@
   .fnum{font-size:2rem;margin-bottom:10px}
   .studio{grid-template-columns:1fr}
   .svc-row{grid-template-columns:64px 1fr auto;gap:18px;padding:30px 0}
+  .post-row{grid-template-columns:1fr auto;gap:6px 18px;padding:26px 0}
+  .post-date{grid-column:1 / -1}
   .svc-num{font-size:1.8rem}
 }
 @media(prefers-reduced-motion:reduce){
