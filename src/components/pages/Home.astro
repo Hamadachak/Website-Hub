@@ -83,9 +83,14 @@ const gifOn = new Set([12, 13, 16, 17, 31, 38, 42, 43, 44, 45, 46, 47]);
   </div>
 </header>
 
-<div class="caps">
-  <div class="wrap caps-in">
-    {h.caps.map((cap) => <span class="tag">{cap}</span>)}
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-set">
+      {h.caps.map((cap) => <span class="tk">{cap}<span class="tk-sep" aria-hidden="true">/</span></span>)}
+    </div>
+    <div class="ticker-set" aria-hidden="true">
+      {h.caps.map((cap) => <span class="tk">{cap}<span class="tk-sep" aria-hidden="true">/</span></span>)}
+    </div>
   </div>
 </div>
 
@@ -273,11 +278,10 @@ const gifOn = new Set([12, 13, 16, 17, 31, 38, 42, 43, 44, 45, 46, 47]);
 
 <section class="block offer" style="border-top:1px solid var(--line)">
   <div class="wrap">
-    <div class="offer-card reveal">
-      <span class="offer-badge mono">{h.offer.badge}</span>
-      <p class="eyebrow">{h.offer.eyebrow}</p>
+    <div class="offer-ed reveal">
+      <p class="eyebrow"><span class="b">{h.offer.badge}</span> · {h.offer.eyebrow}</p>
       <p class="offer-q">{h.offer.q1}</p>
-      <p class="offer-q">{h.offer.q2}</p>
+      <p class="offer-q offer-q-2">{h.offer.q2}</p>
       <p class="offer-body">{h.offer.body}</p>
       <div class="offer-actions">
         <a href="https://cal.com/mohammad-chakrouf-sp9k7e/hubspot-erstgesprach" class="btn btn-primary" target="_blank" rel="noopener" aria-label={h.offer.ctaAria}>{h.offer.cta}</a>

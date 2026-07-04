@@ -49,8 +49,22 @@ Homepage cinematic redesign at quality threshold; propagate refinements to inner
 - Cal.com inline embed — GDPR/Datenschutz implications, separate decision
 - Replacing record card — kept as the "trusted system" end-state of the hero metaphor
 
+## Loop 3 — strict critique pass (complete)
+Findings & resolutions:
+- **P1 offer section = banned cliché** (rounded card + gradient + pill badge) → rebuilt as editorial statement block (`.offer-ed`): giant display questions (second muted), mono meta line, no container. FIXED
+- **P1 caps stripe = generic pill chips** → editorial marquee ticker: borderless mono uppercase, amber slash separators, slow CSS scroll, hover-pause, RTL-reversed direction, reduced-motion → static wrapped row (duplicate set hidden). FIXED
+- **P1 repetitive chapter rhythm** (meta rail always left) → even chapters mirror (meta right, end-aligned); reset on mobile. FIXED
+- **P1 mobile hero lost the chaos→structure story** (chips hidden) → 4-chip reduced set repositioned around the record card on ≤860px. FIXED
+- **P1 contact heading too safe** → scale raised to clamp(2.2rem,6vw,4.6rem). FIXED
+- **P2 build grid symmetric 2×2** → asymmetric 12-col spans (7/5, 5/7). FIXED
+- **P2 mobile chips grazed the status line** → top offsets nudged. FIXED
+- P3 remaining: service-page section heads still at base `.head` scale (consistent, not wrong); consider `.head-xl` propagation next loop.
+
+## Verified (loop 3)
+- Rebuild green; ticker/offer/chapters/build/contact/mobile re-captured and reviewed at 1440 + 390.
+- Verification pending on preview: AR ticker direction (RTL keyframes), reduced-motion ticker wrap.
+
 ## Next iteration priorities
-1. P1: visual regression pass on service pages / blog (shared CSS) — in progress
-2. P2: propagate `.head-xl` scale to service-page section heads
-3. P2: caps stripe → more editorial treatment
-4. P3: keyboard/focus spot-check on new link rows (inherit global focus-visible)
+1. Review PR #18 deploy preview on real devices (user)
+2. P2: propagate `.head-xl` to service-page section heads if user approves direction
+3. P3: related-articles block on blog posts (data allows: same-tag matching)
